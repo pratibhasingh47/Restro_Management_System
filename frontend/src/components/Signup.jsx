@@ -13,6 +13,7 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import backgroundImage from '../assets/background.jpeg';
 
 const Signup = () => {
 	const [isLogin, setIsLogin] = useState(true);
@@ -26,12 +27,13 @@ const Signup = () => {
 
 	return (
 		<div
-			className="min-h-screen bg-cover bg-center flex items-center justify-center"
+			className="min-h-screen  bg-cover  flex items-center justify-center"
 			style={{
-				backgroundImage: `url('your-background-image-url.jpg')`
+				backgroundImage: `url(${backgroundImage})`, // Add your background image URL
+                backgroundSize: 'cover',
 			}}
 		>
-			<div className={`flex w-[900px] bg-white rounded-lg shadow-lg overflow-hidden ${isLogin ? '' : 'transform translate-x-full transition-transform duration-500'}`}>
+			<div className={`flex w-[900px] bg-white rounded-lg shadow-lg overflow-hidden transition-transform	 ${isLogin ? '' : 'transform translate-x-full transition-transform duration-500'}`}>
 				{/* Sign In Form */}
 				<div className="w-1/2 p-8">
 					<h2 className="text-3xl font-bold text-center mb-6">Sign In</h2>

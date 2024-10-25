@@ -15,6 +15,7 @@
 
 import React  , {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
+import backgroundImage from '../assets/background.jpeg';
 
 
 const Login = () => {
@@ -32,7 +33,7 @@ const Login = () => {
         <div
             className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-300 to-purple-500"
             style={{
-                backgroundImage: `url('your-background-image-url')`, // Add your background image URL
+                backgroundImage: `url(${backgroundImage})`, // Add your background image URL
                 backgroundSize: 'cover',
             }}
         >
