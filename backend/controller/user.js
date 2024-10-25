@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 
 const jwt = require('jsonwebtoken');
 
-exports.signup = async (req, res) => {
+exports.signup = async (req, res,next) => {
     try {
         const { name, email, password, contactNumber, role } = req.body;
 
@@ -45,7 +45,8 @@ exports.signup = async (req, res) => {
         });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Server error. Please try again later." });
+        // res.status(500).json({ message: "Server error. Please try again later." });
+        next(error);
     }
 };
 
