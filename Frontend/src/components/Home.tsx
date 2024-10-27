@@ -39,7 +39,7 @@ const Home: React.FC = () => {
                         "Experience the best dining with a touch of elegance and taste."
                     </p>
                     <button className="px-6 py-3 bg-accent1 hover:bg-accent2 text-black rounded-sm font-medium text-xl transition">
-                        Explore Menu
+                        Explore Menu 
                     </button>
                     <Box
                         sx={{

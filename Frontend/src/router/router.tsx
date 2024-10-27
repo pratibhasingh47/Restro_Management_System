@@ -10,6 +10,7 @@ import StaffPersonal from '../components/StaffPersonal';
 // import StaffPay from '../components/staffMyAccount/StaffPay';
 import StaffMyAccountDashboard from '../components/staffMyAccountDashboard';
 import EmployeeManagement from '../components/EmployeeManagement';
+import About from '../components/About';
 
 
 const router = createBrowserRouter([
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
             {
                 path: '/login',
                 element: <Login />
+            },
+            {
+                path: '/about',
+                element: <About />
             },
             {
                 path: '/menuManagement',
