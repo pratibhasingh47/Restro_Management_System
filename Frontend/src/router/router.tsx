@@ -11,6 +11,7 @@ import StaffPersonal from '../components/StaffPersonal';
 import StaffMyAccountDashboard from '../components/staffMyAccountDashboard';
 import EmployeeManagement from '../components/EmployeeManagement';
 import About from '../components/About';
+import Contact from '../components/Contact';
 
 
 const router = createBrowserRouter([
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
             {
                 path: '/about',
                 element: <About />
+            },
+            {
+                path: '/contact',
+                element: <Contact />
             },
             {
                 path: '/menuManagement',
