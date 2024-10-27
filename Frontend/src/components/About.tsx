@@ -48,7 +48,7 @@ const About: React.FC = () => {
 
                 <div className="flex flex-col md:flex-row items-center w-3/4 md:space-x-8">
                     <div className="md:w-[75%] order-2 md:order-1">
-                        <h2 className="text-4xl font-semibold mb-4" style={{ fontFamily: 'Dancing Script, Lato' }}>Function</h2>
+                        <h2 className="text-4xl font-semibold mb-4" style={{ fontFamily: 'Dancing Script, Lato' }}>Functions & Small Gathering</h2>
                         <p className="text-lg font-lato leading-relaxed">
                             Host your functions with ease and sophistication at Prat's Restaurant. Our function space is versatile and well-equipped to accommodate a variety of events, from formal dinners to casual get-togethers, ensuring a seamless and enjoyable experience for everyone.
                         </p>
