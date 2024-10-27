@@ -30,13 +30,13 @@ const Signup = () => {
 			className="min-h-screen  bg-cover  flex items-center justify-center"
 			style={{
 				backgroundImage: `url(${backgroundImage})`, // Add your background image URL
-                backgroundSize: 'cover',
+				backgroundSize: 'cover',
 			}}
 		>
 			<div className={`flex w-[900px] bg-white rounded-lg shadow-lg overflow-hidden transition-transform	 ${isLogin ? '' : 'transform translate-x-full transition-transform duration-500'}`}>
 				{/* Sign In Form */}
 				<div className="w-1/2 p-8">
-					<h2 className="text-3xl font-bold text-center mb-6">Sign In</h2>
+					<h2 className="text-3xl font-bold text-center mb-6">Sign Up</h2>
 					<div className="flex justify-center space-x-4 mb-6">
 						<button className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 hover:bg-gray-300">
 							<i className="fab fa-google"></i>
@@ -77,7 +77,7 @@ const Signup = () => {
 							type="submit"
 							className="w-full bg-purple-600 text-white p-3 rounded-lg hover:bg-purple-700"
 						>
-							SIGN IN
+							SIGN UP
 						</button>
 					</form>
 				</div>

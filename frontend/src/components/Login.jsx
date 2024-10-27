@@ -13,20 +13,20 @@
 
 
 
-import React  , {useState} from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import backgroundImage from '../assets/background.jpeg';
 
 
 const Login = () => {
     const [isLogin, setIsLogin] = useState(true);
-	const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const toggleForm = () => {
         setIsLogin(!isLogin);
         navigate('/signup');
     };
-    
+
 
 
     return (
@@ -82,9 +82,9 @@ const Login = () => {
                     <p className="text-center mt-4 mb-8">
                         Register with your personal details to use all of the site features.
                     </p>
-                    <button 
+                    <button
                         onClick={toggleForm}
-                    className="bg-white text-purple-600 px-6 py-2 rounded-lg hover:bg-gray-100">
+                        className="bg-white text-purple-600 px-6 py-2 rounded-lg hover:bg-gray-100">
                         SIGN UP
                     </button>
                 </div>
