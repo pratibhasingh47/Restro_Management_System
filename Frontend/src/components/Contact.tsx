@@ -15,16 +15,16 @@ const Contact: React.FC = () => {
                         </p>
                     </div>
                     <div className="md:w-1/2">
-                        <form className="space-y-4">
+                        <form className="space-y-6">
                             <input className="w-full p-4 border " type="text" name="Name" placeholder="Name" />
                             <input className="w-full p-4 border " type="text" name="Contact Number" placeholder="Contact Number" />
                             <input className="w-full p-4 border " type="email" name="Email" placeholder="Email" />
                             <textarea className="w-full p-4 border " name="Message" placeholder="Message" rows={4}></textarea>
-                            <button className="w-full p-4 bg-yellow-400 text-black font-lato font-bold ">
+                            <button className="w-full p-4 text-xl bg-yellow-400 text-black font-lato font-bold ">
                                 Send
                             </button>
                         </form>
-                        <div className="flex justify-around mt-8">
+                        <div className="flex justify-around mt-16">
                             <div className="w-8 h-8">
                                 <svg viewBox="0 0 37.701 37.7" xmlns="http://www.w3.org/2000/svg" className="w-full h-full fill-current text-yellow-400">
                                     <path d="M32.178,0H5.523A5.529,5.529,0,0,0,0,5.522V32.178A5.529,5.529,0,0,0,5.523,37.7H16.641V24.372H12.223V17.746h4.418V13.254a6.634,6.634,0,0,1,6.627-6.627h6.7v6.627h-6.7v4.492h6.7l-1.1,6.627h-5.6V37.7h8.91A5.529,5.529,0,0,0,37.7,32.178V5.522A5.529,5.529,0,0,0,32.178,0Zm0,0">
