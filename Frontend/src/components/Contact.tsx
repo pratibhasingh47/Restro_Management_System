@@ -2,22 +2,25 @@ import React from 'react';
 
 const Contact: React.FC = () => {
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-yellow-50">
-            <div className="max-w-4xl w-full p-8 bg-white shadow-lg rounded-lg">
-                <div className="flex flex-col md:flex-row justify-between">
+        <div className="flex flex-col items-center justify-center h-screen bg-yellow-50">
+
+            <div className="max-w-7xl w-full p-8 bg-yellow-50  rounded-lg">
+
+                <div className="flex flex-col md:flex-row w-[90%] justify-between">
+
                     <div className="md:w-1/2 mb-8 md:mb-0">
-                        <h2 className="text-4xl font-bold mb-4">Get in Touch</h2>
-                        <p className="text-gray-600 mb-4">
+                        <h2 className="text-7xl  font-lato font-bold mb-4">Get in Touch</h2>
+                        <p className="text-gray-600 font-lato max-w-md text-justify mb-4">
                             We would love to hear from you! Whether you have a question about our services, need assistance with a reservation, or just want to share your experience, our team is here to help. Feel free to reach out to us through the contact form, and we will get back to you as soon as possible.
                         </p>
                     </div>
                     <div className="md:w-1/2">
                         <form className="space-y-4">
-                            <input className="w-full p-4 border border-gray-400 rounded-md" type="text" name="Name" placeholder="Name" />
-                            <input className="w-full p-4 border border-gray-400 rounded-md" type="text" name="Contact Number" placeholder="Contact Number" />
-                            <input className="w-full p-4 border border-gray-400 rounded-md" type="email" name="Email" placeholder="Email" />
-                            <textarea className="w-full p-4 border border-gray-400 rounded-md" name="Message" placeholder="Message" rows={4}></textarea>
-                            <button className="w-full p-4 bg-yellow-400 text-white font-bold rounded-md">
+                            <input className="w-full p-4 border " type="text" name="Name" placeholder="Name" />
+                            <input className="w-full p-4 border " type="text" name="Contact Number" placeholder="Contact Number" />
+                            <input className="w-full p-4 border " type="email" name="Email" placeholder="Email" />
+                            <textarea className="w-full p-4 border " name="Message" placeholder="Message" rows={4}></textarea>
+                            <button className="w-full p-4 bg-yellow-400 text-white font-lato font-bold ">
                                 Send
                             </button>
                         </form>
