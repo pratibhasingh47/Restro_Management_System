@@ -20,7 +20,7 @@ const Contact: React.FC = () => {
                             <input className="w-full p-4 border " type="text" name="Contact Number" placeholder="Contact Number" />
                             <input className="w-full p-4 border " type="email" name="Email" placeholder="Email" />
                             <textarea className="w-full p-4 border " name="Message" placeholder="Message" rows={4}></textarea>
-                            <button className="w-full p-4 text-xl bg-yellow-400 text-black font-lato font-bold ">
+                            <button className="w-full p-4 text-xl bg-yellow-400 text-white font-lato font-bold ">
                                 Send
                             </button>
                         </form>
