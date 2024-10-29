@@ -10,7 +10,7 @@ const Contact: React.FC = () => {
 
                     <div className="md:w-1/2 mb-8 md:mb-0">
                         <h2 className="text-7xl  font-lato font-bold mb-4">Get in Touch</h2>
-                        <p className="text-gray-600 font-lato max-w-md text-justify mb-4">
+                        <p className="text-gray-800 font-lato max-w-md text-justify mb-4">
                             We would love to hear from you! Whether you have a question about our services, need assistance with a reservation, or just want to share your experience, our team is here to help. Feel free to reach out to us through the contact form, and we will get back to you as soon as possible.
                         </p>
                     </div>
