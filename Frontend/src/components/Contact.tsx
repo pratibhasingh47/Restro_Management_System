@@ -16,10 +16,10 @@ const Contact: React.FC = () => {
                     </div>
                     <div className="md:w-1/2">
                         <form className="space-y-6">
-                            <input className="w-full p-4 border " type="text" name="Name" placeholder="Name" />
-                            <input className="w-full p-4 border " type="text" name="Contact Number" placeholder="Contact Number" />
-                            <input className="w-full p-4 border " type="email" name="Email" placeholder="Email" />
-                            <textarea className="w-full p-4 border " name="Message" placeholder="Message" rows={4}></textarea>
+                            <input className="w-full font-lato p-4 border " type="text" name="Name" placeholder="Name" />
+                            <input className="w-full font-lato p-4 border " type="text" name="Contact Number" placeholder="Contact Number" />
+                            <input className="w-full font-lato p-4 border " type="email" name="Email" placeholder="Email" />
+                            <textarea className="w-full font-lato p-4 border " name="Message" placeholder="Message" rows={4}></textarea>
                             <button className="w-full p-4 text-xl bg-yellow-400 text-black font-lato font-bold ">
                                 Send
                             </button>
