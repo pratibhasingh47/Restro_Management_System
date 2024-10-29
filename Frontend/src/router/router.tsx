@@ -44,8 +44,8 @@ const router = createBrowserRouter([
                 element: <MenuManagement />
             },
             {
-                path : '/employeeManagement',
-                element : <EmployeeManagement />
+                path: '/employeeManagement',
+                element: <EmployeeManagement />
             },
             {
                 path: '/staffMyAccount',

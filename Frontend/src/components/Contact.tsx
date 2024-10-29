@@ -17,7 +17,7 @@ const Contact: React.FC = () => {
 
 
                     <div className="md:w-1/2">
-                    
+
                         <form className="space-y-6">
                             <input className="w-full font-lato p-4 border " type="text" name="Name" placeholder="Name" />
                             <input className="w-full font-lato p-4 border " type="text" name="Contact Number" placeholder="Contact Number" />
@@ -65,7 +65,7 @@ const Contact: React.FC = () => {
                                 </svg>
                             </div>
 
-                            
+
                         </div>
                     </div>
                 </div>
