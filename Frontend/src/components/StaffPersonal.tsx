@@ -988,6 +988,8 @@ const StaffPersonal: React.FC = () => {
                                 type="password"
                                 value={passwordState.currentPassword}
                                 onChange={handlePasswordChange}
+                                style={{marginBottom: '-1.5rem' }}
+
                                 fullWidth
                                 required
                             />
@@ -999,6 +1001,8 @@ const StaffPersonal: React.FC = () => {
                                 type="password"
                                 value={passwordState.newPassword}
                                 onChange={handlePasswordChange}
+                                style={{marginBottom: '-1.5rem' }}
+
                                 fullWidth
                                 required
                             />
