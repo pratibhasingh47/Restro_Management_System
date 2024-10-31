@@ -1009,7 +1009,7 @@ const StaffPersonal: React.FC = () => {
                                 variant="contained"
                                 color="primary"
                                 fullWidth
-                                style={{ padding: '0.5rem', fontSize: '0.875rem', maxWidth: '100px', backgroundColor: '#FFC300', color: '#000', fontWeight: 'bold' }}
+                                style={{ padding: '0.5rem', fontSize: '0.875rem', maxWidth: '250px', backgroundColor: '#FFC300', color: '#000', fontWeight: 'bold' }}
                             >
                                 Change Password
                             </Button>
