@@ -1,13 +1,16 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-interface JobDetails {
-    status: string;
-    workPerHourWeek: number;
-    dateHired: string;
-    department: string;
-    position: string;
-    employmentType: string;
+interface PayDetails {
+    wageCalculation: string;
+    payroll: string;
+    bankName: string;
+    accountNo: string;
+    bankBranch: string;
+    ifscCode: string;
+    issueDate: string;
+    issueMonth: string;
+    issuedAmount: number;
 }
 
 const getToken = () => {
@@ -15,15 +18,15 @@ const getToken = () => {
     return token;
 };
 
-export const getJobDetails = createAsyncThunk(
-    'job/getJobDetails',
+export const getPayDetails = createAsyncThunk(
+    'pay/getPayDetails',
     async (managementId: string, { rejectWithValue }) => {
         try {
             const token = getToken();
             if (!token) {
                 return rejectWithValue('Token not found');
             }
-            const response = await axios.get(`/job/${managementId}`, {
+            const response = await axios.get(`/pay/${managementId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -35,15 +38,15 @@ export const getJobDetails = createAsyncThunk(
     }
 );
 
-export const updateJobDetails = createAsyncThunk(
-    'job/updateJobDetails',
-    async ({ managementId, jobDetails }: { managementId: string; jobDetails: JobDetails }, { rejectWithValue }) => {
+export const updatePayDetails = createAsyncThunk(
+    'pay/updatePayDetails',
+    async ({ managementId, payDetails }: { managementId: string; payDetails: PayDetails }, { rejectWithValue }) => {
         try {
             const token = getToken();
             if (!token) {
                 return rejectWithValue('Token not found');
             }
-            const response = await axios.post(`/job/${managementId}`, jobDetails, {
+            const response = await axios.put(`/pay/${managementId}`, payDetails, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -55,47 +58,75 @@ export const updateJobDetails = createAsyncThunk(
     }
 );
 
-
+export const createPayDetails = createAsyncThunk(
+    'pay/createPayDetails',
+    async (payDetails: PayDetails, { rejectWithValue }) => {
+        try {
+            const token = getToken();
+            if (!token) {
+                return rejectWithValue('Token not found');
+            }
+            const response = await axios.post('/pay', payDetails, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return response.data;
+        } catch (error: any) {
+            return rejectWithValue(error.response.data);
+        }
+    }
+);
 
 const initialState = {
-    jobDetails: {} as JobDetails,
+    payDetails: {} as PayDetails,
     loading: false,
     error: null as string | null
 };
 
-const jobSlice = createSlice({
-    name: 'job',
+const paySlice = createSlice({
+    name: 'pay',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(getJobDetails.pending, (state) => {
+            .addCase(getPayDetails.pending, (state) => {
                 state.loading = true;
                 state.error = null;
             })
-            .addCase(getJobDetails.fulfilled, (state, action: PayloadAction<JobDetails>) => {
+            .addCase(getPayDetails.fulfilled, (state, action: PayloadAction<PayDetails>) => {
                 state.loading = false;
-                state.jobDetails = action.payload;
+                state.payDetails = action.payload;
             })
-            .addCase(getJobDetails.rejected, (state, action) => {
+            .addCase(getPayDetails.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload as string;
             })
-            .addCase(updateJobDetails.pending, (state) => {
+            .addCase(updatePayDetails.pending, (state) => {
                 state.loading = true;
                 state.error = null;
             })
-            .addCase(updateJobDetails.fulfilled, (state, action: PayloadAction<JobDetails>) => {
+            .addCase(updatePayDetails.fulfilled, (state, action: PayloadAction<PayDetails>) => {
                 state.loading = false;
-                state.jobDetails = action.payload;
+                state.payDetails = action.payload;
             })
-            .addCase(updateJobDetails.rejected, (state, action) => {
+            .addCase(updatePayDetails.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload as string;
+            })
+            .addCase(createPayDetails.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(createPayDetails.fulfilled, (state, action: PayloadAction<PayDetails>) => {
+                state.loading = false;
+                state.payDetails = action.payload;
+            })
+            .addCase(createPayDetails.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload as string;
             });
     }
 });
 
-
-export default jobSlice.reducer;
-
+export default paySlice.reducer;
