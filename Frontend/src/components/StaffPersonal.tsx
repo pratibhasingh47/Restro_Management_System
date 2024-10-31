@@ -933,8 +933,7 @@ const StaffPersonal: React.FC = () => {
                                 type="email"
                                 value={formState.alternateEmail}
                                 onChange={handleChange}
-                                style={{marginBottom: '-1.5rem' }}
-
+                                style={{ marginBottom: '-1.5rem' }}
                                 fullWidth
                                 disabled={!isEditable} // Disable field if not editable
                             />
@@ -945,8 +944,7 @@ const StaffPersonal: React.FC = () => {
                                 name="alternateMobileNo"
                                 value={formState.alternateMobileNo}
                                 onChange={handleChange}
-                                style={{marginBottom: '-1.5rem' }}
-
+                                style={{ marginBottom: '-1.5rem' }}
                                 fullWidth
                                 disabled={!isEditable} // Disable field if not editable
                             />
@@ -992,7 +990,7 @@ const StaffPersonal: React.FC = () => {
                                 type="password"
                                 value={passwordState.currentPassword}
                                 onChange={handlePasswordChange}
-                                style={{marginBottom: '-1.5rem' }}
+                                style={{ marginBottom: '-1.5rem' }}
 
                                 fullWidth
                                 required
@@ -1005,7 +1003,7 @@ const StaffPersonal: React.FC = () => {
                                 type="password"
                                 value={passwordState.newPassword}
                                 onChange={handlePasswordChange}
-                                style={{marginBottom: '-1.5rem' }}
+                                style={{ marginBottom: '-1.5rem' }}
 
                                 fullWidth
                                 required
