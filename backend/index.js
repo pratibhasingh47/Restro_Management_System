@@ -18,4 +18,3 @@ app.use(errorHandler);
 app.listen(3000, () => {
     console.log('Server is running http://localhost:3000');
 });
-
