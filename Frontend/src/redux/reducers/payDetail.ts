@@ -46,7 +46,27 @@ export const updatePayDetails = createAsyncThunk(
             if (!token) {
                 return rejectWithValue('Token not found');
             }
-            const response = await axios.post(`/pay/${managementId}`, payDetails, {
+            const response = await axios.put(`/pay/${managementId}`, payDetails, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return response.data;
+        } catch (error: any) {
+            return rejectWithValue(error.response.data);
+        }
+    }
+);
+
+export const createPayDetails = createAsyncThunk(
+    'pay/createPayDetails',
+    async (payDetails: PayDetails, { rejectWithValue }) => {
+        try {
+            const token = getToken();
+            if (!token) {
+                return rejectWithValue('Token not found');
+            }
+            const response = await axios.post('/pay', payDetails, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -91,6 +111,18 @@ const paySlice = createSlice({
                 state.payDetails = action.payload;
             })
             .addCase(updatePayDetails.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload as string;
+            })
+            .addCase(createPayDetails.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(createPayDetails.fulfilled, (state, action: PayloadAction<PayDetails>) => {
+                state.loading = false;
+                state.payDetails = action.payload;
+            })
+            .addCase(createPayDetails.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload as string;
             });
