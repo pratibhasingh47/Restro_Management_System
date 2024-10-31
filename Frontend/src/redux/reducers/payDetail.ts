@@ -26,7 +26,7 @@ export const getPayDetails = createAsyncThunk(
             if (!token) {
                 return rejectWithValue('Token not found');
             }
-            const response = await axios.get(`/pay/${managementId}`, {
+            const response = await axios.get(`http://localhost:3000/staffMyAccount/pay/${managementId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -46,7 +46,7 @@ export const updatePayDetails = createAsyncThunk(
             if (!token) {
                 return rejectWithValue('Token not found');
             }
-            const response = await axios.put(`/pay/${managementId}`, payDetails, {
+            const response = await axios.put(`http://localhost:3000/staffMyAccount/pay/${managementId}`, payDetails, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -66,7 +66,7 @@ export const createPayDetails = createAsyncThunk(
             if (!token) {
                 return rejectWithValue('Token not found');
             }
-            const response = await axios.post('/pay', payDetails, {
+            const response = await axios.post('/http://localhost:3000/staffMyAccount/pay', payDetails, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
