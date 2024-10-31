@@ -933,6 +933,8 @@ const StaffPersonal: React.FC = () => {
                                 type="email"
                                 value={formState.alternateEmail}
                                 onChange={handleChange}
+                                style={{marginBottom: '-1.5rem' }}
+
                                 fullWidth
                                 disabled={!isEditable} // Disable field if not editable
                             />
@@ -943,6 +945,8 @@ const StaffPersonal: React.FC = () => {
                                 name="alternateMobileNo"
                                 value={formState.alternateMobileNo}
                                 onChange={handleChange}
+                                style={{marginBottom: '-1.5rem' }}
+
                                 fullWidth
                                 disabled={!isEditable} // Disable field if not editable
                             />
