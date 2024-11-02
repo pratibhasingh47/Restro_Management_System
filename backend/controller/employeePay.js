@@ -41,7 +41,6 @@ exports.createPayDetails = async (req, res) => {
         res.status(500).json({ message: 'Server error', error });
     }
 };
-
 // Delete pay details
 exports.deletePayDetails = async (req, res) => {
     try {
