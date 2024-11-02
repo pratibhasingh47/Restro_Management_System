@@ -1,4 +1,3 @@
-// models/EmployeePay.js
 const mongoose = require('mongoose');
 
 const employeePaySchema = new mongoose.Schema({
@@ -28,6 +27,14 @@ const employeePaySchema = new mongoose.Schema({
     },
     issuedAmount: {
         type: Number,
+    },
+    allowance: {
+        type: Number,
+        default: 0,
+    },
+    status: {
+        type: String,
+        default: 'pending',
     },
     managementID: {
         type: mongoose.Schema.Types.ObjectId,

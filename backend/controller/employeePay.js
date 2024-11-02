@@ -55,3 +55,25 @@ exports.deletePayDetails = async (req, res) => {
         res.status(500).json({ message: 'Server error', error });
     }
 };
+
+// Approve allowance
+exports.approveAllowance = async (req, res) => {
+    try {
+        const { managementId } = req.params;
+        const { allowance } = req.body;
+
+        const payDetails = await EmployeePay.findOneAndUpdate(
+            { managementID: managementId },
+            { $set: { allowance: allowance, status: 'approved' } },
+            { new: true }
+        );
+
+        if (!payDetails) {
+            return res.status(404).json({ message: 'Pay details not found' });
+        }
+
+        res.json(payDetails);
+    } catch (error) {
+        res.status(500).json({ message: 'Server error', error });
+    }
+};

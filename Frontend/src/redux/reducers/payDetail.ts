@@ -11,6 +11,8 @@ interface PayDetails {
   issueDate: string;
   issueMonth: string;
   issuedAmount: number;
+  allowance: number;
+  status: string;
 }
 
 const getToken = () => {
@@ -78,6 +80,26 @@ export const createPayDetails = createAsyncThunk(
   }
 );
 
+export const approveAllowance = createAsyncThunk(
+  'pay/approveAllowance',
+  async ({ managementId, allowance }: { managementId: string; allowance: number }, { rejectWithValue }) => {
+    try {
+      const token = getToken();
+      if (!token) {
+        return rejectWithValue('Token not found');
+      }
+      const response = await axios.put(`http://localhost:3000/staffMyAccount/allowance/${managementId}`, { allowance }, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      return response.data;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data.message || 'Error approving allowance');
+    }
+  }
+);
+
 const initialState = {
   payDetails: {} as PayDetails,
   loading: false,
@@ -123,6 +145,18 @@ const paySlice = createSlice({
         state.payDetails = action.payload;
       })
       .addCase(createPayDetails.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+      .addCase(approveAllowance.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(approveAllowance.fulfilled, (state, action: PayloadAction<PayDetails>) => {
+        state.loading = false;
+        state.payDetails = action.payload;
+      })
+      .addCase(approveAllowance.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       });
