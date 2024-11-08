@@ -107,10 +107,11 @@
 
 
 
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import restaurantImage from '../assets/background.jpeg';
+import restaurantImage from '../assets/background.png'; // Use the same background image
+import logo from '../assets/pratsRestro.png'; // Use the same logo
+import restroImage from '../assets/restro1.png'; // Use an image related to restaurant management
 
 const Signup = () => {
     const [isLogin, setIsLogin] = useState(false); // Set to false to show signup initially
@@ -122,58 +123,69 @@ const Signup = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
-            <div className="flex w-full max-w-4xl bg-white rounded-2xl shadow-lg overflow-hidden">
+        <div 
+            className="flex h-screen items-center justify-center bg-gray-100 p-4"
+            style={{
+                backgroundImage: `url(${restaurantImage})`, // Use the same background image
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 'cover',
+            }}
+        >
+            <div className="flex h-[85%] w-[60%] bg-white rounded-2xl shadow-lg overflow-hidden">
                 {/* Promotional Section */}
-                <div className="hidden md:flex flex-col justify-center items-start w-1/2 p-12 bg-gradient-to-br from-orange-500 to-orange-600 text-white">
-                    <h2 className="text-3xl font-bold mb-4">Simplify Management with Our Dashboard</h2>
-                    <p className="mb-8 text-lg">Streamline your restaurant's operations with our user-friendly management system.</p>
-                    <img src={restaurantImage} alt="Restaurant Management" className="w-3/4 mt-8" />
+                <div className="hidden md:flex flex-col justify-center items-start h-[100%] w-1/2 px-12 bg-gradient-to-br from-orange-400 to-orange-700 text-white">
+                    <h2 className="text-4xl font-lato font-bold mb-4 w-80">Simplify Management with Our Dashboard</h2>
+                    <p className="font-lato font-thin text-lg">Register yourself with our user-friendly management system.</p>
+                    <img src={restroImage} alt="Restaurant Management" className="w-4/5" />
                 </div>
 
                 {/* Signup Form */}
                 <div className="w-full md:w-1/2 p-8 flex flex-col items-center">
-                    <img src="/path/to/logo.png" alt="Logo" className="w-16 mb-4" /> {/* Logo */}
-                    <h2 className="text-2xl font-bold text-gray-800 mb-4">{isLogin ? "Welcome Back" : "Create Account"}</h2>
-                    <p className="text-gray-500 mb-6">{isLogin ? "Please login to your account" : "Create a new account to get started"}</p>
+                    <img src={logo} alt="Logo" className="w-72 mt-16 mb-4" /> {/* Logo */}
+                    <h2 className="text-2xl font-lato font-bold text-gray-800 mt-8 mb-4">Create Account</h2>
+                    <p className="text-gray-600 font-lato mb-6">Create a new account to get started</p>
 
-                    <form className="w-full max-w-sm space-y-4">
-                        {!isLogin && (
+                    <form className="w-full mt-4 max-w-sm space-y-4">
+                        <div>
                             <input
                                 type="text"
                                 placeholder="Name"
-                                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                                className="w-full p-3 border font-lato border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
                             />
-                        )}
-                        <input
-                            type="email"
-                            placeholder="Email"
-                            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-                        />
-                        <input
-                            type="password"
-                            placeholder="Password"
-                            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-                        />
-                        {!isLogin && (
+                        </div>
+                        <div>
+                            <input
+                                type="email"
+                                placeholder="Email address"
+                                className="w-full p-3 border font-lato border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+                            />
+                        </div>
+                        <div>
+                            <input
+                                type="password"
+                                placeholder="Password"
+                                className="w-full p-3 border font-lato border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+                            />
+                        </div>
+                        <div>
                             <input
                                 type="number"
                                 placeholder="Mobile No."
-                                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                                className="w-full p-3 border font-lato border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
                             />
-                        )}
+                        </div>
                         <button
                             type="submit"
-                            className="w-full bg-orange-500 text-white p-3 rounded-lg hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                            className="w-full bg-orange-500 text-white font-lato font-black p-3 rounded-md hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500"
                         >
-                            {isLogin ? "Login" : "Sign Up"}
+                            Sign Up
                         </button>
                     </form>
 
-                    <div className="flex items-center my-6">
-                        <span className="border-b border-gray-300 w-full"></span>
-                        <span className="px-4 text-gray-500">Or Sign Up with</span>
-                        <span className="border-b border-gray-300 w-full"></span>
+                    <div className="flex w-auto items-center my-6">
+                        <span className="border-b w-20 border-gray-300"></span>
+                        <span className="px-4 w-auto text-gray-500">Or Sign Up with</span>
+                        <span className="border-b w-20 border-gray-300"></span>
                     </div>
 
                     <div className="flex space-x-4">
@@ -181,15 +193,12 @@ const Signup = () => {
                             <i className="fab fa-google text-xl text-gray-500"></i>
                         </button>
                         <button className="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-full hover:bg-gray-200">
-                            <i className="fab fa-facebook text-xl text-gray-500"></i>
+                            <i className="fab fa -facebook text-xl text-gray-500"></i>
                         </button>
                     </div>
 
                     <p className="text-sm text-gray-500 mt-8">
-                        {isLogin ? "Don’t have an account?" : "Already have an account?"}{" "}
-                        <span onClick={toggleForm} className="text-orange-500 cursor-pointer hover:underline">
-                            {isLogin ? "Sign Up" : "Login"}
-                        </span>
+                        Already have an account? <span onClick={toggleForm} className="text-orange-500 cursor-pointer hover:underline">Login</span>
                     </p>
                 </div>
             </div>
@@ -198,4 +207,3 @@ const Signup = () => {
 };
 
 export default Signup;
-

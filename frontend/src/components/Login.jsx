@@ -105,8 +105,9 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import backgroundImage from '../assets/restro1.png'; // Use an image related to restaurant management
+import restroImage from '../assets/restro1.png'; // Use an image related to restaurant management
 import logo from '../assets/pratsRestro.png'; // Use your own logo
+import backgroundImage from '../assets/background.png'; // Use a background image
 
 const Login = () => {
     const [isLogin, setIsLogin] = useState(true);
@@ -118,13 +119,21 @@ const Login = () => {
     };
 
     return (
-        <div className="flex  h-screen items-center justify-center bg-gray-100 p-4">
+        <div className="flex  h-screen items-center justify-center bg-gray-100 p-4"   
+        style={{
+            backgroundImage: `url(${backgroundImage})`, // Import a background image
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+            backgroundColor: 'rgba(0,0,0,0)', // Optional: add a slight overlay
+            backgroundBlendMode: 'overlay'
+        }}
+        >
             <div className="flex  h-[85%] w-[60%] bg-white rounded-2xl shadow-lg overflow-hidden">
                 {/* Promotional Section */}
-                <div className="hidden md:flex flex-col justify-center items-start h-[100%] w-1/2 p-12 bg-gradient-to-br from-orange-400 to-orange-700 text-white">
+                <div className="hidden md:flex flex-col justify-center items-start h-[100%] w-1/2 px-12 bg-gradient-to-br from-orange-400 to-orange-700 text-white">
                     <h2 className="text-4xl font-lato font-bold mb-4 w-80">Simplify Management with Our Dashboard</h2>
                     <p className=" font-lato font-thin text-lg ">Register yourself with our user-friendly management system.</p>
-                    <img src={backgroundImage} alt="Restaurant Management" className="w-4/5 " />
+                    <img src={restroImage} alt="Restaurant Management" className="w-4/5 " />
                 </div>
 
                 {/* Login Form */}
