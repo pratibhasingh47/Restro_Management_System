@@ -105,7 +105,8 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import backgroundImage from '../assets/background.jpeg';
+import backgroundImage from '../assets/background.jpeg'; // Use an image related to restaurant management
+import logo from '../assets/pratsRestro.png'; // Use your own logo
 
 const Login = () => {
     const [isLogin, setIsLogin] = useState(true);
@@ -117,72 +118,67 @@ const Login = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-400 to-purple-600 p-4"
-            style={{
-                backgroundImage: `url(${backgroundImage})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-            }}
-        >
-            <div className="flex w-full max-w-4xl bg-white rounded-2xl shadow-2xl overflow-hidden">
+        <div className="flex  h-screen items-center justify-center bg-gray-100 p-4">
+            <div className="flex  h-[85%] w-[60%] bg-white rounded-2xl shadow-lg overflow-hidden">
+                {/* Promotional Section */}
+                <div className="hidden md:flex flex-col justify-center items-start h-[100%] w-1/2 p-12 bg-gradient-to-br from-orange-400 to-orange-700 text-white">
+                    <h2 className="text-4xl font-bold mb-4">Simplify Management with Our Dashboard</h2>
+                    <p className="mb-8 text-lg">Streamline your restaurant's operations with our user-friendly management system.</p>
+                    <img src={backgroundImage} alt="Restaurant Management" className="w-3/4 mt-8" />
+                </div>
+
                 {/* Login Form */}
-                <div className="w-full md:w-1/2 p-8">
-                    <h2 className="text-4xl font-extrabold text-center mb-8 text-gray-800">Welcome Back</h2>
-                    <div className="flex justify-center space-x-4 mb-8">
-                        <button className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition duration-300">
-                            <i className="fab fa-google text-xl"></i>
-                        </button>
-                        <button className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition duration-300">
-                            <i className="fab fa-facebook-f text-xl"></i>
-                        </button>
-                        <button className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition duration-300">
-                            <i className="fab fa-linkedin-in text-xl"></i>
-                        </button>
-                    </div>
-                    <p className="text-center mb-6 text-gray-600">Or use your email to sign in</p>
-                    <form className="space-y-6">
+                <div className="w-full md:w-1/2 p-8 flex flex-col items-center">
+                    <img src={logo} alt="Logo" className="w-72 mb-4" /> {/* Logo */}
+                    <h2 className="text-2xl font-bold text-gray-800 mb-4">Welcome Back</h2>
+                    <p className="text-gray-500 mb-6">Please login to your account</p>
+
+                    <form className="w-full max-w-sm space-y-4">
                         <div>
-                            <label htmlFor="email" className="text-sm font-medium text-gray-700">Email</label>
                             <input
                                 id="email"
                                 type="email"
-                                placeholder="Enter your email"
-                                className="mt-1 w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent transition duration-300"
+                                placeholder="Email address"
+                                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                             />
                         </div>
                         <div>
-                            <label htmlFor="password" className="text-sm font-medium text-gray-700">Password</label>
                             <input
                                 id="password"
                                 type="password"
-                                placeholder="Enter your password"
-                                className="mt-1 w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent transition duration-300"
+                                placeholder="Password"
+                                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                             />
                         </div>
-                        <div className="text-right">
-                            <a href="#" className="text-sm text-purple-600 hover:text-purple-800 transition duration-300">Forgot Password?</a>
+                        <div className="text-right w-full">
+                            <a href="#" className="text-sm text-orange-500 hover:underline">Forgot password?</a>
                         </div>
                         <button
                             type="submit"
-                            className="w-full bg-purple-600 text-white p-3 rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 transition duration-300"
+                            className="w-full bg-orange-500 text-white p-3 rounded-lg hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500"
                         >
-                            Sign In
+                            Login
                         </button>
                     </form>
-                </div>
 
-                {/* Welcome Section */}
-                <div className="hidden md:block w-1/2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white flex flex-col justify-center items-center p-12">
-                    <h2 className="text-4xl font-extrabold mb-6">Hello, Friend!</h2>
-                    <p className="text-center text-lg mb-8">
-                        Enter your personal details and start your journey with us today.
+                    <div className="flex items-center my-6">
+                        <span className="border-b border-gray-300 w-full"></span>
+                        <span className="px-4 text-gray-500">Or Login with</span>
+                        <span className="border-b border-gray-300 w-full"></span>
+                    </div>
+
+                    <div className="flex space-x-4">
+                        <button className="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-full hover:bg-gray-200">
+                            <i className="fab fa-google text-xl text-gray-500"></i>
+                        </button>
+                        <button className="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-full hover:bg-gray-200">
+                            <i className="fab fa-facebook text-xl text-gray-500"></i>
+                        </button>
+                    </div>
+
+                    <p className="text-sm text-gray-500 mt-8">
+                        Don’t have an account? <span onClick={toggleForm} className="text-orange-500 cursor-pointer hover:underline">Sign Up</span>
                     </p>
-                    <button
-                        onClick={toggleForm}
-                        className="bg-transparent text-white px-8 py-3 border-2 border-white rounded-lg hover:bg-white hover:text-purple-600 transition duration-300"
-                    >
-                        Sign Up
-                    </button>
                 </div>
             </div>
         </div>
