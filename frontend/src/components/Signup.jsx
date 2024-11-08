@@ -316,7 +316,7 @@ const Signup = () => {
                     </div>
 
                     <p className="text-sm text-gray-500 mt-8">
-                        Already have an account? <span onClick={toggleForm} className="text-orange-500 cursor-pointer hover:underline">Login</span>
+                        Already have an account? <span onClick={toggleForm} className="text-orange-500 font-bold font-lato cursor-pointer hover:underline">Login</span>
                     </p>
                 </motion.div>
             </div>
