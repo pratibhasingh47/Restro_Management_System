@@ -213,6 +213,8 @@ import backgroundImage from '../assets/background.png';
 import logo from '../assets/pratsRestro.png'; 
 import { motion } from 'framer-motion'; // Import Framer Motion
 import restroImage from '../assets/restro1.png';
+import { FaGoogle, FaFacebook } from 'react-icons/fa';
+
 
 const Login = () => {
     const [isLogin, setIsLogin] = useState(true);
@@ -287,10 +289,10 @@ const Login = () => {
 
                     <div className="flex space-x-4">
                         <button className="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-full hover:bg-gray-200">
-                            <i className="fab fa-google text-xl text-gray-500"></i>
+                        <FaGoogle className="text-xl text-gray-800" />
                         </button>
                         <button className="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-full hover:bg-gray-200">
-                            <i className="fab fa-facebook text-xl text-gray-500"></i>
+                        <FaFacebook className="text-xl text-gray-800" />
                         </button>
                     </div>
 
