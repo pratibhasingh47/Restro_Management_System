@@ -107,11 +107,122 @@
 
 
 
+// import React, { useState } from 'react';
+// import { useNavigate } from 'react-router-dom';
+// import restaurantImage from '../assets/background.png'; // Use the same background image
+// import logo from '../assets/pratsRestro.png'; // Use the same logo
+// import restroImage from '../assets/restro1.png'; // Use an image related to restaurant management
+
+// const Signup = () => {
+//     const [isLogin, setIsLogin] = useState(false); // Set to false to show signup initially
+//     const navigate = useNavigate();
+
+//     const toggleForm = () => {
+//         setIsLogin(!isLogin);
+//         navigate(isLogin ? '/signup' : '/login');
+//     };
+
+//     return (
+//         <div 
+//             className="flex h-screen items-center justify-center bg-gray-100 p-4"
+//             style={{
+//                 backgroundImage: `url(${restaurantImage})`, // Use the same background image
+//                 backgroundRepeat: 'no-repeat',
+//                 backgroundSize: 'cover',
+//             }}
+//         >
+//             <div className="flex h-[85%] w-[60%] bg-white rounded-2xl shadow-lg overflow-hidden">
+//                 {/* Promotional Section */}
+//                 <div className="hidden md:flex flex-col justify-center items-start h-[100%] w-1/2 px-12 bg-gradient-to-br from-orange-400 to-orange-700 text-white">
+//                     <h2 className="text-4xl font-lato font-bold mb-4 w-80">Simplify Management with Our Dashboard</h2>
+//                     <p className="font-lato font-thin text-lg">Register yourself with our user-friendly management system.</p>
+//                     <img src={restroImage} alt="Restaurant Management" className="w-4/5" />
+//                 </div>
+
+//                 {/* Signup Form */}
+//                 <div className="w-full md:w-1/2 p-8 flex flex-col items-center">
+//                     <img src={logo} alt="Logo" className="w-72 mt-16 mb-4" /> {/* Logo */}
+//                     <h2 className="text-2xl font-lato font-bold text-gray-800 mt-8 mb-4">Create Account</h2>
+//                     <p className="text-gray-600 font-lato mb-6">Create a new account to get started</p>
+
+//                     <form className="w-full mt-4 max-w-sm space-y-4">
+//                         <div>
+//                             <input
+//                                 type="text"
+//                                 placeholder="Name"
+//                                 className="w-full p-3 border font-lato border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+//                             />
+//                         </div>
+//                         <div>
+//                             <input
+//                                 type="email"
+//                                 placeholder="Email address"
+//                                 className="w-full p-3 border font-lato border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+//                             />
+//                         </div>
+//                         <div>
+//                             <input
+//                                 type="password"
+//                                 placeholder="Password"
+//                                 className="w-full p-3 border font-lato border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+//                             />
+//                         </div>
+//                         <div>
+//                             <input
+//                                 type="number"
+//                                 placeholder="Mobile No."
+//                                 className="w-full p-3 border font-lato border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+//                             />
+//                         </div>
+//                         <button
+//                             type="submit"
+//                             className="w-full bg-orange-500 text-white font-lato font-black p-3 rounded-md hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500"
+//                         >
+//                             Sign Up
+//                         </button>
+//                     </form>
+
+//                     <div className="flex w-auto items-center my-6">
+//                         <span className="border-b w-20 border-gray-300"></span>
+//                         <span className="px-4 w-auto text-gray-500">Or Sign Up with</span>
+//                         <span className="border-b w-20 border-gray-300"></span>
+//                     </div>
+
+//                     <div className="flex space-x-4">
+//                         <button className="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-full hover:bg-gray-200">
+//                             <i className="fab fa-google text-xl text-gray-500"></i>
+//                         </button>
+//                         <button className="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-full hover:bg-gray-200">
+//                             <i className="fab fa -facebook text-xl text-gray-500"></i>
+//                         </button>
+//                     </div>
+
+//                     <p className="text-sm text-gray-500 mt-8">
+//                         Already have an account? <span onClick={toggleForm} className="text-orange-500 cursor-pointer hover:underline">Login</span>
+//                     </p>
+//                 </div>
+//             </div>
+//         </div>
+//     );
+// };
+
+// export default Signup;
+
+
+
+
+
+
+
+
+
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import restaurantImage from '../assets/background.png'; // Use the same background image
 import logo from '../assets/pratsRestro.png'; // Use the same logo
 import restroImage from '../assets/restro1.png'; // Use an image related to restaurant management
+import { motion } from 'framer-motion'; // Import Framer Motion
 
 const Signup = () => {
     const [isLogin, setIsLogin] = useState(false); // Set to false to show signup initially
@@ -139,8 +250,14 @@ const Signup = () => {
                     <img src={restroImage} alt="Restaurant Management" className="w-4/5" />
                 </div>
 
-                {/* Signup Form */}
-                <div className="w-full md:w-1/2 p-8 flex flex-col items-center">
+                {/* Signup Form with Motion */}
+                <motion.div
+                    className="w-full md:w-1/2 p-8 flex flex-col items-center"
+                    initial={{ opacity: 0, x: 100 }} // Initial state
+                    animate={{ opacity: 1, x: 0 }} // Animate to this state
+                    exit={{ opacity: 0, x: -100 }} // Exit state
+                    transition={{ duration: 0.5 }} // Transition duration
+                >
                     <img src={logo} alt="Logo" className="w-72 mt-16 mb-4" /> {/* Logo */}
                     <h2 className="text-2xl font-lato font-bold text-gray-800 mt-8 mb-4">Create Account</h2>
                     <p className="text-gray-600 font-lato mb-6">Create a new account to get started</p>
@@ -185,22 +302,21 @@ const Signup = () => {
                     <div className="flex w-auto items-center my-6">
                         <span className="border-b w-20 border-gray-300"></span>
                         <span className="px-4 w-auto text-gray-500">Or Sign Up with</span>
-                        <span className="border-b w-20 border-gray-300"></span>
-                    </div>
+                        <span className="border-b w-20 border-gray-300"></span> </div>
 
                     <div className="flex space-x-4">
                         <button className="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-full hover:bg-gray-200">
                             <i className="fab fa-google text-xl text-gray-500"></i>
                         </button>
                         <button className="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-full hover:bg-gray-200">
-                            <i className="fab fa -facebook text-xl text-gray-500"></i>
+                            <i className="fab fa-facebook text-xl text-gray-500"></i>
                         </button>
                     </div>
 
                     <p className="text-sm text-gray-500 mt-8">
                         Already have an account? <span onClick={toggleForm} className="text-orange-500 cursor-pointer hover:underline">Login</span>
                     </p>
-                </div>
+                </motion.div>
             </div>
         </div>
     );

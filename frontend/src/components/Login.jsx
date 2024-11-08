@@ -209,9 +209,10 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import restaurantImage from '../assets/background.png'; 
+import backgroundImage from '../assets/background.png'; 
 import logo from '../assets/pratsRestro.png'; 
 import { motion } from 'framer-motion'; // Import Framer Motion
+import restroImage from '../assets/restro1.png';
 
 const Login = () => {
     const [isLogin, setIsLogin] = useState(true);
@@ -225,7 +226,7 @@ const Login = () => {
     return (
         <div className="flex h-screen items-center justify-center bg-gray-100 p-4"
             style={{
-                backgroundImage: `url(${restaurantImage})`,
+                backgroundImage: `url(${backgroundImage})`,
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: 'cover',
             }}
@@ -235,7 +236,7 @@ const Login = () => {
                 <div className="hidden md:flex flex-col justify-center items-start h-[100%] w-1/2 px-12 bg-gradient-to-br from-orange-400 to-orange-700 text-white">
                     <h2 className="text-4xl font-lato font-bold mb-4 w-80">Simplify Management with Our Dashboard</h2>
                     <p className="font-lato font-thin text-lg">Register yourself with our user-friendly management system.</p>
-                    <img src={restaurantImage} alt="Restaurant Management" className="w-4/5" />
+                    <img src={restroImage} alt="Restaurant Management" className="w-4/5" />
                 </div>
 
                 {/* Login Form */}
