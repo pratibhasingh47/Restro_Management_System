@@ -322,9 +322,9 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../redux/slices/authslice'; // Import loginUser thunk
-import backgroundImage from '../assets/background.png'; 
-import logo from '../assets/pratsRestro.png'; 
-import { motion } from 'framer-motion'; 
+import backgroundImage from '../assets/background.png';
+import logo from '../assets/pratsRestro.png';
+import { motion } from 'framer-motion';
 import restroImage from '../assets/restro1.png';
 import { FaGoogle, FaFacebook } from 'react-icons/fa';
 
