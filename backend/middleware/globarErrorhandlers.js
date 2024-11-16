@@ -25,7 +25,7 @@ const errorHandler = (err, req, res, next) => {
         for (let key in err.errors) {
             errors[key] = err.errors[key].message;
         }
-        message = errors; 
+        message = errors;
     }
 
     res.status(statusCode).json({
