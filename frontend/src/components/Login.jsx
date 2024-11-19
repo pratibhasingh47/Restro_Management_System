@@ -339,7 +339,7 @@ const Login = () => {
         e.preventDefault();
         const result = await dispatch(loginUser({ email, password }));
         if (loginUser.fulfilled.match(result)) {
-            navigate('/dashboard'); // Redirect on successful login
+            navigate('/'); // Redirect on successful login
         }
     };
 
