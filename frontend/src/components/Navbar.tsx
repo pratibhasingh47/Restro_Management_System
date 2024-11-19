@@ -11,7 +11,7 @@ const Navbar: React.FC = () => {
     };
 
     return (
-        <nav className="bg-gradient-to-r from-orange-400 to-orange-600 shadow-md sticky top-0 z-50">
+        <nav className="bg-gradient-to-r from-orange-100 to-orange-300 shadow-md sticky top-0 z-50">
             <div className="container mx-auto px-6 py-4 flex justify-between items-center">
                 {/* Logo */}
                 <div className="flex items-center">
