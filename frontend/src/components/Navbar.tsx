@@ -11,22 +11,25 @@ const Navbar: React.FC = () => {
     };
 
     return (
-        <nav className="bg-gradient-to-r from-orange-100 to-orange-300 shadow-md sticky top-0 z-50">
-            <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+        <nav className="bg-gradient-to-r from-orange-100 to-orange-300 shadow-md sticky top-0 z-50" style={{ height: '100px' }}>
+            <div className="container mx-auto px-6 py-4 flex justify-between items-center h-full">
                 {/* Logo */}
                 <div className="flex items-center">
-                    <img src={logo} alt="Logo" className="h-12" />
+                    <img src={logo} alt="Logo" className="h-16" />
                 </div>
 
                 {/* Desktop Menu */}
                 <div className="hidden md:flex space-x-8">
-                    <Link to="/about" className="text-white hover:text-black text-xl font-bold font-lato transition duration-300">
+                    <Link to="/about" className="text-black hover:text-black text-xl font-bold font-lato transition duration-300">
                         About Us
                     </Link>
-                    <Link to="/delivery" className="text-white hover:text-black  text-xl font-bold font-lato transition duration-300">
+                    <Link to="/delivery" className="text-black hover:text-black text-xl font-bold font-lato transition duration-300">
                         Delivery
                     </Link>
-                    <Link to="/account" className="text-white hover:text-black text-xl font-bold font-lato transition duration-300">
+                    <Link to="/orders" className="text-black hover:text-black text-xl font-bold font-lato transition duration-300">
+                        Orders
+                    </Link>
+                    <Link to="/account" className="text-black hover:text-black text-xl font-bold font-lato transition duration-300">
                         My Account
                     </Link>
                 </div>
@@ -56,6 +59,13 @@ const Navbar: React.FC = () => {
                         onClick={toggleMenu}
                     >
                         Delivery
+                    </Link>
+                    <Link
+                        to="/orders"
+                        className="block px-4 py-3 text-white hover:bg-yellow-200 hover:text-gray-800 transition duration-300"
+                        onClick={toggleMenu}
+                    >
+                        Orders
                     </Link>
                     <Link
                         to="/account"
