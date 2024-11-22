@@ -54,8 +54,9 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.secondary.main,
     },
     form: {
-        width: '70%', // Fix IE 11 issue.
-        marginTop: theme.spacing(1),
+        width: '100%', // Fix IE 11 issue.
+        marginTop: theme.spacing(2),
+        maxWidth: '500px',
     },
     submit: {
         margin: theme.spacing(3, 0, 2),
@@ -63,6 +64,12 @@ const useStyles = makeStyles((theme) => ({
     tabs: {
         display: 'flex',
         justifyContent: 'center',
+        marginTop: theme.spacing(2),
+    },
+    linkContainer: {
+        display: 'flex',
+        justifyContent: 'center',
+        marginTop: theme.spacing(2),
     },
 }));
 
@@ -102,7 +109,6 @@ const SignUp: React.FC = () => {
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };
-
     return (
         <Grid container component="main" className={classes.root} alignItems="stretch">
             <CssBaseline />
@@ -115,13 +121,12 @@ const SignUp: React.FC = () => {
                     <Typography component="h1" variant="h5">
                         Sign Up
                     </Typography>
-                    <Box sx={{ width: '100%' }} className={classes.tabs}>
-                        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                            <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                                <Tab label="User " {...a11yProps(0)} />
-                                <Tab label="Management" {...a11yProps(1)} />
-                            </Tabs>
-                        </Box>
+                    <Box sx={{ width: '100%' }} className={classes.tabs} />
+                    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                            <Tab label="User " {...a11yProps(0)} />
+                            <Tab label="Management" {...a11yProps(1)} />
+                        </Tabs>
                     </Box>
                     <CustomTabPanel value={value} index={0}>
                         <form className={classes.form} noValidate>
@@ -256,7 +261,7 @@ const SignUp: React.FC = () => {
                             </Button>
                         </form>
                     </CustomTabPanel>
-                    <Grid container>
+                    <Grid container className={classes.linkContainer}>
                         <Grid item>
                             <Link href="#" variant="body2">
                                 {"Already have an account? Sign In"}
