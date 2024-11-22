@@ -1,28 +1,53 @@
-const User = require("../model/user");
+const Customer = require("../model/customerSchema");
+const Management = require("../model/managementSchema");
 const bcrypt = require('bcrypt');
-
 const jwt = require('jsonwebtoken');
 
 exports.signup = async (req, res, next) => {
     try {
-        const { name, email, password, contactNumber, role } = req.body;
+        const { name, email, password, contactNumber, role, managementId } = req.body;
 
         if (!name || !email || !password || !contactNumber) {
             return res.status(400).json({ message: "All fields are required." });
         }
 
-        const existingUser = await User.findOne({ email });
+        // Default role to "Customer" if not provided
+        const userRole = role || "Customer";
+
+        let existingUser;
+        if (userRole === "Customer") {
+            existingUser = await Customer.findOne({ email });
+        } else if (userRole === "Manager" || userRole === "Staff") {
+            existingUser = await Management.findOne({ email });
+        }
+
         if (existingUser) {
             return res.status(400).json({ message: "Email is already registered." });
         }
 
-        const newUser = new User({
-            name,
-            email,
-            password,
-            contactNumber,
-            role
-        });
+        let newUser;
+        if (userRole === "Customer") {
+            newUser = new Customer({
+                name,
+                email,
+                password,
+                contactNumber
+            });
+        } else if (userRole === "Manager" || userRole === "Staff") {
+            if (!managementId) {
+                return res.status(400).json({ message: "Management ID is required for staff and manager." });
+            }
+            newUser = new Management({
+                name,
+                email,
+                password,
+                contactNumber,
+                role: userRole,
+                managementId
+            });
+        } else {
+            return res.status(400).json({ message: "Invalid role specified." });
+        }
 
         await newUser.save();
 
@@ -45,24 +70,25 @@ exports.signup = async (req, res, next) => {
         });
     } catch (error) {
         console.error(error);
-        // res.status(500).json({ message: "Server error. Please try again later." });
         next(error);
     }
 };
 
-
-
 exports.login = async (req, res) => {
     try {
-        const { email, password } = req.body;
+        const { email, password, managementId } = req.body;
 
-        if (!email || !password) {
-            return res.status(400).json({ message: "Email and password are required." });
+        if (!email || !password || (!managementId && role !== "Customer")) {
+            return res.status(400).json({ message: "Email, password, and management ID are required for staff and manager." });
         }
 
-        const user = await User.findOne({ email });
+        let user = await Customer.findOne({ email });
         if (!user) {
-            return res.status(400).json({ message: "Invalid email (User Not Found)" });
+            user = await Management.findOne({ email, managementId });
+        }
+
+        if (!user) {
+            return res.status(400).json({ message: "Invalid email or management ID (User Not Found)" });
         }
 
         const isPasswordValid = await bcrypt.compare(password, user.password);
