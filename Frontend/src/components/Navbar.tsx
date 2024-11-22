@@ -1,20 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import logo from '../assets/images/pratsRestro.png';
+import { FaUserPlus } from 'react-icons/fa';
+
 
 const Navbar: React.FC = () => {
     return (
-        <nav className="bg-primary text-white sticky top-0 w-full flex items-center justify-between p-4 shadow-lg">
+        <nav className="bg-accent1 px-40  text-primary sticky top-0 w-full flex items-center justify-between p-4 shadow-lg">
             <div className="flex items-center">
-                <img src="/path-to-your-logo.png" alt="Logo" className="h-8 w-8 mr-2" />
-                <span className="text-xl font-bold">YourAppName</span>
+                <img src={logo} alt="Logo" className="h-16 w-auto mr-2" />
+                {/* <span className="text-xl font-bold">YourAppName</span> */}
             </div>
-            <div className="flex space-x-4">
-                <Link to="/orders" className="hover:text-accent1">Orders</Link>
-                <Link to="/about" className="hover:text-accent1">About Us</Link>
-                <Link to="/contact" className="hover:text-accent1">Contact</Link>
-                <Link to="/account" className="hover:text-accent1">My Account</Link>
-                <Link to="/signup" className="hover:text-accent1">
-                    <button className="bg-accent1 text-white px-4 py-2 rounded">Sign Up</button>
+            <div className="flex justify-center items-center space-x-8 mx-12">
+                <Link to="/about" className="font-lato font-extrabold text-xl hover:text-secondary">About Us</Link>
+                <Link to="/contact" className="font-lato font-extrabold text-xl hover:text-secondary">Contact</Link>
+                <Link to="/account" className="font-lato font-extrabold text-xl hover:text-secondary">My Account</Link>
+                <Link to="/signup" className="font-lato font-bold  tracking-wide text-xl hover:text-secondary">
+                    <button className="flex items-center bg-secondary text-white px-4 py-2 rounded-md hover:bg-secondary-dark transition duration-300">
+                        <FaUserPlus className=" mr-2 font-lato" />
+                        Sign Up
+                    </button>
                 </Link>
             </div>
         </nav>
