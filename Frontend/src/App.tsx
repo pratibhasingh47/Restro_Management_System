@@ -1,15 +1,12 @@
-import { useState } from 'react'
-import './App.css'
-import React from 'react'
+import React from 'react';
+import { Provider } from 'react-redux';
+import store from './redux/store/store';
+import Routes from './router/router';
 
-function App() {
-	const [count, setCount] = useState(0)
-
+export const App: React.FC = () => {
 	return (
-		<>
-			<div className="App">Hello World</div>
-		</>
-	)
-}
-
-export default App
+		<Provider store={store}>
+			<Routes />
+		</Provider>
+	);
+};
