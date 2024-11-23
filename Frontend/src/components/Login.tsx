@@ -170,6 +170,11 @@ const Login: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        if (localStorage.getItem('authToken')) {
+            alert('You are already logged in');
+            return;
+        }
     
         const emailError = validateEmail(formData.email);
         const passwordError = validatePassword(formData.password);
@@ -195,7 +200,7 @@ const Login: React.FC = () => {
                 navigate('/'); // Redirect to dashboard or any other route on successful login
             } else {
                 // Handle case where payload is undefined or token is missing
-                setErrors({ ...errors, managementId: 'Failed to retrieve token. Please try again.' });
+                // setErrors({ ...errors, managementId: 'Failed to retrieve token. Please try again.' });
             }
         } else {
             // Handle login failure (e.g., show an error message)

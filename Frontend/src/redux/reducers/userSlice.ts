@@ -11,12 +11,12 @@ const initialState: UserState = {
     token: null,
 };
 
-// Thunks for signup and login
 export const signupUser = createAsyncThunk(
     'user/signup',
     async (userData: { name: string; email: string; password: string; contactNumber: string; role: string; managementId?: string }, { dispatch }) => {
         const response = await axios.post('http://localhost:3000/auth/signup', userData);
         const { user, token } = response.data;
+        localStorage.setItem('authToken', token); // Store token in local storage
         dispatch(setUser({ user, token }));
     }
 );
@@ -26,6 +26,7 @@ export const loginUser = createAsyncThunk(
     async (credentials: { email: string; password: string; managementId?: string }, { dispatch }) => {
         const response = await axios.post('http://localhost:3000/auth/login', credentials);
         const { user, token } = response.data;
+        localStorage.setItem('authToken', token); // Store token in local storage
         dispatch(setUser({ user, token }));
     }
 );
