@@ -78,13 +78,16 @@ exports.login = async (req, res) => {
     try {
         const { email, password, managementId } = req.body;
 
-        if (!email || !password || (!managementId && role !== "Customer")) {
-            return res.status(400).json({ message: "Email, password, and management ID are required for staff and manager." });
+        if (!email || !password) {
+            return res.status(400).json({ message: "Email and password are required." });
         }
 
         let user = await Customer.findOne({ email });
+        let role = "Customer"; // Default role to Customer if not specified
+
         if (!user) {
             user = await Management.findOne({ email, managementId });
+            role = user ? user.role : role; // Update role if user is found in Management
         }
 
         if (!user) {

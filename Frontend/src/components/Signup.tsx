@@ -15,9 +15,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import MenuItem from '@mui/material/MenuItem';
+import { useNavigate } from 'react-router-dom';
 import R1 from '../assets/images/r1.webp';
 import GoogleIcon from '@mui/icons-material/Google';
-import { yellow } from '@material-ui/core/colors';
 
 function Copyright() {
     return (
@@ -145,6 +145,7 @@ const SignUp: React.FC = () => {
     });
 
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     const validateName = (name: string) => {
         const regex = /^[a-zA-Z\s]{3,50}$/;
@@ -313,7 +314,7 @@ const SignUp: React.FC = () => {
                                 startIcon={<GoogleIcon />}
                                 onClick={handleGoogleSignIn}
                             >
-                                Sign in with Google
+                                Sign up with Google
                             </Button>
                         </form>
                     </CustomTabPanel>
@@ -390,7 +391,7 @@ const SignUp: React.FC = () => {
                                 onChange={handleChange}
                             >
                                 <MenuItem value="Staff">Staff</MenuItem>
-                                <MenuItem value="Worker">Worker</MenuItem>
+                                <MenuItem value="Manager">Manager</MenuItem>
                             </TextField>
                             <TextField
                                 variant="outlined"
@@ -423,13 +424,13 @@ const SignUp: React.FC = () => {
                                 startIcon={<GoogleIcon />}
                                 onClick={handleGoogleSignIn}
                             >
-                                Sign in with Google
+                                Sign up with Google
                             </Button>
                         </form>
                     </CustomTabPanel>
                     <Grid container className={classes.linkContainer}>
                         <Grid item>
-                            <Link href="#" variant="body2">
+                            <Link href="/login" variant="body2" onClick={() => navigate('/login')}>
                                 {"Already have an account? Log In"}
                             </Link>
                         </Grid>
