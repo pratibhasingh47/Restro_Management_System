@@ -14,8 +14,8 @@ const initialState: UserState = {
 // Thunks for signup and login
 export const signupUser = createAsyncThunk(
     'user/signup',
-    async (userData: { name: string; email: string; password: string; contactNumber: string }, { dispatch }) => {
-        const response = await axios.post('/api/auth/signup', userData);
+    async (userData: { name: string; email: string; password: string; contactNumber: string; role: string; managementId?: string }, { dispatch }) => {
+        const response = await axios.post('http://localhost:3000/auth/signup', userData);
         const { user, token } = response.data;
         dispatch(setUser({ user, token }));
     }
@@ -24,7 +24,7 @@ export const signupUser = createAsyncThunk(
 export const loginUser = createAsyncThunk(
     'user/login',
     async (credentials: { email: string; password: string; managementId?: string }, { dispatch }) => {
-        const response = await axios.post('/api/auth/login', credentials);
+        const response = await axios.post('http://localhost:3000/auth/login', credentials);
         const { user, token } = response.data;
         dispatch(setUser({ user, token }));
     }

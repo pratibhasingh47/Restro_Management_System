@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useAppDispatch } from '../redux/store/store';
+import { signupUser } from '../redux/reducers/userSlice';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -35,7 +37,6 @@ const useStyles = makeStyles((theme) => ({
         height: '100vh',
         width: '100vw',
         overflow: 'hidden',
-        // backgroundColor: yellow[500], // Set the background color to yellow
         backgroundColor: 'yellow',
     },
     image: {
@@ -58,10 +59,9 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: '#001e71',
     },
     form: {
-        width: '100%', // Fix IE 11 issue.
+        width: '100%',
         marginTop: theme.spacing(2),
         maxWidth: '500px',
-        // height: '550px',
     },
     submit: {
         margin: theme.spacing(3, 0, 2),
@@ -128,14 +128,94 @@ function a11yProps(index: number) {
 const SignUp: React.FC = () => {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        password: '',
+        contactNumber: '',
+        role: 'Customer',
+        managementId: ''
+    });
 
-    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-        setValue(newValue);
+    const [errors, setErrors] = useState({
+        name: '',
+        email: '',
+        password: '',
+        contactNumber: ''
+    });
+
+    const dispatch = useAppDispatch();
+
+    const validateName = (name: string) => {
+        const regex = /^[a-zA-Z\s]{3,50}$/;
+        return regex.test(name) ? '' : 'Name should only contain alphabets and spaces, and be 3-50 characters long';
     };
 
-    function handleGoogleSignIn(event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+    const validateEmail = (email: string) => {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email) ? '' : 'Please enter a valid email address';
+    };
+
+    const validatePassword = (password: string) => {
+        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        return regex.test(password) ? '' : 'Password must be at least 8 characters long, include one uppercase letter, one lowercase letter, one number, and one symbol';
+    };
+
+    const validateContactNumber = (contactNumber: string) => {
+        const regex = /^[6-9]\d{9}$/;
+        return regex.test(contactNumber) ? '' : 'Please enter a valid mobile number';
+    };
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+
+        let error = '';
+        switch (name) {
+            case 'name':
+                error = validateName(value);
+                break;
+            case 'email':
+                error = validateEmail(value);
+                break;
+            case 'password':
+                error = validatePassword(value);
+                break;
+            case 'contactNumber':
+                error = validateContactNumber(value);
+                break;
+        }
+        setErrors({ ...errors, [name]: error });
+    };
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+
+        const nameError = validateName(formData.name);
+        const emailError = validateEmail(formData.email);
+        const passwordError = validatePassword(formData.password);
+        const contactNumberError = validateContactNumber(formData.contactNumber);
+
+        if (nameError || emailError || passwordError || contactNumberError) {
+            setErrors({
+                name: nameError,
+                email: emailError,
+                password: passwordError,
+                contactNumber: contactNumberError
+            });
+            return;
+        }
+
+        dispatch(signupUser(formData));
+    };
+
+    const handleGoogleSignIn = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
         throw new Error('Function not implemented.');
-    }
+    };
+
+    const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+        setValue(newValue);
+    };
 
     return (
         <Grid container component="main" className={classes.root} alignItems="stretch">
@@ -146,18 +226,16 @@ const SignUp: React.FC = () => {
                     <Avatar className={classes.avatar}>
                         <LockOutlinedIcon />
                     </Avatar>
-                    <Typography component="h1" variant="h5" className={classes.signUpHeading}>
-                        Sign Up
-                    </Typography>
+                    <Typography component="h1" variant="h5" className={classes.signUpHeading}>Sign Up</Typography>
                     <Box sx={{ width: '100%' }} className={classes.tabs} />
                     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                        <Tabs value={value} onChange={handleTabChange} aria-label="basic tabs example">
                             <Tab label="User " {...a11yProps(0)} />
                             <Tab label="Management" {...a11yProps(1)} />
                         </Tabs>
                     </Box>
                     <CustomTabPanel value={value} index={0}>
-                        <form className={classes.form} noValidate>
+                        <form className={classes.form} noValidate onSubmit={handleSubmit}>
                             <TextField
                                 variant="outlined"
                                 margin="normal"
@@ -168,6 +246,10 @@ const SignUp: React.FC = () => {
                                 name="name"
                                 autoComplete="name"
                                 autoFocus
+                                value={formData.name}
+                                onChange={handleChange}
+                                error={!!errors.name}
+                                helperText={errors.name}
                             />
                             <TextField
                                 variant="outlined"
@@ -178,6 +260,10 @@ const SignUp: React.FC = () => {
                                 label="Email Address"
                                 name="email"
                                 autoComplete="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                error={!!errors.email}
+                                helperText={errors.email}
                             />
                             <TextField
                                 variant="outlined"
@@ -189,6 +275,10 @@ const SignUp: React.FC = () => {
                                 type="password"
                                 id="password"
                                 autoComplete="current-password"
+                                value={formData.password}
+                                onChange={handleChange}
+                                error={!!errors.password}
+                                helperText={errors.password}
                             />
                             <TextField
                                 variant="outlined"
@@ -197,8 +287,12 @@ const SignUp: React.FC = () => {
                                 fullWidth
                                 id="contact"
                                 label="Contact Number"
-                                name="contact"
+                                name="contactNumber"
                                 autoComplete="contact"
+                                value={formData.contactNumber}
+                                onChange={handleChange}
+                                error={!!errors.contactNumber}
+                                helperText={errors.contactNumber}
                             />
                             <Button
                                 type="submit"
@@ -224,7 +318,7 @@ const SignUp: React.FC = () => {
                         </form>
                     </CustomTabPanel>
                     <CustomTabPanel value={value} index={1}>
-                        <form className={classes.form} noValidate>
+                        <form className={classes.form} noValidate onSubmit={handleSubmit}>
                             <TextField
                                 variant="outlined"
                                 margin="normal"
@@ -235,6 +329,10 @@ const SignUp: React.FC = () => {
                                 name="name"
                                 autoComplete="name"
                                 autoFocus
+                                value={formData.name}
+                                onChange={handleChange}
+                                error={!!errors.name}
+                                helperText={errors.name}
                             />
                             <TextField
                                 variant="outlined"
@@ -245,6 +343,10 @@ const SignUp: React.FC = () => {
                                 label="Email Address"
                                 name="email"
                                 autoComplete="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                error={!!errors.email}
+                                helperText={errors.email}
                             />
                             <TextField
                                 variant="outlined"
@@ -256,6 +358,10 @@ const SignUp: React.FC = () => {
                                 type="password"
                                 id="password"
                                 autoComplete="current-password"
+                                value={formData.password}
+                                onChange={handleChange}
+                                error={!!errors.password}
+                                helperText={errors.password}
                             />
                             <TextField
                                 variant="outlined"
@@ -264,8 +370,12 @@ const SignUp: React.FC = () => {
                                 fullWidth
                                 id="contact"
                                 label="Contact Number"
-                                name="contact"
+                                name="contactNumber"
                                 autoComplete="contact"
+                                value={formData.contactNumber}
+                                onChange={handleChange}
+                                error={!!errors.contactNumber}
+                                helperText={errors.contactNumber}
                             />
                             <TextField
                                 variant="outlined"
@@ -276,6 +386,8 @@ const SignUp: React.FC = () => {
                                 label="Role"
                                 name="role"
                                 select
+                                value={formData.role}
+                                onChange={handleChange}
                             >
                                 <MenuItem value="Staff">Staff</MenuItem>
                                 <MenuItem value="Worker">Worker</MenuItem>
@@ -289,6 +401,8 @@ const SignUp: React.FC = () => {
                                 label="Management ID"
                                 name="managementId"
                                 autoComplete="management-id"
+                                value={formData.managementId}
+                                onChange={handleChange}
                             />
                             <Button
                                 type="submit"
