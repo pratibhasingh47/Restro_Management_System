@@ -170,7 +170,7 @@ const Login: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
+    
         if (localStorage.getItem('authToken')) {
             alert('You are already logged in');
             return;
@@ -188,23 +188,22 @@ const Login: React.FC = () => {
             return;
         }
     
-        const resultAction = await dispatch(loginUser(formData));
-        console.log('resultAction:', resultAction); // Log the entire resultAction for debugging
-    
-        if (loginUser.fulfilled.match(resultAction)) {
-            const payload = resultAction.payload as unknown as { token: string };
-            console.log('payload:', payload); // Log the payload for debugging
-    
-            if (payload && payload.token) {
-                localStorage.setItem('authToken', payload.token); // Store in local storage
-                navigate('/'); // Redirect to dashboard or any other route on successful login
+        try {
+            const resultAction = await dispatch(loginUser(formData));
+            if (loginUser.fulfilled.match(resultAction)) {
+                const payload = resultAction.payload as unknown as { token: string };
+                if (payload && payload.token) {
+                    localStorage.setItem('authToken', payload.token); // Store in local storage
+                    navigate('/'); // Redirect to home route on successful login
+                } else {
+                    // setErrors({ ...errors, managementId: 'Failed to retrieve token. Please try again.' });
+                }
             } else {
-                // Handle case where payload is undefined or token is missing
-                // setErrors({ ...errors, managementId: 'Failed to retrieve token. Please try again.' });
+                setErrors({ ...errors, managementId: 'Invalid email or password' });
             }
-        } else {
-            // Handle login failure (e.g., show an error message)
-            setErrors({ ...errors, managementId: 'Invalid email or password' });
+        } catch (error) {
+            console.error('Login error:', error);
+            setErrors({ ...errors, managementId: 'An error occurred. Please try again.' });
         }
     };
 

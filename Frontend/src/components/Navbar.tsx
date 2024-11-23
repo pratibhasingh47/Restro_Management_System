@@ -1,26 +1,63 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/images/pratsRestro.png';
 import { FaUserPlus } from 'react-icons/fa';
+import {jwtDecode} from 'jwt-decode';
+import MenuIcon from '@mui/icons-material/Menu';
+import TemporaryDrawer from './TemporaryDrawer';
 
+interface DecodedToken {
+    role: string;
+}
 
 const Navbar: React.FC = () => {
+    const [role, setRole] = useState<string | null>(null);
+    const [drawerOpen, setDrawerOpen] = useState(false);
+
+    useEffect(() => {
+        const token = localStorage.getItem('authToken');
+        if (token) {
+            const decoded: DecodedToken = jwtDecode<DecodedToken>(token);
+            setRole(decoded.role);
+        }
+    }, []);
+
+    const toggleDrawer = (open: boolean) => () => {
+        setDrawerOpen(open);
+    };
+
     return (
-        <nav className="bg-accent1 px-40  text-primary sticky top-0 w-full flex items-center justify-between p-4 shadow-lg">
+        <nav className="bg-accent1 px-40 text-primary sticky top-0 w-full flex items-center justify-between p-4 shadow-lg">
             <div className="flex items-center">
                 <img src={logo} alt="Logo" className="h-16 w-auto mr-2" />
-                {/* <span className="text-xl font-bold">YourAppName</span> */}
             </div>
-            <div className="flex justify-center items-center space-x-8 mx-12">
-                <Link to="/about" className="font-lato font-extrabold text-lg hover:text-xl">About Us</Link>
-                <Link to="/contact" className="font-lato font-extrabold text-lg hover:text-xl">Contact</Link>
-                <Link to="/account" className="font-lato font-extrabold text-lg  hover:text-xl">My Account</Link>
-                <Link to="/signup" className="font-lato font-bold  tracking-wide text-xl hover:text-secondary">
-                    <button className="flex items-center bg-black text-lg text-white px-4 py-2 rounded-full hover:bg-secondary-dark transition duration-300">
-                        <FaUserPlus className=" mr-2 font-lato" />
-                        Sign Up
-                    </button>
-                </Link>
+            <div className="flex justify-center items-center space-x-12 mx-12">
+                <Link to="/about" className="font-lato font-extrabold text-lg hover:text-xl hover:transition duration-500">About Us</Link>
+                <Link to="/contact" className="font-lato font-extrabold text-lg hover:text-xl hover:transition duration-500">Contact</Link>
+                {!role ? (
+                    <Link to="/signup" className="font-lato font-bold tracking-wide text-xl hover:text-secondary hover:transition duration-500">
+                        <button className="flex items-center bg-black text-lg text-white px-4 py-2 rounded-full hover:bg-secondary-dark hover:transition duration-300">
+                            <FaUserPlus className="mr-2 font-lato" />
+                            Sign Up
+                        </button>
+                    </Link>
+                ) : (
+                    <>
+                        <Link to="/account" className="font-lato font-extrabold text-lg hover:text-xl hover:transition duration-500">My Account</Link>
+                        {role === 'Manager' && (
+                            <>
+                                <MenuIcon style={{ fontSize: 35, marginLeft: '100px' }} onClick={toggleDrawer(true)} />
+                                <TemporaryDrawer open={drawerOpen} toggleDrawer={toggleDrawer} />
+                            </>
+                        )}
+                        {role === 'Staff' && (
+                            <>
+                                <Link to="/order-status" className="font-lato font-extrabold text-lg hover:text-xl hover:transition duration-500">Order Status</Link>
+                                <Link to="/attendance" className="font-lato font-extrabold text-lg hover:text-xl hover:transition duration-500">Attendance</Link>
+                            </>
+                        )}
+                    </>
+                )}
             </div>
         </nav>
     );
