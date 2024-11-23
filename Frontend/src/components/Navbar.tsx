@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/images/pratsRestro.png';
 import { FaUserPlus } from 'react-icons/fa';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import MenuIcon from '@mui/icons-material/Menu';
 import TemporaryDrawer from './TemporaryDrawer';
 
@@ -17,13 +17,23 @@ const Navbar: React.FC = () => {
     useEffect(() => {
         const token = localStorage.getItem('authToken');
         if (token) {
-            const decoded: DecodedToken = jwtDecode<DecodedToken>(token);
-            setRole(decoded.role);
+            try {
+                const decoded: DecodedToken = jwtDecode<DecodedToken>(token);
+                setRole(decoded.role);
+            } catch (error) {
+                console.error("Failed to decode token:", error);
+            }
         }
     }, []);
 
     const toggleDrawer = (open: boolean) => () => {
         setDrawerOpen(open);
+    };
+
+    const handleLogout = () => {
+        localStorage.removeItem('authToken');
+        setRole(null);
+        window.location.href = '/'; // Redirect to home page after logout
     };
 
     return (
@@ -46,7 +56,7 @@ const Navbar: React.FC = () => {
                         <Link to="/account" className="font-lato font-extrabold text-lg hover:text-xl hover:transition duration-500">My Account</Link>
                         {role === 'Manager' && (
                             <>
-                                <MenuIcon style={{ fontSize: 35, marginLeft: '100px' }} onClick={toggleDrawer(true)} />
+                                <MenuIcon style={{ fontSize: 35, marginLeft: '100px' , marginRight:'50px' }} onClick={toggleDrawer(true)} />
                                 <TemporaryDrawer open={drawerOpen} toggleDrawer={toggleDrawer} />
                             </>
                         )}
@@ -56,6 +66,9 @@ const Navbar: React.FC = () => {
                                 <Link to="/attendance" className="font-lato font-extrabold text-lg hover:text-xl hover:transition duration-500">Attendance</Link>
                             </>
                         )}
+                        <button onClick={handleLogout} className="flex items-center bg-black text-lg text-white px-4 py-2 rounded-full hover:bg-secondary-dark hover:transition duration-300 ml-4">
+                            Logout
+                        </button>
                     </>
                 )}
             </div>

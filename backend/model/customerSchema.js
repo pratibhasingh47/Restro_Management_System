@@ -54,6 +54,11 @@ const customerSchema = mongoose.Schema({
             message: "Please enter a valid Indian mobile number",
         },
     },
+    role: {
+        type: String,
+        enum: ["Customer"],
+        default: "Customer",
+    },
 }, { timestamps: true });
 
 // Pre-save hook to hash the password if it's new or modified

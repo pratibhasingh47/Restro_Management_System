@@ -221,7 +221,7 @@ const SignUp: React.FC = () => {
                 navigate('/'); // Redirect to dashboard or any other route on successful signup
             } else {
                 // Handle case where payload is undefined or token is missing
-                setErrors({ ...errors, managementId: 'Failed to retrieve token. Please try again.' });
+                // setErrors({ ...errors, managementId: 'Failed to retrieve token. Please try again.' });
             }
         } else {
             // Handle signup failure (e.g., show an error message)

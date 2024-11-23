@@ -3,6 +3,7 @@ const Management = require("../model/managementSchema");
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+
 exports.signup = async (req, res, next) => {
     try {
         const { name, email, password, contactNumber, role, managementId } = req.body;
@@ -52,7 +53,7 @@ exports.signup = async (req, res, next) => {
         await newUser.save();
 
         const token = jwt.sign(
-            { userId: user._id, email: user.email, password: user.password, role: user.role, managementId: user.managementId },
+            { userId: newUser._id, email: newUser.email, role: newUser.role, managementId: newUser.managementId },
             process.env.JWT_SECRET || "your_jwt_secret_key",
             { expiresIn: "1d" }
         );
