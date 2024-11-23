@@ -18,6 +18,7 @@ export const signupUser = createAsyncThunk(
         const { user, token } = response.data;
         localStorage.setItem('authToken', token); // Store token in local storage
         dispatch(setUser({ user, token }));
+        return { user, token };
     }
 );
 
@@ -28,6 +29,7 @@ export const loginUser = createAsyncThunk(
         const { user, token } = response.data;
         localStorage.setItem('authToken', token); // Store token in local storage
         dispatch(setUser({ user, token }));
+        return { user, token };
     }
 );
 
@@ -46,10 +48,12 @@ const userSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(signupUser.fulfilled, (state, action) => {
-            // Handle any additional state changes if needed
+            state.user = action.payload.user;
+            state.token = action.payload.token;
         });
         builder.addCase(loginUser.fulfilled, (state, action) => {
-            // Handle any additional state changes if needed
+            state.user = action.payload.user;
+            state.token = action.payload.token;
         });
     },
 });
