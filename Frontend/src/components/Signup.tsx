@@ -141,7 +141,8 @@ const SignUp: React.FC = () => {
         name: '',
         email: '',
         password: '',
-        contactNumber: ''
+        contactNumber: '',
+        managementId: ''
     });
 
     const dispatch = useAppDispatch();
@@ -189,25 +190,43 @@ const SignUp: React.FC = () => {
         setErrors({ ...errors, [name]: error });
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-
+    
         const nameError = validateName(formData.name);
         const emailError = validateEmail(formData.email);
         const passwordError = validatePassword(formData.password);
         const contactNumberError = validateContactNumber(formData.contactNumber);
-
+    
         if (nameError || emailError || passwordError || contactNumberError) {
             setErrors({
                 name: nameError,
                 email: emailError,
                 password: passwordError,
-                contactNumber: contactNumberError
+                contactNumber: contactNumberError,
+                managementId: errors.managementId
             });
             return;
         }
-
-        dispatch(signupUser(formData));
+    
+        const resultAction = await dispatch(signupUser(formData));
+        console.log('resultAction:', resultAction); // Log the entire resultAction for debugging
+    
+        if (signupUser.fulfilled.match(resultAction)) {
+            const payload = resultAction.payload as unknown as { token: string };
+            console.log('payload:', payload); // Log the payload for debugging
+    
+            if (payload && payload.token) {
+                localStorage.setItem('authToken', payload.token); // Store in local storage
+                navigate('/'); // Redirect to dashboard or any other route on successful signup
+            } else {
+                // Handle case where payload is undefined or token is missing
+                setErrors({ ...errors, managementId: 'Failed to retrieve token. Please try again.' });
+            }
+        } else {
+            // Handle signup failure (e.g., show an error message)
+            setErrors({ ...errors, managementId: 'Signup failed. Please try again.' });
+        }
     };
 
     const handleGoogleSignIn = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {

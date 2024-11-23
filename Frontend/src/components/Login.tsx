@@ -168,12 +168,12 @@ const Login: React.FC = () => {
         setErrors({ ...errors, [name]: error });
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
+    
         const emailError = validateEmail(formData.email);
         const passwordError = validatePassword(formData.password);
-
+    
         if (emailError || passwordError) {
             setErrors({
                 email: emailError,
@@ -182,10 +182,21 @@ const Login: React.FC = () => {
             });
             return;
         }
-
+    
         const resultAction = await dispatch(loginUser(formData));
+        console.log('resultAction:', resultAction); // Log the entire resultAction for debugging
+    
         if (loginUser.fulfilled.match(resultAction)) {
-            navigate('/'); // Redirect to dashboard or any other route on successful login
+            const payload = resultAction.payload as unknown as { token: string };
+            console.log('payload:', payload); // Log the payload for debugging
+    
+            if (payload && payload.token) {
+                localStorage.setItem('authToken', payload.token); // Store in local storage
+                navigate('/'); // Redirect to dashboard or any other route on successful login
+            } else {
+                // Handle case where payload is undefined or token is missing
+                setErrors({ ...errors, managementId: 'Failed to retrieve token. Please try again.' });
+            }
         } else {
             // Handle login failure (e.g., show an error message)
             setErrors({ ...errors, managementId: 'Invalid email or password' });

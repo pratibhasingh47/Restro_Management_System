@@ -52,7 +52,7 @@ exports.signup = async (req, res, next) => {
         await newUser.save();
 
         const token = jwt.sign(
-            { userId: newUser._id, role: newUser.role },
+            { userId: user._id, email: user.email, password: user.password, role: user.role, managementId: user.managementId },
             process.env.JWT_SECRET || "your_jwt_secret_key",
             { expiresIn: "1d" }
         );
@@ -100,7 +100,7 @@ exports.login = async (req, res) => {
         }
 
         const token = jwt.sign(
-            { userId: user._id, role: user.role },
+            { userId: user._id, email: user.email, password: user.password, role: user.role, managementId: user.managementId },
             process.env.JWT_SECRET || "your_jwt_secret_key",
             { expiresIn: "1d" }
         );
@@ -112,10 +112,12 @@ exports.login = async (req, res) => {
                 name: user.name,
                 email: user.email,
                 contactNumber: user.contactNumber,
-                role: user.role
+                role: user.role,
+                managementId: user.managementId
             },
             token
         });
+
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Server error. Please try again later." });
