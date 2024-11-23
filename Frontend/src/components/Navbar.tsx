@@ -12,11 +12,11 @@ const Navbar: React.FC = () => {
                 {/* <span className="text-xl font-bold">YourAppName</span> */}
             </div>
             <div className="flex justify-center items-center space-x-8 mx-12">
-                <Link to="/about" className="font-lato font-extrabold text-xl hover:text-secondary">About Us</Link>
-                <Link to="/contact" className="font-lato font-extrabold text-xl hover:text-secondary">Contact</Link>
-                <Link to="/account" className="font-lato font-extrabold text-xl hover:text-secondary">My Account</Link>
+                <Link to="/about" className="font-lato font-extrabold text-lg hover:text-xl">About Us</Link>
+                <Link to="/contact" className="font-lato font-extrabold text-lg hover:text-xl">Contact</Link>
+                <Link to="/account" className="font-lato font-extrabold text-lg  hover:text-xl">My Account</Link>
                 <Link to="/signup" className="font-lato font-bold  tracking-wide text-xl hover:text-secondary">
-                    <button className="flex items-center bg-secondary text-white px-4 py-2 rounded-md hover:bg-secondary-dark transition duration-300">
+                    <button className="flex items-center bg-black text-lg text-white px-4 py-2 rounded-full hover:bg-secondary-dark transition duration-300">
                         <FaUserPlus className=" mr-2 font-lato" />
                         Sign Up
                     </button>

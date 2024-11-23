@@ -3,8 +3,6 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
@@ -16,6 +14,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import MenuItem from '@mui/material/MenuItem';
 import R1 from '../assets/images/r1.webp';
+import GoogleIcon from '@mui/icons-material/Google';
+import { yellow } from '@material-ui/core/colors';
 
 function Copyright() {
     return (
@@ -34,6 +34,9 @@ const useStyles = makeStyles((theme) => ({
     root: {
         height: '100vh',
         width: '100vw',
+        overflow: 'hidden',
+        // backgroundColor: yellow[500], // Set the background color to yellow
+        backgroundColor: 'yellow',
     },
     image: {
         backgroundImage: `url(${R1})`,
@@ -42,24 +45,39 @@ const useStyles = makeStyles((theme) => ({
             theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
         backgroundSize: 'cover',
         backgroundPosition: 'center',
+        objectFit: 'cover',
     },
     paper: {
-        margin: theme.spacing(20, 4),
+        margin: theme.spacing(8, 4),
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
     },
     avatar: {
         margin: theme.spacing(2),
-        backgroundColor: theme.palette.secondary.main,
+        backgroundColor: '#001e71',
     },
     form: {
         width: '100%', // Fix IE 11 issue.
         marginTop: theme.spacing(2),
         maxWidth: '500px',
+        // height: '550px',
     },
     submit: {
         margin: theme.spacing(3, 0, 2),
+        fontSize: '16px',
+        fontWeight: 'bold',
+        backgroundColor: '#001e71',
+    },
+    googleButton: {
+        margin: theme.spacing(3, 0, 2),
+        backgroundColor: '#FFC300',
+        color: '#001D3D',
+        '&:hover': {
+            backgroundColor: '#FFD60A',
+        },
+        fontSize: '16px',
+        fontWeight: 'bold',
     },
     tabs: {
         display: 'flex',
@@ -70,6 +88,11 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
         marginTop: theme.spacing(2),
+    },
+    signUpHeading: {
+        fontWeight: 'bold',
+        fontSize: '30px',
+        fontFamily: 'Lato, sans-serif',
     },
 }));
 
@@ -109,6 +132,11 @@ const SignUp: React.FC = () => {
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };
+
+    function handleGoogleSignIn(event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+        throw new Error('Function not implemented.');
+    }
+
     return (
         <Grid container component="main" className={classes.root} alignItems="stretch">
             <CssBaseline />
@@ -118,7 +146,7 @@ const SignUp: React.FC = () => {
                     <Avatar className={classes.avatar}>
                         <LockOutlinedIcon />
                     </Avatar>
-                    <Typography component="h1" variant="h5">
+                    <Typography component="h1" variant="h5" className={classes.signUpHeading}>
                         Sign Up
                     </Typography>
                     <Box sx={{ width: '100%' }} className={classes.tabs} />
@@ -180,6 +208,18 @@ const SignUp: React.FC = () => {
                                 className={classes.submit}
                             >
                                 Sign Up
+                            </Button>
+                            <Typography component="p" variant="body2" align="center">
+                                OR
+                            </Typography>
+                            <Button
+                                fullWidth
+                                variant="contained"
+                                className={classes.googleButton}
+                                startIcon={<GoogleIcon />}
+                                onClick={handleGoogleSignIn}
+                            >
+                                Sign in with Google
                             </Button>
                         </form>
                     </CustomTabPanel>
@@ -259,12 +299,24 @@ const SignUp: React.FC = () => {
                             >
                                 Sign Up
                             </Button>
+                            <Typography component="p" variant="body2" align="center">
+                                OR
+                            </Typography>
+                            <Button
+                                fullWidth
+                                variant="contained"
+                                className={classes.googleButton}
+                                startIcon={<GoogleIcon />}
+                                onClick={handleGoogleSignIn}
+                            >
+                                Sign in with Google
+                            </Button>
                         </form>
                     </CustomTabPanel>
                     <Grid container className={classes.linkContainer}>
                         <Grid item>
                             <Link href="#" variant="body2">
-                                {"Already have an account? Sign In"}
+                                {"Already have an account? Log In"}
                             </Link>
                         </Grid>
                     </Grid>
