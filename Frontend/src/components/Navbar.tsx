@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../assets/images/pratsRestro.png';
 import { FaUserPlus } from 'react-icons/fa';
 import { jwtDecode } from 'jwt-decode';
@@ -13,6 +13,7 @@ interface DecodedToken {
 const Navbar: React.FC = () => {
     const [role, setRole] = useState<string | null>(null);
     const [drawerOpen, setDrawerOpen] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const token = localStorage.getItem('authToken');
@@ -36,10 +37,14 @@ const Navbar: React.FC = () => {
         window.location.href = '/'; // Redirect to home page after logout
     };
 
+    const handleLogoClick = () => {
+        navigate('/');
+    };
+
     return (
         <nav className="bg-accent1 px-40 text-primary z-50 sticky top-0 w-full flex items-center justify-between p-4 shadow-lg">
             <div className="flex items-center">
-                <img src={logo} alt="Logo" className="h-16 w-auto mr-2" />
+                <img src={logo} alt="Logo" className="h-16 w-auto mr-2" onClick={handleLogoClick} style={{ cursor: 'pointer' }} />
             </div>
             <div className="flex justify-center items-center space-x-12 mx-12">
                 <Link to="/about" className="font-lato font-extrabold text-lg hover:text-xl hover:transition duration-500">About Us</Link>

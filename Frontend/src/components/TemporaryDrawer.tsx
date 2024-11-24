@@ -21,7 +21,7 @@ const TemporaryDrawer: React.FC<TemporaryDrawerProps> = ({ open, toggleDrawer })
             <Box sx={{ width: 350, height: '100vh', backgroundColor: '#001D3D', color: 'white', fontSize: '20px' }}
                 role="presentation" onClick={toggleDrawer(false)}>
                 <List>
-                    <ListItem button component={React.forwardRef<HTMLAnchorElement, any>((props, ref) => <Link {...props} ref={ref} to="/menu-management" />)}>
+                    <ListItem button component={React.forwardRef<HTMLAnchorElement, any>((props, ref) => <Link {...props} ref={ref} to="/menuManagement" />)}>
                         <ListItemIcon>
                             <MdFastfood style={{ color: 'white' }} />
                         </ListItemIcon>

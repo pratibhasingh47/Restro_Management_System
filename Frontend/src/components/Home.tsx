@@ -8,7 +8,7 @@ import Box from '@mui/material/Box';
 const Home: React.FC = () => {
 	return (
 		<div>
-			<Navbar />
+			{/* <Navbar /> */}
 			<div className="relative h-screen overflow-hidden">
 				{/* Background Image */}
 				<div className="absolute inset-0 z-0 h-full">

@@ -13,10 +13,12 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import EditIcon from '@mui/icons-material/Edit';
-import { getMenuItems, addMenuItem, updateMenuItem } from '../redux/reducers/menuSlice'; // Adjust the path as needed
+import { getMenuItems, addMenuItem, updateMenuItem, deleteMenuItem } from '../redux/reducers/menuSlice'; // Adjust the path as needed
 import { RootState } from '../redux/reducers'; // Adjust the path as needed
 import { AppDispatch, useAppDispatch } from '../redux/store/store'; // Adjust the path as needed
 import { Grid } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -80,6 +82,10 @@ const MenuManagement: React.FC = () => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
+    };
+
+    const handleDelete = (id: string) => {
+        dispatch(deleteMenuItem(id));
     };
 
     const handleSubmit = () => {
@@ -207,39 +213,47 @@ const MenuManagement: React.FC = () => {
                     {loading && <Typography style={{ fontFamily: 'Lato, sans-serif' }}>Loading...</Typography>}
                     {error && <Typography style={{ fontFamily: 'Lato, sans-serif' }}>Error: {error}</Typography>}
                     <Grid container spacing={6} sx={{ marginLeft: '80px', marginRight: '80px' }}>
-                        {menuItems.map((item) => (
-                            <Grid item xs={12} sm={4} key={item._id}>
-                                <Card sx={{ minWidth: 275, padding: '10px' }}>
-                                    <CardContent>
-                                        <Typography sx={{ fontSize: 20, fontFamily: 'Lato, sans-serif', fontWeight: 'bold' }} color="text.secondary" gutterBottom>
-                                            {item.category}
-                                        </Typography>
-                                        <Typography variant="h5" component="div" sx={{ fontFamily: 'Lato, sans-serif', fontWeight: 'bold', fontSize: '24px' }}>
-                                            {item.name}
-                                        </Typography>
-                                        <Typography sx={{ mb: 1.5, mt: 0.5, fontFamily: 'Lato, sans-serif' }} color="text.secondary">
-                                            {item.description}
-                                        </Typography>
-                                        <Typography variant="body2" sx={{ fontFamily: 'Lato, sans-serif' }}>
-                                            Price: ${item.price}
-                                            <br />
-                                            In Stock: {item.stock ? 'Yes' : 'No'}
-                                        </Typography>
-                                    </CardContent>
-                                    <CardActions>
-                                        <Button
-                                            size="small"
-                                            sx={{ fontFamily: 'Lato, sans-serif', backgroundColor: '#FFC300', color: '#001D3D', fontWeight: 'bold', fontSize: '15px', padding: '5px 10px' }}
-                                            startIcon={<EditIcon />}
-                                            onClick={() => handleOpen(item)}
-                                        >
-                                            Edit
-                                        </Button>
-                                    </CardActions>
-                                </Card>
-                            </Grid>
-                        ))}
+                {menuItems.map((item) => (
+                    <Grid item xs={12} sm={4} key={item._id}>
+                        <Card sx={{ minWidth: 275, padding: '10px' }}>
+                            <CardContent>
+                                <Typography sx={{ fontSize: 20, fontFamily: 'Lato, sans-serif', fontWeight: 'bold' }} color="text.secondary" gutterBottom>
+                                    {item.category}
+                                </Typography>
+                                <Typography variant="h5" component="div" sx={{ fontFamily: 'Lato, sans-serif', fontWeight: 'bold', fontSize: '24px' }}>
+                                    {item.name}
+                                </Typography>
+                                <Typography sx={{ mb: 1.5, mt: 0.5, fontFamily: 'Lato, sans-serif' }} color="text.secondary">
+                                    {item.description}
+                                </Typography>
+                                <Typography variant="body2" sx={{ fontFamily: 'Lato, sans-serif' }}>
+                                    Price: ${item.price}
+                                    <br />
+                                    In Stock: {item.stock}
+                                </Typography>
+                            </CardContent>
+                            <CardActions>
+                                <Button
+                                    size="small"
+                                    sx={{ fontFamily: 'Lato, sans-serif', backgroundColor: '#FFC300', color: '#001D3D', fontWeight: 'bold', fontSize: '15px', padding: '5px 10px' }}
+                                    startIcon={<EditIcon />}
+                                    onClick={() => handleOpen(item)}
+                                >
+                                    Edit
+                                </Button>
+                                <Button
+                                    size="small"
+                                    sx={{ fontFamily: 'Lato, sans-serif', backgroundColor: '#001D3D', color: '#fff', fontWeight: 'bold', fontSize: '15px', padding: '5px 10px' }}
+                                    startIcon={<DeleteIcon />}
+                                    onClick={() => handleDelete(item._id)}
+                                >
+                                    Delete
+                                </Button>
+                            </CardActions>
+                        </Card>
                     </Grid>
+                ))}
+            </Grid>
                 </Box>
             </div>
         </div>
