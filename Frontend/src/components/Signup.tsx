@@ -16,7 +16,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from 'react-router-dom';
-import R1 from '../assets/images/r1.webp';
+import R1 from '../assets/images/r2.png';
 import GoogleIcon from '@mui/icons-material/Google';
 
 function Copyright() {

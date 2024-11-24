@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import logo from '../assets/images/pratsRestro.png';
 import { FaUserPlus } from 'react-icons/fa';
 import { jwtDecode } from 'jwt-decode';
-import MenuIcon from '@mui/icons-material/Menu';
+import { BsArrowRightCircleFill } from "react-icons/bs";
 import TemporaryDrawer from './TemporaryDrawer';
 
 interface DecodedToken {
@@ -56,17 +56,20 @@ const Navbar: React.FC = () => {
                         <Link to="/account" className="font-lato font-extrabold text-lg hover:text-xl hover:transition duration-500">My Account</Link>
                         {role === 'Manager' && (
                             <>
-                                <MenuIcon style={{ fontSize: 35, marginLeft: '100px' , marginRight:'50px' }} onClick={toggleDrawer(true)} />
+                                <button onClick={toggleDrawer(true)} className="flex items-center font-bold bg-black font-lato justify-center text-lg text-white px-4 py-2 rounded-full hover:bg-secondary-dark hover:transition duration-300 ml-4">
+                                    <BsArrowRightCircleFill className="mr-2.5" />
+                                    Management
+                                </button>
                                 <TemporaryDrawer open={drawerOpen} toggleDrawer={toggleDrawer} />
                             </>
-                        )}
+                        )} 
                         {role === 'Staff' && (
                             <>
                                 <Link to="/order-status" className="font-lato font-extrabold text-lg hover:text-xl hover:transition duration-500">Order Status</Link>
                                 <Link to="/attendance" className="font-lato font-extrabold text-lg hover:text-xl hover:transition duration-500">Attendance</Link>
                             </>
                         )}
-                        <button onClick={handleLogout} className="flex items-center bg-black text-lg text-white px-4 py-2 rounded-full hover:bg-secondary-dark hover:transition duration-300 ml-4">
+                        <button onClick={handleLogout} className="font-lato font-bold flex items-center bg-black text-lg text-white px-4 py-2 rounded-full hover:bg-secondary-dark hover:transition duration-300 ml-4">
                             Logout
                         </button>
                     </>
