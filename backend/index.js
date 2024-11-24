@@ -26,6 +26,7 @@ const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/db');
 const authRoutes = require('./router/user');
+const menuRoutes = require('./router/menu'); // Ensure this path and the file are correct
 const errorHandler = require('./middleware/globarErrorhandlers'); // Ensure this path and the file are correct
 
 const app = express();
@@ -35,6 +36,7 @@ app.use(cors());
 
 // Ensure authRoutes is a valid middleware function or router
 app.use('/auth', authRoutes);
+app.use('/menu', menuRoutes); // Ensure this path and the file are correct
 
 connectDB();
 
