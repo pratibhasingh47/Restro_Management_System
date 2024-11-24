@@ -2,13 +2,16 @@ import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 // API endpoints
-const API_URL = '/api/menu';
+// const API_URL = '/api/menu';
 
 // Menu item interface
 interface MenuItem {
+    stock: any;
     _id: string;
     name: string;
     price: number;
+    description: string;
+    category: string;
     // Add other fields as necessary
 }
 

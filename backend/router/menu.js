@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { dispatchMenuData } = require('../controller/menu');
+const { addMenuData } = require('../controller/menu');
 const Menu = require('../model/menu'); // Ensure that the Menu model is imported
 
 // Route to get all menu items
@@ -14,7 +14,7 @@ router.get('/getMenu', async (req, res) => {
 });
 
 // Route to add a new menu item
-router.post('/addMenu', dispatchMenuData);
+router.post('/addMenu', addMenuData);
 
 // Route to update a menu item
 router.put('/:id', async (req, res) => {

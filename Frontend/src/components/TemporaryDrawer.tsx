@@ -8,6 +8,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import { FaUtensils, FaUserTie, FaClipboardList, FaTruck, FaRegListAlt, FaWarehouse } from 'react-icons/fa';
 import { MdFastfood } from 'react-icons/md';
+import CustomListItem from './ListItem'; // Ensure this path is correct
 
 interface TemporaryDrawerProps {
     open: boolean;
