@@ -1,11 +1,14 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from '../components/Navbar'; // Adjust the path as needed
 
 const Layout: React.FC = () => {
+    const location = useLocation();
+    const hideNavbar = location.pathname === '/signup' || location.pathname === '/login';
+
     return (
         <div>
-            <Navbar />
+            {!hideNavbar && <Navbar />}
             <Outlet />
         </div>
     );
