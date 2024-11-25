@@ -64,32 +64,56 @@ const Home: React.FC = () => {
                 </div>
             </div>
 
-            <div className="mt-12 px-8">
-                <h2 className="text-4xl font-bold text-center mb-8">Our Menu</h2>
+
+			<div className='flex flex-col items-center w-auto justify-center bg-accent1	'>
+            <div className="mt-12 px-8 py-4">
+                <h2 className="text-5xl font-bold font-lato underline text-center mb-12">Our Menu</h2>
                 {loading && <p>Loading...</p>}
                 {error && <p>Error: {error}</p>}
                 {!loading && !error && (
-                    <div className="grid grid-cols-2 gap-6">
+					<div className="grid grid-cols-2 gap-20">
                         {categories.map(category => (
-                            <div key={category} className="mb-10">
-                                <h3 className="text-2xl font-bold mb-4">{category}</h3>
+                            <div key={category} className="mb-10 ">
+                                <h3 className="text-2xl font-lato font-bold mb-4 uppercase">{category}</h3>
                                 {menuItems.filter(item => item.category === category).map(item => (
-                                    <Accordion key={item._id} expanded={expanded === item._id} onChange={handleChange(item._id)}>
+									<Accordion key={item._id} expanded={expanded === item._id} onChange={handleChange(item._id)}>
                                         <AccordionSummary
                                             expandIcon={<ExpandMoreIcon />}
                                             aria-controls={`panel-${item._id}-content`}
                                             id={`panel-${item._id}-header`}
-                                        >
+											sx={{ backgroundColor: 'white' , 
+													fontFamily: 'Lato , sans-serif',
+													fontWeight: 'bold',
+													fontSize: '1.3rem',
+													padding: '5px 20px',
+											}}
+											>
                                             {item.name}
                                         </AccordionSummary>
-                                        <AccordionDetails>
-                                            <div className="flex justify-between items-center">
-                                                <span>{item.description}</span>
-                                                <span className="font-bold">${item.price}</span>
+                                        <AccordionDetails 
+										sx={ {padding : '10px 20px'} }
+										>
+                                            <div className="flex justify-between items-center font-lato ">
+                                                <span className='max-w-[400px]'>{item.description}</span>
+                                                <span className="font-extrabold text-xl  pr-4">${item.price}</span>
                                             </div>
                                         </AccordionDetails>
-                                        <AccordionActions>
-                                            <Button variant="contained" color="primary">Add to Orders</Button>
+                                        <AccordionActions 
+										sx={ {padding : '10px 20px 20px 20px'} }
+										>
+                                            <Button variant="contained" color="primary" 
+											sx={ {backgroundColor: 'black' ,
+													color: 'white' ,
+													fontFamily: 'Lato , sans-serif',
+													fontWeight: 'bold',
+													fontSize: '0.9rem',
+													padding: '10px 20px',
+													'&:hover': {
+														backgroundColor: 'black',
+														color: 'white',
+													}}
+											}
+											>Add to Orders</Button>
                                         </AccordionActions>
                                     </Accordion>
                                 ))}
@@ -97,6 +121,7 @@ const Home: React.FC = () => {
                         ))}
                     </div>
                 )}
+				</div>
             </div>
         </div>
     );

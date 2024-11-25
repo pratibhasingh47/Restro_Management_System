@@ -116,7 +116,7 @@ const MenuManagement: React.FC = () => {
     const categories = Array.from(new Set(menuItems.map(item => item.category)));
 
     return (
-        <div style={{ fontFamily: 'Lato, sans-serif', backgroundColor: 'black', color: 'white', height: '100vh' }}>
+        <div style={{ fontFamily: 'Lato, sans-serif', backgroundColor: 'black', color: 'white', height: 'auto' }}>
             <Box sx={{ '& > :not(style)': { m: 1 }, position: 'fixed', top: 125, right: 40 }}>
                 <Button
                     sx={{ fontFamily: 'Lato, sans-serif', backgroundColor: '#FFC300', color: '#001D3D', fontWeight: 'bold', padding: '10px 20px' }}
