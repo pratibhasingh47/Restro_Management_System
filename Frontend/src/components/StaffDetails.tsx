@@ -43,7 +43,6 @@ const StaffDetails: React.FC = () => {
         role: '',
         name: '',
         email: '',
-        password: '',
         contactNumber: '',
         managementId: '',
         address: '',
@@ -76,7 +75,6 @@ const StaffDetails: React.FC = () => {
                 role: '',
                 name: '',
                 email: '',
-                password: '',
                 contactNumber: '',
                 managementId: '',
                 address: '',
@@ -120,7 +118,7 @@ const StaffDetails: React.FC = () => {
         dispatch(addStaffDetailAsync(newItem));
         handleClose();
     };
-    
+
     const handleUpdate = () => {
         const updatedItem: StaffDetail = {
             ...formData,
@@ -183,7 +181,7 @@ const StaffDetails: React.FC = () => {
                             margin="normal"
                             InputProps={{ style: { fontFamily: 'Lato, sans-serif' } }}
                         />
-                        <TextField
+                        {/* <TextField
                             label="Password"
                             name="password"
                             value={formData.password}
@@ -191,7 +189,7 @@ const StaffDetails: React.FC = () => {
                             fullWidth
                             margin="normal"
                             InputProps={{ style: { fontFamily: 'Lato, sans-serif' } }}
-                        />
+                        /> */}
                         <TextField
                             label="Contact Number"
                             name="contactNumber"
@@ -250,7 +248,7 @@ const StaffDetails: React.FC = () => {
                             label="Date of Birth"
                             name="dateOfBirth"
                             type="date"
-                            value={formData.dateOfBirth.toISOString().substring(0, 10)}
+                            value={formData.dateOfBirth ? formData.dateOfBirth.toISOString().substring(0, 10) : ''}
                             onChange={(e) => setFormData(prevFormData => ({ ...prevFormData, dateOfBirth: new Date(e.target.value) }))}
                             fullWidth
                             margin="normal"

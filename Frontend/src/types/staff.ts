@@ -3,7 +3,6 @@ export interface StaffDetail {
     role: string;
     name: string;
     email: string;
-    password: string;
     contactNumber: string;
     managementId: string;
     address: string;
