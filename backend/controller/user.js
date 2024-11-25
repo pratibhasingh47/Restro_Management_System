@@ -1,18 +1,17 @@
 const Customer = require("../model/customerSchema");
 const Management = require("../model/managementSchema");
+const StaffDetails = require("../model/staffDetails");
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-
 exports.signup = async (req, res, next) => {
     try {
-        const { name, email, password, contactNumber, role, managementId } = req.body;
+        const { name, email, password, contactNumber, role, managementId, address, state, country, skills, dateOfBirth, aadharNumber, accountNumber, salary, graduationYear, graduationUniversity, motherName, fatherName, alternateMobileNumber } = req.body;
 
         if (!name || !email || !password || !contactNumber) {
             return res.status(400).json({ message: "All fields are required." });
         }
 
-        // Default role to "Customer" if not provided
         const userRole = role || "Customer";
 
         let existingUser;
@@ -46,6 +45,30 @@ exports.signup = async (req, res, next) => {
                 role: userRole,
                 managementId
             });
+
+            // Also save to StaffDetails schema ensuring all required fields are provided
+            const staffDetails = new StaffDetails({
+                name,
+                email,
+                password,
+                contactNumber,
+                role: userRole,
+                managementId,
+                address,
+                state,
+                country,
+                skills,
+                dateOfBirth,
+                aadharNumber,
+                accountNumber,
+                salary,
+                graduationYear,
+                graduationUniversity,
+                motherName,
+                fatherName,
+                alternateMobileNumber
+            });
+            await staffDetails.save();
         } else {
             return res.status(400).json({ message: "Invalid role specified." });
         }
@@ -84,11 +107,11 @@ exports.login = async (req, res) => {
         }
 
         let user = await Customer.findOne({ email });
-        let role = "Customer"; // Default role to Customer if not specified
+        let role = "Customer";
 
         if (!user) {
             user = await Management.findOne({ email, managementId });
-            role = user ? user.role : role; // Update role if user is found in Management
+            role = user ? user.role : role;
         }
 
         if (!user) {
