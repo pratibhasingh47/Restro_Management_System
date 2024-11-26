@@ -24,7 +24,7 @@ const StaffDetails: React.FC = () => {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: 700,
+        width: '80%',
         bgcolor: 'background.paper',
         border: '2px solid #000',
         boxShadow: 24,
@@ -105,6 +105,7 @@ const StaffDetails: React.FC = () => {
             setFormData(prevFormData => ({ ...prevFormData, [name]: value }));
         }
     };
+
     const handleDelete = (id: string) => {
         dispatch(deleteStaffDetailAsync(id));
     };
@@ -154,181 +155,210 @@ const StaffDetails: React.FC = () => {
                         <Typography id="transition-modal-title" variant="h6" component="h2" style={{ fontFamily: 'Lato, sans-serif', fontWeight: 'bold' }}>
                             {isEditing ? 'Update Employee Details' : 'Add New Employee'}
                         </Typography>
-                        <TextField
-                            label="Role"
-                            name="role"
-                            value={formData.role}
-                            onChange={handleChange}
-                            fullWidth
-                            margin="normal"
-                            InputProps={{ style: { fontFamily: 'Lato, sans-serif' } }}
-                        />
-                        <TextField
-                            label="Name"
-                            name="name"
-                            value={formData.name}
-                            onChange={handleChange}
-                            fullWidth
-                            margin="normal"
-                            InputProps={{ style: { fontFamily: 'Lato, sans-serif' } }}
-                        />
-                        <TextField
-                            label="Email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            fullWidth
-                            margin="normal"
-                            InputProps={{ style: { fontFamily: 'Lato, sans-serif' } }}
-                        />
-                        {/* <TextField
-                            label="Password"
-                            name="password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            fullWidth
-                            margin="normal"
-                            InputProps={{ style: { fontFamily: 'Lato, sans-serif' } }}
-                        /> */}
-                        <TextField
-                            label="Contact Number"
-                            name="contactNumber"
-                            value={formData.contactNumber}
-                            onChange={handleChange}
-                            fullWidth
-                            margin="normal"
-                            InputProps={{ style: { fontFamily: 'Lato, sans-serif' } }}
-                        />
-                        <TextField
-                            label="Management ID"
-                            name="managementId"
-                            value={formData.managementId}
-                            onChange={handleChange}
-                            fullWidth
-                            margin="normal"
-                            InputProps={{ style: { fontFamily: 'Lato, sans-serif' } }}
-                        />
-                        <TextField
-                            label="Address"
-                            name="address"
-                            value={formData.address}
-                            onChange={handleChange}
-                            fullWidth
-                            margin="normal"
-                            InputProps={{ style: { fontFamily: 'Lato, sans-serif' } }}
-                        />
-                        <TextField
-                            label="State"
-                            name="state"
-                            value={formData.state}
-                            onChange={handleChange}
-                            fullWidth
-                            margin="normal"
-                            InputProps={{ style: { fontFamily: 'Lato, sans-serif' } }}
-                        />
-                        <TextField
-                            label="Country"
-                            name="country"
-                            value={formData.country}
-                            onChange={handleChange}
-                            fullWidth
-                            margin="normal"
-                            InputProps={{ style: { fontFamily: 'Lato, sans-serif' } }}
-                        />
-                        <TextField
-                            label="Skills"
-                            name="skills"
-                            value={formData.skills.join(',')}
-                            onChange={(e) => setFormData(prevFormData => ({ ...prevFormData, skills: e.target.value.split(',').map(skill => skill.trim()) }))}
-                            fullWidth
-                            margin="normal"
-                            InputProps={{ style: { fontFamily: 'Lato, sans-serif' } }}
-                        />
-                        <TextField
-                            label="Date of Birth"
-                            name="dateOfBirth"
-                            type="date"
-                            value={formData.dateOfBirth ? formData.dateOfBirth.toISOString().substring(0, 10) : ''}
-                            onChange={(e) => setFormData(prevFormData => ({ ...prevFormData, dateOfBirth: new Date(e.target.value) }))}
-                            fullWidth
-                            margin="normal"
-                            InputLabelProps={{ shrink: true }}
-                            InputProps={{ style: { fontFamily: 'Lato, sans-serif' } }}
-                        />
-                        <TextField
-                            label="Aadhar Number"
-                            name="aadharNumber"
-                            value={formData.aadharNumber}
-                            onChange={handleChange}
-                            fullWidth
-                            margin="normal"
-                            InputProps={{ style: { fontFamily: 'Lato, sans-serif' } }}
-                        />
-                        <TextField
-                            label="Account Number"
-                            name="accountNumber"
-                            value={formData.accountNumber}
-                            onChange={handleChange}
-                            fullWidth
-                            margin="normal"
-                            InputProps={{ style: { fontFamily: 'Lato, sans-serif' } }}
-                        />
-                        <TextField
-                            label="Salary"
-                            name="salary"
-                            value={formData.salary}
-                            onChange={handleChange}
-                            type="number"
-                            fullWidth
-                            margin="normal"
-                            InputProps={{ style: { fontFamily: 'Lato, sans-serif' } }}
-                        />
-                        <TextField
-                            label="Graduation Year"
-                            name="graduationYear"
-                            value={formData.graduationYear}
-                            onChange={handleChange}
-                            type="number"
-                            fullWidth
-                            margin="normal"
-                            InputProps={{ style: { fontFamily: 'Lato, sans-serif' } }}
-                        />
-                        <TextField
-                            label="Graduation University"
-                            name="graduationUniversity"
-                            value={formData.graduationUniversity}
-                            onChange={handleChange}
-                            fullWidth
-                            margin="normal"
-                            InputProps={{ style: { fontFamily: 'Lato, sans-serif' } }}
-                        />
-                        <TextField
-                            label="Mother's Name"
-                            name="motherName"
-                            value={formData.motherName}
-                            onChange={handleChange}
-                            fullWidth
-                            margin="normal"
-                            InputProps={{ style: { fontFamily: 'Lato, sans-serif' } }}
-                        />
-                        <TextField
-                            label="Father's Name"
-                            name="fatherName"
-                            value={formData.fatherName}
-                            onChange={handleChange}
-                            fullWidth
-                            margin="normal"
-                            InputProps={{ style: { fontFamily: 'Lato, sans-serif' } }}
-                        />
-                        <TextField
-                            label="Alternate Mobile Number"
-                            name="alternateMobileNumber"
-                            value={formData.alternateMobileNumber}
-                            onChange={handleChange}
-                            fullWidth
-                            margin="normal"
-                            InputProps={{ style: { fontFamily: 'Lato, sans-serif' } }}
-                        />
+                        <Grid container spacing={2}>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    label="Role"
+                                    name="role"
+                                    value={formData.role}
+                                    onChange={handleChange}
+                                    fullWidth
+                                    margin="normal"
+                                    InputProps={{ style: { fontFamily: 'Lato, sans-serif' } }}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    label="Name"
+                                    name="name"
+                                    value={formData.name}
+                                    onChange={handleChange}
+                                    fullWidth
+                                    margin="normal"
+                                    InputProps={{ style: { fontFamily: 'Lato, sans-serif' } }}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    label="Email"
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    fullWidth
+                                    margin="normal"
+                                    InputProps={{ style: { fontFamily: 'Lato, sans-serif' } }}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    label="Contact Number"
+                                    name="contactNumber"
+                                    value={formData.contactNumber}
+                                    onChange={handleChange}
+                                    fullWidth
+                                    margin="normal"
+                                    InputProps={{ style: { fontFamily: 'Lato, sans-serif' } }}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    label="Management ID"
+                                    name="managementId"
+                                    value={formData.managementId}
+                                    onChange={handleChange}
+                                    fullWidth
+                                    margin="normal"
+                                    InputProps={{ style: { fontFamily: 'Lato, sans-serif' } }}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    label="Address"
+                                    name="address"
+                                    value={formData.address}
+                                    onChange={handleChange}
+                                    fullWidth
+                                    margin="normal"
+                                    InputProps={{ style: { fontFamily: 'Lato, sans-serif' } }}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    label="State"
+                                    name="state"
+                                    value={formData.state}
+                                    onChange={handleChange}
+                                    fullWidth
+                                    margin="normal"
+                                    InputProps={{ style: { fontFamily: 'Lato, sans-serif' } }}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    label="Country"
+                                    name="country"
+                                    value={formData.country}
+                                    onChange={handleChange}
+                                    fullWidth
+                                    margin="normal"
+                                    InputProps={{ style: { fontFamily: 'Lato, sans-serif' } }}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    label="Skills"
+                                    name="skills"
+                                    value={formData.skills.join(',')}
+                                    onChange={(e) => setFormData(prevFormData => ({ ...prevFormData, skills: e.target.value.split(',').map(skill => skill.trim()) }))}
+                                    fullWidth
+                                    margin="normal"
+                                    InputProps={{ style: { fontFamily: 'Lato, sans-serif' } }}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    label="Date of Birth"
+                                    name="dateOfBirth"
+                                    type="date"
+                                    value={formData.dateOfBirth ? formData.dateOfBirth.toISOString().substring(0, 10) : ''}
+                                    onChange={(e) => setFormData(prevFormData => ({ ...prevFormData, dateOfBirth: new Date(e.target.value) }))}
+                                    fullWidth
+                                    margin="normal"
+                                    InputLabelProps={{ shrink: true }}
+                                    InputProps={{ style: { fontFamily: 'Lato, sans-serif' } }}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    label="Aadhar Number"
+                                    name="aadharNumber"
+                                    value={formData.aadharNumber}
+                                    onChange={handleChange}
+                                    fullWidth
+                                    margin="normal"
+                                    InputProps={{ style: { fontFamily: 'Lato, sans-serif' } }}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    label="Account Number"
+                                    name="accountNumber"
+                                    value={formData.accountNumber}
+                                    onChange={handleChange}
+                                    fullWidth
+                                    margin="normal"
+                                    InputProps={{ style: { fontFamily: 'Lato, sans-serif' } }}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    label="Salary"
+                                    name="salary"
+                                    value={formData.salary}
+                                    onChange={handleChange}
+                                    type="number"
+                                    fullWidth
+                                    margin="normal"
+                                    InputProps={{ style: { fontFamily: 'Lato, sans-serif' } }}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    label="Graduation Year"
+                                    name="graduationYear"
+                                    value={formData.graduationYear}
+                                    onChange={handleChange}
+                                    type="number"
+                                    fullWidth
+                                    margin="normal"
+                                    InputProps={{ style: { fontFamily: 'Lato, sans-serif' } }}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    label="Graduation University"
+                                    name="graduationUniversity"
+                                    value={formData.graduationUniversity}
+                                    onChange={handleChange}
+                                    fullWidth
+                                    margin="normal"
+                                    InputProps={{ style: { fontFamily: 'Lato, sans-serif' } }}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    label="Mother's Name"
+                                    name="motherName"
+                                    value={formData.motherName}
+                                    onChange={handleChange}
+                                    fullWidth
+                                    margin="normal"
+                                    InputProps={{ style: { fontFamily: 'Lato, sans-serif' } }}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    label="Father's Name"
+                                    name="fatherName"
+                                    value={formData.fatherName}
+                                    onChange={handleChange}
+                                    fullWidth
+                                    margin="normal"
+                                    InputProps={{ style: { fontFamily: 'Lato, sans-serif' } }}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    label="Alternate Mobile Number"
+                                    name="alternateMobileNumber"
+                                    value={formData.alternateMobileNumber}
+                                    onChange={handleChange}
+                                    fullWidth
+                                    margin="normal"
+                                    InputProps={{ style: { fontFamily: 'Lato, sans-serif' } }}
+                                />
+                            </Grid>
+                        </Grid>
                         <Button
                             onClick={isEditing ? handleUpdate : handleSubmit}
                             variant="contained"
@@ -376,7 +406,7 @@ const StaffDetails: React.FC = () => {
                                             startIcon={<EditIcon />}
                                             onClick={() => handleOpen(item)}
                                         >
-                                            Edit
+                                            Update
                                         </Button>
                                         <Button
                                             size="small"
