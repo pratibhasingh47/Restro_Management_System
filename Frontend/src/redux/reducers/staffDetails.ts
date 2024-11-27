@@ -20,12 +20,25 @@ export const fetchStaffDetails = createAsyncThunk<StaffDetail[]>('staffDetails/f
 });
 
 export const addStaffDetailAsync = createAsyncThunk<StaffDetail, StaffDetail>('staffDetails/addStaffDetail', async (staffDetail) => {
-    const response = await axios.post<StaffDetail>('http://localhost:3000/staff/addStaff', staffDetail);
-    return response.data;
+    try {
+        const response = await axios.post<StaffDetail>('http://localhost:3000/staff/addStaff', staffDetail, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        return response.data;
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            console.error('Error adding staff detail:', error.response?.data || error.message);
+        } else {
+            console.error('Error adding staff detail:', (error as Error).message);
+        }
+        throw error;
+    }
 });
 
 export const updateStaffDetailAsync = createAsyncThunk<StaffDetail, StaffDetail>('staffDetails/updateStaffDetail', async (staffDetail) => {
-    const response = await axios.put<StaffDetail>(`http://localhost:3000/staff/staff/${staffDetail.id}`, staffDetail);
+    const response = await axios.put<StaffDetail>(`http://localhost:3000/staff/staff/${staffDetail._id}`, staffDetail);
     return response.data;
 });
 
@@ -56,7 +69,7 @@ const staffDetailsSlice = createSlice({
                 state.staffDetails.push(action.payload);
             })
             .addCase(updateStaffDetailAsync.fulfilled, (state, action: PayloadAction<StaffDetail>) => {
-                const index = state.staffDetails.findIndex(detail => detail.id === action.payload.id);
+                const index = state.staffDetails.findIndex(detail => detail._id === action.payload._id);
                 if (index !== -1) {
                     state.staffDetails[index] = action.payload;
                 }
@@ -65,7 +78,7 @@ const staffDetailsSlice = createSlice({
                 state.error = action.error.message || 'Failed to update staff detail';
             })
             .addCase(deleteStaffDetailAsync.fulfilled, (state, action: PayloadAction<string>) => {
-                state.staffDetails = state.staffDetails.filter(detail => detail.id !== action.payload);
+                state.staffDetails = state.staffDetails.filter(detail => detail._id !== action.payload);
             })
             .addCase(deleteStaffDetailAsync.rejected, (state, action) => {
                 state.error = action.error.message || 'Failed to delete staff detail';

@@ -1,5 +1,5 @@
 export interface StaffDetail {
-    id: string;
+    _id: string;
     role: string;
     name: string;
     email: string;
@@ -9,7 +9,7 @@ export interface StaffDetail {
     state: string;
     country: string;
     skills: string[];
-    dateOfBirth: Date;
+    dateOfBirth: string; // Changed from Date to string
     aadharNumber: string;
     accountNumber: string;
     salary: number;

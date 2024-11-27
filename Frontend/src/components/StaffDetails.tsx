@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, ChangeEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store/store'; // Adjust path as needed
 import { fetchStaffDetails, addStaffDetailAsync, updateStaffDetailAsync, deleteStaffDetailAsync } from '../redux/reducers/staffDetails'; // Adjust path as needed
@@ -39,7 +39,7 @@ const StaffDetails: React.FC = () => {
     const [isEditing, setIsEditing] = useState(false);
 
     const [formData, setFormData] = useState<StaffDetail>({
-        id: '',
+        _id: '',
         role: '',
         name: '',
         email: '',
@@ -49,7 +49,7 @@ const StaffDetails: React.FC = () => {
         state: '',
         country: '',
         skills: [],
-        dateOfBirth: new Date(),
+        dateOfBirth: '', // Changed to string
         aadharNumber: '',
         accountNumber: '',
         salary: 0,
@@ -67,11 +67,14 @@ const StaffDetails: React.FC = () => {
     const handleOpen = (item?: StaffDetail) => {
         if (item) {
             setIsEditing(true);
-            setFormData(item);
+            setFormData({
+                ...item,
+                dateOfBirth: formatDate(new Date(item.dateOfBirth)) // Convert to 'DD/MM/YYYY' format
+            });
         } else {
             setIsEditing(false);
             setFormData({
-                id: '',
+                _id: '',
                 role: '',
                 name: '',
                 email: '',
@@ -81,7 +84,7 @@ const StaffDetails: React.FC = () => {
                 state: '',
                 country: '',
                 skills: [],
-                dateOfBirth: new Date(),
+                dateOfBirth: '', // Changed to string
                 aadharNumber: '',
                 accountNumber: '',
                 salary: 0,
@@ -97,10 +100,10 @@ const StaffDetails: React.FC = () => {
 
     const handleClose = () => setOpen(false);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         if (name === 'dateOfBirth') {
-            setFormData(prevFormData => ({ ...prevFormData, [name]: new Date(value) }));
+            setFormData(prevFormData => ({ ...prevFormData, [name]: value }));
         } else {
             setFormData(prevFormData => ({ ...prevFormData, [name]: value }));
         }
@@ -113,20 +116,27 @@ const StaffDetails: React.FC = () => {
     const handleSubmit = () => {
         const newItem: StaffDetail = {
             ...formData,
-            id: new Date().toISOString(), // Temporary ID, replace with actual ID generation logic
-            dateOfBirth: formData.dateOfBirth instanceof Date ? formData.dateOfBirth : new Date()
+            dateOfBirth: formatDate(new Date(formData.dateOfBirth))
         };
         dispatch(addStaffDetailAsync(newItem));
         handleClose();
     };
 
     const handleUpdate = () => {
+        console.log('Form Data:', formData); // Log form data
         const updatedItem: StaffDetail = {
             ...formData,
-            dateOfBirth: formData.dateOfBirth instanceof Date ? formData.dateOfBirth : new Date()
+            dateOfBirth: formatDate(new Date(formData.dateOfBirth))
         };
         dispatch(updateStaffDetailAsync(updatedItem));
         handleClose();
+    };
+
+    const formatDate = (date: Date): string => {
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+        return `${day}/${month}/${year}`;
     };
 
     return (
@@ -260,8 +270,9 @@ const StaffDetails: React.FC = () => {
                                     label="Date of Birth"
                                     name="dateOfBirth"
                                     type="date"
-                                    value={formData.dateOfBirth ? formData.dateOfBirth.toISOString().substring(0, 10) : ''}
-                                    onChange={(e) => setFormData(prevFormData => ({ ...prevFormData, dateOfBirth: new Date(e.target.value) }))}
+                                    value={formData.dateOfBirth}  // Use string value directly
+                                    onChange={handleChange}
+                                    placeholder="DD/MM/YYYY"
                                     fullWidth
                                     margin="normal"
                                     InputLabelProps={{ shrink: true }}
@@ -380,7 +391,7 @@ const StaffDetails: React.FC = () => {
                     {error && <Typography style={{ fontFamily: 'Lato, sans-serif' }}>Error: {error}</Typography>}
                     <Grid container spacing={6}>
                         {Array.isArray(staffDetails) && staffDetails.map((item: StaffDetail) => (
-                            <Grid item xs={12} sm={4} key={item.id}>
+                            <Grid item xs={12} sm={4} key={item._id}>
                                 <Card sx={{ minWidth: 275, padding: '10px' }}>
                                     <CardContent>
                                         <Typography variant="h6" component="div" sx={{ fontFamily: 'Lato, sans-serif', fontWeight: 'bold' }}>
@@ -406,13 +417,13 @@ const StaffDetails: React.FC = () => {
                                             startIcon={<EditIcon />}
                                             onClick={() => handleOpen(item)}
                                         >
-                                            Update
+                                            Edit
                                         </Button>
                                         <Button
                                             size="small"
                                             sx={{ fontFamily: 'Lato, sans-serif', backgroundColor: '#001D3D', color: '#fff', fontWeight: 'bold', fontSize: '15px', padding: '5px 10px' }}
                                             startIcon={<DeleteIcon />}
-                                            onClick={() => handleDelete(item.id)}
+                                            onClick={() => handleDelete(item._id)}
                                         >
                                             Delete
                                         </Button>
