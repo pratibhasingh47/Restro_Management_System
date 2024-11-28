@@ -76,14 +76,16 @@ const staffDetailsSchema = new mongoose.Schema({
     dateOfBirth: {
         type: Date,
     },
-    aadharNumber: {
-        type: String,
-        unique: true,
-        validate: {
-            validator: value => validator.isNumeric(value) && value.length === 12,
-            message: "Please enter a valid 12-digit Aadhar number"
-        }
-    },
+    // aadharNumber: {
+    //     type: String,
+    //     sparse : true,
+    //     unique: true,
+    //     default: null,
+    //     validate: {
+    //         validator: value => value == null || (validator.isNumeric(value) && value.length === 12),
+    //         message: "Please enter a valid 12-digit Aadhar number"
+    //     }
+    // },
     accountNumber: {
         type: String,
         unique: true,

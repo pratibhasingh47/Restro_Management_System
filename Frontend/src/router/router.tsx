@@ -5,7 +5,7 @@ import Signup from '../components/Signup';
 import Login from '../components/Login';
 import MenuManagement from '../components/MenuManagement'; // Ensure this path is correct
 import Layout from '../components/Layout'; // Ensure this path is correct
-import StaffDetails from '../components/StaffDetails'; // Ensure this path is correct
+// import StaffDetails from '../components/StaffDetails'; // Ensure this path is correct
 
 const router = createBrowserRouter([
     {
@@ -28,10 +28,10 @@ const router = createBrowserRouter([
                 path: '/menuManagement',
                 element: <MenuManagement />
             },
-            {
-                path: '/staffDetails',
-                element: <StaffDetails />
-            },
+            // {
+            //     path: '/staffDetails',
+            //     element: <StaffDetails />
+            // },
         ]
     },
     {
