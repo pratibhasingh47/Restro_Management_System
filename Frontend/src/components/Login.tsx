@@ -170,15 +170,15 @@ const Login: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-    
+
         if (localStorage.getItem('authToken')) {
             alert('You are already logged in');
             return;
         }
-    
+
         const emailError = validateEmail(formData.email);
         const passwordError = validatePassword(formData.password);
-    
+
         if (emailError || passwordError) {
             setErrors({
                 email: emailError,
@@ -187,7 +187,7 @@ const Login: React.FC = () => {
             });
             return;
         }
-    
+
         try {
             const resultAction = await dispatch(loginUser(formData));
             if (loginUser.fulfilled.match(resultAction)) {

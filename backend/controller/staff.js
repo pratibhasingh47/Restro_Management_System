@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 
 exports.addStaff = async (req, res) => {
     try {
-        const { 
+        const {
             name, email, password, contactNumber, role, managementId
         } = req.body;
 

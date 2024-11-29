@@ -113,7 +113,7 @@ const MenuManagement: React.FC = () => {
         handleClose();
     };
 
-    const categories = Array.from(new Set(menuItems.map(item => item.category)));
+    const categories: string[] = Array.from(new Set(menuItems.map((item: { category: string }) => item.category)));
 
     return (
         <div style={{ fontFamily: 'Lato, sans-serif', backgroundColor: 'black', color: 'white', height: 'auto' }}>
@@ -213,13 +213,13 @@ const MenuManagement: React.FC = () => {
                     </Typography>
                     {loading && <Typography style={{ fontFamily: 'Lato, sans-serif' }}>Loading...</Typography>}
                     {error && <Typography style={{ fontFamily: 'Lato, sans-serif' }}>Error: {error}</Typography>}
-                    {!loading && !error && categories.map(category => (
+                    {!loading && !error && categories.map((category: string) => (
                         <div key={category} style={{ width: '100%' }}>
                             <Typography variant="h5" component="h2" style={{ fontFamily: 'Lato, sans-serif', marginTop: '20px', marginBottom: '30px' }}>
                                 {category}
                             </Typography>
                             <Grid container spacing={6}>
-                                {menuItems.filter(item => item.category === category).map(item => (
+                                {menuItems.filter((item: { category: string }) => item.category === category).map((item: { _id: string, name: string, description: string, price: number, stock: string }) => (
                                     <Grid item xs={12} sm={4} key={item._id}>
                                         <Card sx={{ minWidth: 275, padding: '10px' }}>
                                             <CardContent>
