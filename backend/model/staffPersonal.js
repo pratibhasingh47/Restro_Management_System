@@ -45,6 +45,11 @@ const StaffPersonalSchema = new mongoose.Schema({
     },
     alternateMobileNo: {
         type: String
+    },
+    managementId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Management',
+        required: true
     }
 });
 

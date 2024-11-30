@@ -1,24 +1,41 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import {jwtDecode} from 'jwt-decode';
 
 interface StaffPersonalState {
     staffPersonal: any;
     loading: boolean;
     error: string | null;
+    email: string | null; // Add email to the state
 }
 
 const initialState: StaffPersonalState = {
     staffPersonal: null,
     loading: false,
     error: null,
+    email: null,
 };
 
-// Async thunk for creating a new staff personal detail
+// Async thunk for handling staff login
+
+
+export const updateStaffPersonal = createAsyncThunk(
+    'staffPersonal/update',
+    async ({ email, staffData }: { email: string, staffData: any }, { rejectWithValue }) => {
+        try {
+            const response = await axios.put(`http://localhost:3000/staffMyAccount/personal/updateStaff/${email}`, staffData);
+            return response.data;
+        } catch (error: any) {
+            return rejectWithValue(error.response.data);
+        }
+    }
+);
+
 export const createStaffPersonal = createAsyncThunk(
     'staffPersonal/create',
     async (staffData: any, { rejectWithValue }) => {
         try {
-            const response = await axios.post('http://localhost:3000/staffMyAccount/personal', staffData);
+            const response = await axios.post('http://localhost:3000/staffMyAccount/personal/create', staffData);
             return response.data;
         } catch (error: any) {
             return rejectWithValue(error.response.data);
@@ -26,38 +43,11 @@ export const createStaffPersonal = createAsyncThunk(
     }
 );
 
-// Async thunk for fetching a staff personal detail by ID
-export const getStaffPersonalById = createAsyncThunk(
-    'staffPersonal/getById',
-    async (id: string, { rejectWithValue }) => {
+export const getStaffPersonalByEmail = createAsyncThunk(
+    'staffPersonal/getByEmail',
+    async (email: string, { rejectWithValue }) => {
         try {
-            const response = await axios.get(`http://localhost:3000/staffMyAccount/personal/${id}`);
-            return response.data;
-        } catch (error: any) {
-            return rejectWithValue(error.response.data);
-        }
-    }
-);
-
-// Async thunk for updating a staff personal detail by ID
-export const updateStaffPersonal = createAsyncThunk(
-    'staffPersonal/update',
-    async ({ id, staffData }: { id: string, staffData: any }, { rejectWithValue }) => {
-        try {
-            const response = await axios.put(`http://localhost:3000/staffMyAccount/personal/${id}`, staffData);
-            return response.data;
-        } catch (error: any) {
-            return rejectWithValue(error.response.data);
-        }
-    }
-);
-
-// Async thunk for deleting a staff personal detail by ID
-export const deleteStaffPersonal = createAsyncThunk(
-    'staffPersonal/delete',
-    async (id: string, { rejectWithValue }) => {
-        try {
-            const response = await axios.delete(`http://localhost:3000/staffMyAccount/personal/${id}`);
+            const response = await axios.get(`http://localhost:3000/staffMyAccount/personal/getStaff/${email}`);
             return response.data;
         } catch (error: any) {
             return rejectWithValue(error.response.data);
@@ -68,33 +58,13 @@ export const deleteStaffPersonal = createAsyncThunk(
 const staffPersonalSlice = createSlice({
     name: 'staffPersonal',
     initialState,
-    reducers: {},
+    reducers: {
+        setEmail: (state, action) => {
+            state.email = action.payload;
+        }
+    },
     extraReducers: (builder) => {
         builder
-            .addCase(createStaffPersonal.pending, (state) => {
-                state.loading = true;
-                state.error = null;
-            })
-            .addCase(createStaffPersonal.fulfilled, (state, action) => {
-                state.loading = false;
-                state.staffPersonal = action.payload;
-            })
-            .addCase(createStaffPersonal.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.payload as string;
-            })
-            .addCase(getStaffPersonalById.pending, (state) => {
-                state.loading = true;
-                state.error = null;
-            })
-            .addCase(getStaffPersonalById.fulfilled, (state, action) => {
-                state.loading = false;
-                state.staffPersonal = action.payload;
-            })
-            .addCase(getStaffPersonalById.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.payload as string;
-            })
             .addCase(updateStaffPersonal.pending, (state) => {
                 state.loading = true;
                 state.error = null;
@@ -107,19 +77,32 @@ const staffPersonalSlice = createSlice({
                 state.loading = false;
                 state.error = action.payload as string;
             })
-            .addCase(deleteStaffPersonal.pending, (state) => {
+            .addCase(createStaffPersonal.pending, (state) => {
                 state.loading = true;
                 state.error = null;
             })
-            .addCase(deleteStaffPersonal.fulfilled, (state, action) => {
+            .addCase(createStaffPersonal.fulfilled, (state, action) => {
                 state.loading = false;
-                state.staffPersonal = null;
+                state.staffPersonal = action.payload;
             })
-            .addCase(deleteStaffPersonal.rejected, (state, action) => {
+            .addCase(createStaffPersonal.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload as string;
+            })
+            .addCase(getStaffPersonalByEmail.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(getStaffPersonalByEmail.fulfilled, (state, action) => {
+                state.loading = false;
+                state.staffPersonal = action.payload;
+            })
+            .addCase(getStaffPersonalByEmail.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload as string;
             });
     },
 });
 
+export const { setEmail } = staffPersonalSlice.actions;
 export const staffPersonalReducer = staffPersonalSlice.reducer;
