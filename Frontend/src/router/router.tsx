@@ -3,9 +3,12 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from '../components/Home';
 import Signup from '../components/Signup';
 import Login from '../components/Login';
-import MenuManagement from '../components/MenuManagement'; // Ensure this path is correct
-import Layout from '../components/Layout'; // Ensure this path is correct
-import StaffMyAccountDashboard from '../components/staffMyAccountDashboard'; // Ensure this path is correct
+import MenuManagement from '../components/MenuManagement';
+import Layout from '../components/Layout';
+import StaffPersonal from '../components/StaffPersonal';
+// import StaffJob from '../components/staffMyAccount/StaffJob';
+// import StaffPay from '../components/staffMyAccount/StaffPay';
+import StaffMyAccountDashboard from '../components/staffMyAccountDashboard';
 
 const router = createBrowserRouter([
     {
@@ -30,8 +33,22 @@ const router = createBrowserRouter([
             },
             {
                 path: '/staffMyAccount',
-                element: <StaffMyAccountDashboard />
-            },
+                element: <StaffMyAccountDashboard />,
+                children: [
+                    {
+                        path: 'staffPersonal',
+                        element: <StaffPersonal />
+                    },
+                    // {
+                    //     path: 'staffJob',
+                    //     element: <StaffJob />
+                    // },
+                    // {
+                    //     path: 'staffPay',
+                    //     element: <StaffPay />
+                    // }
+                ]
+            }
         ]
     },
     {
