@@ -55,16 +55,20 @@ const StaffPersonal: React.FC = () => {
     };
 
     return (
-        <Box display="flex" justifyContent="center" alignItems="center"  bgcolor="#f4f6f8">
-            <Paper elevation={3} style={{ padding: '2rem', width: '100%', height : '80vh'  }}>
+        <Box display="flex" justifyContent="center" alignItems="center" bgcolor="#f4f6f8" 
+        sx={{ fontFamily: 'Lato, sans-serif' , height: 'auto'}}
+        >
+            <Paper elevation={3} style={{ padding: '2rem', width: '100%', height: '80vh' }}>
                 <Typography variant="h4" gutterBottom
-                sx={{ fontFamily: 'Lato ', color: '#000' , fontWeight: 'bold' , marginBottom : '1.5rem' }}>
-                Personal Details
+                    sx={{ fontFamily: 'Lato ', color: '#000', fontWeight: 'bold', marginBottom: '1.5rem' }}>
+                    Personal Details
                 </Typography>
                 {loading && <Typography>Loading...</Typography>}
                 {error && <Typography>Error: {error}</Typography>}
                 <form onSubmit={handleSubmit}>
-                    <Grid container spacing={2}>
+                    <Grid container spacing={5} 
+                    sx={{ fontFamily: 'Lato '}}
+                    >
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 label="Name"
@@ -73,13 +77,13 @@ const StaffPersonal: React.FC = () => {
                                 onChange={handleChange}
                                 fullWidth
                                 required
-                            />
+                                />
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 label="Birthday"
                                 name="birthday"
-                                type="date"
+                                // type="date"
                                 value={formState.birthday}
                                 onChange={handleChange}
                                 fullWidth
@@ -204,7 +208,7 @@ const StaffPersonal: React.FC = () => {
                                 variant="contained"
                                 color="primary"
                                 fullWidth
-                                style={{ padding: '0.75rem', fontSize: '1rem' }}
+                                style={{ padding: '0.5rem', fontSize: '0.875rem', maxWidth : '100px' , backgroundColor: '#FFC300', color: '#000', fontWeight: 'bold' }}
                             >
                                 Save
                             </Button>

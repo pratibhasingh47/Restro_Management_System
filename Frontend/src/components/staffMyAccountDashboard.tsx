@@ -14,7 +14,7 @@ const StaffMyAccountDashboard: React.FC = () => {
     };
 
     return (
-        <div className="grid grid-cols-5 h-screen bg-white">
+        <div className="grid grid-cols-5 h-auto  bg-white">
             {/* Sidebar (Drawer) */}
             <div className="col-span-1 bg-black text-white flex flex-col">
                 <div className="p-4 mx-8 text-2xl font-lato font-semibold text-white flex items-center">
@@ -41,7 +41,7 @@ const StaffMyAccountDashboard: React.FC = () => {
                 </nav>
             </div>
 
-            <div className="col-span-4 p-8">
+            <div className="col-span-4 p-8 h-auto">
                 <Outlet />
             </div>
         </div>
