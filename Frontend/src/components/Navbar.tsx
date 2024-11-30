@@ -41,6 +41,16 @@ const Navbar: React.FC = () => {
         navigate('/');
     };
 
+    const handleAccountClick = () => {
+        if (role === 'Manager') {
+            navigate('/managerAccount');
+        } else if (role === 'Staff') {
+            navigate('/staffMyAccount');
+        } else {
+            navigate('/account');
+        }
+    };
+
     return (
         <nav className="bg-accent1 px-40 text-primary z-50 sticky top-0 w-full flex items-center justify-between p-4 shadow-lg">
             <div className="flex items-center">
@@ -58,7 +68,7 @@ const Navbar: React.FC = () => {
                     </Link>
                 ) : (
                     <>
-                        <Link to="/account" className="font-lato font-extrabold text-lg hover:text-xl hover:transition duration-500">My Account</Link>
+                        <button onClick={handleAccountClick} className="font-lato font-extrabold text-lg hover:text-xl hover:transition duration-500">My Account</button>
                         {role === 'Manager' && (
                             <>
                                 <button onClick={toggleDrawer(true)} className="flex items-center font-bold bg-black font-lato justify-center text-lg text-white px-4 py-2 rounded-full hover:bg-secondary-dark hover:transition duration-300 ml-4">
@@ -67,7 +77,7 @@ const Navbar: React.FC = () => {
                                 </button>
                                 <TemporaryDrawer open={drawerOpen} toggleDrawer={toggleDrawer} />
                             </>
-                        )} 
+                        )}
                         {role === 'Staff' && (
                             <>
                                 <Link to="/order-status" className="font-lato font-extrabold text-lg hover:text-xl hover:transition duration-500">Order Status</Link>
