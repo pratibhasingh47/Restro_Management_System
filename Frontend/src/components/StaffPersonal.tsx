@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
 
 const StaffPersonal: React.FC = () => {
     const dispatch: AppDispatch = useDispatch();
@@ -54,151 +55,163 @@ const StaffPersonal: React.FC = () => {
     };
 
     return (
-        <Box>
-            {loading && <Typography>Loading...</Typography>}
-            {error && <Typography>Error: {error}</Typography>}
-            <form onSubmit={handleSubmit}>
-                <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                        <TextField
-                            label="Name"
-                            name="name"
-                            value={formState.name}
-                            onChange={handleChange}
-                            fullWidth
-                            required
-                        />
+        <Box display="flex" justifyContent="center" alignItems="center"  bgcolor="#f4f6f8">
+            <Paper elevation={3} style={{ padding: '2rem', width: '100%', height : '80vh'  }}>
+                <Typography variant="h4" gutterBottom
+                sx={{ fontFamily: 'Lato ', color: '#000' , fontWeight: 'bold' , marginBottom : '1.5rem' }}>
+                Personal Details
+                </Typography>
+                {loading && <Typography>Loading...</Typography>}
+                {error && <Typography>Error: {error}</Typography>}
+                <form onSubmit={handleSubmit}>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                label="Name"
+                                name="name"
+                                value={formState.name}
+                                onChange={handleChange}
+                                fullWidth
+                                required
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                label="Birthday"
+                                name="birthday"
+                                type="date"
+                                value={formState.birthday}
+                                onChange={handleChange}
+                                fullWidth
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                label="Gender"
+                                name="gender"
+                                value={formState.gender}
+                                onChange={handleChange}
+                                fullWidth
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                label="Email"
+                                name="email"
+                                type="email"
+                                value={formState.email}
+                                onChange={handleChange}
+                                fullWidth
+                                required
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                label="Password"
+                                name="password"
+                                type="password"
+                                value={formState.password}
+                                onChange={handleChange}
+                                fullWidth
+                                required
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                label="Phone"
+                                name="phone"
+                                value={formState.phone}
+                                onChange={handleChange}
+                                fullWidth
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                label="State"
+                                name="state"
+                                value={formState.state}
+                                onChange={handleChange}
+                                fullWidth
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                label="City"
+                                name="city"
+                                value={formState.city}
+                                onChange={handleChange}
+                                fullWidth
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                label="Home Address"
+                                name="homeAddress"
+                                value={formState.homeAddress}
+                                onChange={handleChange}
+                                fullWidth
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                label="Work Address"
+                                name="workAddress"
+                                value={formState.workAddress}
+                                onChange={handleChange}
+                                fullWidth
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                label="Mother's Name"
+                                name="motherName"
+                                value={formState.motherName}
+                                onChange={handleChange}
+                                fullWidth
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                label="Father's Name"
+                                name="fatherName"
+                                value={formState.fatherName}
+                                onChange={handleChange}
+                                fullWidth
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                label="Alternate Email"
+                                name="alternateEmail"
+                                type="email"
+                                value={formState.alternateEmail}
+                                onChange={handleChange}
+                                fullWidth
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                label="Alternate Mobile No"
+                                name="alternateMobileNo"
+                                value={formState.alternateMobileNo}
+                                onChange={handleChange}
+                                fullWidth
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Button
+                                type="submit"
+                                variant="contained"
+                                color="primary"
+                                fullWidth
+                                style={{ padding: '0.75rem', fontSize: '1rem' }}
+                            >
+                                Save
+                            </Button>
+                        </Grid>
                     </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                            label="Birthday"
-                            name="birthday"
-                            type="date"
-                            value={formState.birthday}
-                            onChange={handleChange}
-                            fullWidth
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                            label="Gender"
-                            name="gender"
-                            value={formState.gender}
-                            onChange={handleChange}
-                            fullWidth
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                            label="Email"
-                            name="email"
-                            type="email"
-                            value={formState.email}
-                            onChange={handleChange}
-                            fullWidth
-                            required
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                            label="Password"
-                            name="password"
-                            type="password"
-                            value={formState.password}
-                            onChange={handleChange}
-                            fullWidth
-                            required
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                            label="Phone"
-                            name="phone"
-                            value={formState.phone}
-                            onChange={handleChange}
-                            fullWidth
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                            label="State"
-                            name="state"
-                            value={formState.state}
-                            onChange={handleChange}
-                            fullWidth
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                            label="City"
-                            name="city"
-                            value={formState.city}
-                            onChange={handleChange}
-                            fullWidth
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                            label="Home Address"
-                            name="homeAddress"
-                            value={formState.homeAddress}
-                            onChange={handleChange}
-                            fullWidth
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                            label="Work Address"
-                            name="workAddress"
-                            value={formState.workAddress}
-                            onChange={handleChange}
-                            fullWidth
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                            label="Mother's Name"
-                            name="motherName"
-                            value={formState.motherName}
-                            onChange={handleChange}
-                            fullWidth
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                            label="Father's Name"
-                            name="fatherName"
-                            value={formState.fatherName}
-                            onChange={handleChange}
-                            fullWidth
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                            label="Alternate Email"
-                            name="alternateEmail"
-                            type="email"
-                            value={formState.alternateEmail}
-                            onChange={handleChange}
-                            fullWidth
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                            label="Alternate Mobile No"
-                            name="alternateMobileNo"
-                            value={formState.alternateMobileNo}
-                            onChange={handleChange}
-                            fullWidth
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Button type="submit" variant="contained" color="primary">
-                            Save
-                        </Button>
-                    </Grid>
-                </Grid>
-            </form>
+                </form>
+            </Paper>
         </Box>
     );
 };

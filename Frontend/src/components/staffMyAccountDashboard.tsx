@@ -16,8 +16,8 @@ const StaffMyAccountDashboard: React.FC = () => {
     return (
         <div className="grid grid-cols-5 h-screen bg-white">
             {/* Sidebar (Drawer) */}
-            <div className="col-span-1 bg-gray-900 text-white flex flex-col">
-                <div className="p-4 mx-8 text-2xl font-semibold text-white flex items-center">
+            <div className="col-span-1 bg-black text-white flex flex-col">
+                <div className="p-4 mx-8 text-2xl font-lato font-semibold text-white flex items-center">
                     <FaBars className="mr-4" /> Menu
                 </div>
                 <nav className="flex-1 mx-20 text-xl font-lato">
