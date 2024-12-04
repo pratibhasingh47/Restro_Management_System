@@ -102,8 +102,6 @@ interface TabPanelProps {
     value: number;
 }
 
-
-
 function CustomTabPanel(props: TabPanelProps) {
     const { children, value, index, ...other } = props;
 
@@ -241,7 +239,7 @@ const SignUp: React.FC = () => {
 
 
 
-
+    
 
     return (
         <Grid container component="main" className={classes.root} alignItems="stretch">
