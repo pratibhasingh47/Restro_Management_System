@@ -13,28 +13,22 @@ const initialState: StaffPersonalState = {
     error: null,
 };
 
-// Async thunk to fetch personal details
+// Helper function to get the token from local storage or any other storage mechanism
+const getToken = () => {
+    return localStorage.getItem('token'); // Adjust based on how you store the token
+};
+
+// Async thunk to fetch personal details using POST request
 export const fetchPersonalDetails = createAsyncThunk(
     'staffPersonal/fetchPersonalDetails',
     async (email: string, { rejectWithValue }) => {
         try {
-            console.log(`Fetching personal details for email: ${email}`);
-            const response = await axios.get(`http://localhost:3000/staffMyAccount/personal/getStaff/${email}`);
-            console.log('Response:', response.data);
-            return response.data;
-        } catch (error: any) {
-            console.error('Error fetching personal details:', error.response.data);
-            return rejectWithValue(error.response.data);
-        }
-    }
-);
-
-// Async thunk to create personal details
-export const createPersonalDetails = createAsyncThunk(
-    'staffPersonal/createPersonalDetails',
-    async (data: any, { rejectWithValue }) => {
-        try {
-            const response = await axios.post('http://localhost:3000/staffMyAccount/personal/create', data);
+            const token = getToken();
+            const response = await axios.post('http://localhost:3000/staffMyAccount/personal/getStaff', { email }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
             return response.data;
         } catch (error: any) {
             return rejectWithValue(error.response.data);
@@ -47,21 +41,13 @@ export const updatePersonalDetails = createAsyncThunk(
     'staffPersonal/updatePersonalDetails',
     async ({ email, data }: { email: string, data: any }, { rejectWithValue }) => {
         try {
-            const response = await axios.put(`http://localhost:3000/staffMyAccount/personal/updateStaff/${email}`, data);
+            const token = getToken();
+            const response = await axios.put(`http://localhost:3000/staffMyAccount/personal/updateStaff/${email}`, data, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
             return response.data;
-        } catch (error: any) {
-            return rejectWithValue(error.response.data);
-        }
-    }
-);
-
-// Async thunk to delete personal details
-export const deletePersonalDetails = createAsyncThunk(
-    'staffPersonal/deletePersonalDetails',
-    async (id: string, { rejectWithValue }) => {
-        try {
-            await axios.delete(`http://localhost:3000/staffMyAccount/personal/${id}`);
-            return id;
         } catch (error: any) {
             return rejectWithValue(error.response.data);
         }
@@ -71,9 +57,7 @@ export const deletePersonalDetails = createAsyncThunk(
 const staffPersonalSlice = createSlice({
     name: 'staffPersonal',
     initialState,
-    reducers: {
-        // Define any synchronous actions here if needed
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder
             .addCase(fetchPersonalDetails.pending, (state) => {
@@ -88,18 +72,6 @@ const staffPersonalSlice = createSlice({
                 state.loading = false;
                 state.error = action.payload;
             })
-            .addCase(createPersonalDetails.pending, (state) => {
-                state.loading = true;
-                state.error = null;
-            })
-            .addCase(createPersonalDetails.fulfilled, (state, action: PayloadAction<any>) => {
-                state.loading = false;
-                state.personalDetails = action.payload;
-            })
-            .addCase(createPersonalDetails.rejected, (state, action: PayloadAction<any>) => {
-                state.loading = false;
-                state.error = action.payload;
-            })
             .addCase(updatePersonalDetails.pending, (state) => {
                 state.loading = true;
                 state.error = null;
@@ -109,18 +81,6 @@ const staffPersonalSlice = createSlice({
                 state.personalDetails = action.payload;
             })
             .addCase(updatePersonalDetails.rejected, (state, action: PayloadAction<any>) => {
-                state.loading = false;
-                state.error = action.payload;
-            })
-            .addCase(deletePersonalDetails.pending, (state) => {
-                state.loading = true;
-                state.error = null;
-            })
-            .addCase(deletePersonalDetails.fulfilled, (state, action: PayloadAction<string>) => {
-                state.loading = false;
-                state.personalDetails = null;
-            })
-            .addCase(deletePersonalDetails.rejected, (state, action: PayloadAction<any>) => {
                 state.loading = false;
                 state.error = action.payload;
             });
