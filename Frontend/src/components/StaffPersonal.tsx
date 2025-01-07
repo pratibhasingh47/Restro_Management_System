@@ -493,7 +493,7 @@ const StaffPersonal: React.FC = () => {
                             >
                                 Update
                             </Button>
-                            <Button
+                            {/* <Button
                                 onClick={handleDelete}
                                 variant="contained"
                                 color="secondary"
@@ -501,7 +501,7 @@ const StaffPersonal: React.FC = () => {
                                 style={{ padding: '0.5rem', fontSize: '0.875rem', maxWidth: '100px' , backgroundColor: '#FFC300', color: '#000' , fontWeight: 'bold' }}
                             >
                                 Delete
-                            </Button>
+                            </Button> */}
                         </Grid>
                     </Grid>
                 </form>
