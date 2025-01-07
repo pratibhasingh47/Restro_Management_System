@@ -1,119 +1,92 @@
 const StaffPersonal = require('../model/staffPersonal');
-const jwt = require('jsonwebtoken'); // Assuming JWT is used for token generation
 
-// Function to extract email from token
-const getEmailFromToken = (token) => {
+// Fetch all personal details for Staff My Account
+exports.getPersonalDetails = async (req, res, next) => {
     try {
-        const decoded = jwt.verify(token, 'my_jwt_secret'); // Replace 'your_secret_key' with your actual secret key
-        return decoded.email;
+        const staffId = req.user.id; // Assuming you have the staff ID in the user object
+        const personalDetails = await StaffPersonal.findOne({ managementId: staffId });
+        res.status(200).json(personalDetails);
     } catch (error) {
-        throw new Error('Invalid token');
-    }
-};
-
-// Handle staff login
-exports.handleStaffLogin = async (req, res) => {
-    try {
-        const token = req.headers.authorization.split(' ')[1]; // Assuming token is sent in the Authorization header
-        const email = getEmailFromToken(token);
-
-        // Check if the staff already exists
-        const existingStaff = await StaffPersonal.findOne({ email });
-        if (existingStaff) {
-            // If staff exists, update their details
-            const updatedDetails = req.body;
-            const updatedStaffPersonal = await StaffPersonal.findByIdAndUpdate(
-                existingStaff._id,
-                { $set: updatedDetails },
-                { new: true }
-            );
-            return res.status(200).json(updatedStaffPersonal);
-        } else {
-            // If staff does not exist, create a new one
-            const newStaffPersonal = new StaffPersonal(req.body);
-            await newStaffPersonal.save();
-            return res.status(201).json(newStaffPersonal);
-        }
-    } catch (error) {
-        res.status(500).json({ message: 'Error handling staff login', error });
+        console.error(error);
+        next(error);
     }
 };
 
 // Create a new staff personal detail
-exports.createStaffPersonal = async (req, res) => {
+exports.createStaffPersonal = async (req, res, next) => {
     try {
-        const { name, email, password, phone, ...otherDetails } = req.body;
+        const { name, email, password, contactNumber, managementId } = req.body;
 
-        // Check if the staff already exists
-        const existingStaff = await StaffPersonal.findOne({ email });
-        if (existingStaff) {
-            return res.status(400).json({ message: 'Staff already exists' });
+        if (!name || !email || !password || !contactNumber || !managementId) {
+            return res.status(400).json({ message: "Name, email, password, contact number, and management ID are required." });
         }
 
         const newStaffPersonal = new StaffPersonal({
             name,
             email,
             password,
-            phone,
-            ...otherDetails
+            phone: contactNumber,
+            managementId
         });
 
         await newStaffPersonal.save();
-        res.status(201).json(newStaffPersonal);
+
+        res.status(201).json({ message: "Staff personal details created successfully", staffPersonal: newStaffPersonal });
     } catch (error) {
-        res.status(500).json({ message: 'Error creating staff personal details', error });
+        console.error(error);
+        next(error);
     }
 };
 
 // Get a staff personal detail by email
-exports.getStaffPersonalByEmail = async (req, res) => {
+exports.getStaffPersonalByEmail = async (req, res, next) => {
     try {
-        const staffPersonal = await StaffPersonal.findOne({ email: req.params.email });
-        if (!staffPersonal) {
-            return res.status(404).json({ message: 'Staff personal details not found' });
+        const { email } = req.params;
+        const personalDetails = await StaffPersonal.findOne({ email });
+
+        if (!personalDetails) {
+            return res.status(404).json({ message: "Staff personal details not found" });
         }
-        res.status(200).json(staffPersonal);
+
+        res.status(200).json(personalDetails);
     } catch (error) {
-        res.status(500).json({ message: 'Error fetching staff personal details', error });
+        console.error(error);
+        next(error);
     }
 };
 
-// Update a staff personal detail by ID
-exports.updateStaffPersonal = async (req, res) => {
+// Update a staff personal detail by email
+exports.updateStaffPersonal = async (req, res, next) => {
     try {
-        const { name, email, password, phone, ...otherDetails } = req.body;
-        const updatedDetails = { ...otherDetails };
+        const { email } = req.params;
+        const updateData = req.body;
 
-        if (name) updatedDetails.name = name;
-        if (email) updatedDetails.email = email;
-        if (password) updatedDetails.password = password;
-        if (phone) updatedDetails.phone = phone;
-
-        const updatedStaffPersonal = await StaffPersonal.findOneAndUpdate(
-            { email: req.params.email },
-            { $set: updatedDetails },
-            { new: true }
-        );
+        const updatedStaffPersonal = await StaffPersonal.findOneAndUpdate({ email }, updateData, { new: true });
 
         if (!updatedStaffPersonal) {
-            return res.status(404).json({ message: 'Staff personal details not found' });
+            return res.status(404).json({ message: "Staff personal details not found" });
         }
 
-        res.status(200).json(updatedStaffPersonal);
+        res.status(200).json({ message: "Staff personal details updated successfully", staffPersonal: updatedStaffPersonal });
     } catch (error) {
-        res.status(500).json({ message: 'Error updating staff personal details', error });
+        console.error(error);
+        next(error);
     }
 };
 
 // Delete a staff personal detail by ID
-exports.deleteStaffPersonal = async (req, res) => {
+exports.deleteStaffPersonal = async (req, res, next) => {
     try {
-        const deletedStaffPersonal = await StaffPersonal.findByIdAndDelete(req.params.id);
+        const { id } = req.params;
+        const deletedStaffPersonal = await StaffPersonal.findByIdAndDelete(id);
+
         if (!deletedStaffPersonal) {
-            return res.status(404).json({ message: 'Staff personal details not found' });
+            return res.status(404).json({ message: "Staff personal details not found" });
         }
-        res.status(200).json({ message: 'Staff personal details deleted successfully' });
+
+        res.status(200).json({ message: "Staff personal details deleted successfully" });
     } catch (error) {
-        res.status(500).json({ message: 'Error deleting staff personal details', error });
+        console.error(error);
+        next(error);
     }
 };

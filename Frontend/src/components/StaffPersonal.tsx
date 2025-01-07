@@ -247,10 +247,11 @@
 
 
 
+
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState, AppDispatch } from '../redux/store/store';
-import { getStaffPersonalByEmail, updateStaffPersonal, createStaffPersonal } from '../redux/reducers/staffPersonal';
+import { useSelector } from 'react-redux';
+import { RootState, useAppDispatch } from '../redux/store/store';
+import { fetchPersonalDetails, updatePersonalDetails, createPersonalDetails, deletePersonalDetails } from '../redux/reducers/staffPersonal';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
@@ -258,14 +259,14 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import MenuItem from '@mui/material/MenuItem';
-import jwtDecode from 'jwt-decode'; // Adjust the path as needed
 
 const StaffPersonal: React.FC = () => {
-    const dispatch: AppDispatch = useDispatch();
-    const staffPersonal = useSelector((state: RootState) => state.staffPersonal.staffPersonal);
+    const dispatch = useAppDispatch(); // Use the custom useAppDispatch hook
+    const personalDetails = useSelector((state: RootState) => state.staffPersonal.personalDetails);
     const loading = useSelector((state: RootState) => state.staffPersonal.loading);
     const error = useSelector((state: RootState) => state.staffPersonal.error);
-    const email = useSelector((state: RootState) => state.staffPersonal.email);
+    
+    const [email, setEmail] = useState(''); // Email input state
     const [formState, setFormState] = useState({
         name: '',
         birthday: '',
@@ -283,19 +284,18 @@ const StaffPersonal: React.FC = () => {
         alternateMobileNo: ''
     });
 
-
     useEffect(() => {
         if (email) {
-            dispatch(getStaffPersonalByEmail(email)); // Fetch staff personal details by email
+            dispatch(fetchPersonalDetails(email)); // Fetch staff personal details by email
         }
     }, [dispatch, email]);
 
     useEffect(() => {
-        if (staffPersonal) {
-            console.log('Updating form state with fetched staffPersonal data:', staffPersonal);
-            setFormState(staffPersonal);
+        if (personalDetails) {
+            console.log('Updating form state with fetched personalDetails data:', personalDetails);
+            setFormState(personalDetails);
         }
-    }, [staffPersonal]);
+    }, [personalDetails]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -308,13 +308,19 @@ const StaffPersonal: React.FC = () => {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         if (email) {
-            if (staffPersonal && staffPersonal.email) {
-                console.log('Updating existing staff personal details:', formState);
-                dispatch(updateStaffPersonal({ email, staffData: formState }));
+            if (personalDetails && personalDetails.email) {
+                console.log('Updating existing personal details:', formState);
+                dispatch(updatePersonalDetails({ email, data: formState }));
             } else {
-                console.log('Creating new staff personal details:', formState);
-                dispatch(createStaffPersonal(formState));
+                console.log('Creating new personal details:', formState);
+                dispatch(createPersonalDetails(formState));
             }
+        }
+    };
+
+    const handleDelete = () => {
+        if (personalDetails && personalDetails._id) {
+            dispatch(deletePersonalDetails(personalDetails._id));
         }
     };
 
@@ -333,6 +339,20 @@ const StaffPersonal: React.FC = () => {
                     <Grid container spacing={5}
                         sx={{ fontFamily: 'Lato ' }}
                     >
+                        {/* Email field for fetching/updating personal details */}
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                label="Email"
+                                name="email"
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                fullWidth
+                                required
+                            />
+                        </Grid>
+
+                        {/* Other form fields */}
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 label="Name"
@@ -369,17 +389,6 @@ const StaffPersonal: React.FC = () => {
                                 <MenuItem value="male">Male</MenuItem>
                                 <MenuItem value="other">Other</MenuItem>
                             </TextField>
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                label="Email"
-                                name="email"
-                                type="email"
-                                value={formState.email}
-                                onChange={handleChange}
-                                fullWidth
-                                required
-                            />
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
@@ -483,6 +492,15 @@ const StaffPersonal: React.FC = () => {
                                 style={{ padding: '0.5rem', fontSize: '0.875rem', maxWidth: '100px', backgroundColor: '#FFC300', color: '#000', fontWeight: 'bold' }}
                             >
                                 Update
+                            </Button>
+                            <Button
+                                onClick={handleDelete}
+                                variant="contained"
+                                color="secondary"
+                                fullWidth
+                                style={{ padding: '0.5rem', fontSize: '0.875rem', maxWidth: '100px' , backgroundColor: '#FFC300', color: '#000' , fontWeight: 'bold' }}
+                            >
+                                Delete
                             </Button>
                         </Grid>
                     </Grid>

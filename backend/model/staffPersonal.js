@@ -47,8 +47,7 @@ const StaffPersonalSchema = new mongoose.Schema({
         type: String
     },
     managementId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Management',
+        type: String,
         required: true
     }
 });
