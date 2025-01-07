@@ -18,9 +18,12 @@ export const fetchPersonalDetails = createAsyncThunk(
     'staffPersonal/fetchPersonalDetails',
     async (email: string, { rejectWithValue }) => {
         try {
+            console.log(`Fetching personal details for email: ${email}`);
             const response = await axios.get(`http://localhost:3000/staffMyAccount/personal/getStaff/${email}`);
+            console.log('Response:', response.data);
             return response.data;
         } catch (error: any) {
+            console.error('Error fetching personal details:', error.response.data);
             return rejectWithValue(error.response.data);
         }
     }
