@@ -286,6 +286,7 @@ const StaffPersonal: React.FC = () => {
 
     useEffect(() => {
         if (email) {
+            console.log(`Dispatching fetchPersonalDetails for email: ${email}`);
             dispatch(fetchPersonalDetails(email)); // Fetch staff personal details by email
         }
     }, [dispatch, email]);
