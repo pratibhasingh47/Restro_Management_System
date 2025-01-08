@@ -266,13 +266,11 @@ const StaffPersonal: React.FC = () => {
     const loading = useSelector((state: RootState) => state.staffPersonal.loading);
     const error = useSelector((state: RootState) => state.staffPersonal.error);
 
-    const [email, setEmail] = useState(''); // Replace with actual staff email
     const [formState, setFormState] = useState({
         name: '',
         birthday: '',
         gender: '',
         email: '',
-        password: '',
         phone: '',
         state: '',
         city: '',
@@ -285,10 +283,8 @@ const StaffPersonal: React.FC = () => {
     });
 
     useEffect(() => {
-        if (email) {
-            dispatch(fetchPersonalDetails(email));
-        }
-    }, [dispatch, email]);
+        dispatch(fetchPersonalDetails());
+    }, [dispatch]);
 
     useEffect(() => {
         if (personalDetails) {
@@ -306,9 +302,7 @@ const StaffPersonal: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        if (email) {
-            dispatch(updatePersonalDetails({ email, data: formState }));
-        }
+        dispatch(updatePersonalDetails(formState));
     };
 
     return (
@@ -326,7 +320,6 @@ const StaffPersonal: React.FC = () => {
                     <Grid container spacing={5}
                         sx={{ fontFamily: 'Lato ' }}
                     >
-                        {/* Other form fields */}
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 label="Name"
@@ -466,4 +459,3 @@ const StaffPersonal: React.FC = () => {
 };
 
 export default StaffPersonal;
-

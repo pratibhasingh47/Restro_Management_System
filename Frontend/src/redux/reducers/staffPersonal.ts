@@ -21,10 +21,10 @@ const getToken = () => {
 // Async thunk to fetch personal details using POST request
 export const fetchPersonalDetails = createAsyncThunk(
     'staffPersonal/fetchPersonalDetails',
-    async (email: string, { rejectWithValue }) => {
+    async (_, { rejectWithValue }) => {
         try {
             const token = getToken();
-            const response = await axios.post('http://localhost:3000/staffMyAccount/personal/getStaff', { email }, {
+            const response = await axios.post('http://localhost:3000/staffMyAccount/personal/getStaff', {}, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -39,10 +39,10 @@ export const fetchPersonalDetails = createAsyncThunk(
 // Async thunk to update personal details
 export const updatePersonalDetails = createAsyncThunk(
     'staffPersonal/updatePersonalDetails',
-    async ({ email, data }: { email: string, data: any }, { rejectWithValue }) => {
+    async (data: any, { rejectWithValue }) => {
         try {
             const token = getToken();
-            const response = await axios.put(`http://localhost:3000/staffMyAccount/personal/updateStaff/${email}`, data, {
+            const response = await axios.put('http://localhost:3000/staffMyAccount/personal/updateStaff', data, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
