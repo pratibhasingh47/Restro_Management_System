@@ -1,4 +1,4 @@
-const StaffPersonal = require('../models/StaffPersonal');
+const StaffPersonal = require('../model/staffPersonal');
 
 // Get personal details using verified token
 exports.getStaffPersonalByEmail = async (req, res) => {
