@@ -4,13 +4,13 @@ import { useDispatch } from 'react-redux';
 import menuReducer from '../reducers/menuSlice';
 
 const store = configureStore({
-  reducer: {
-    staffPersonal: staffPersonalReducer,
-    menu: menuReducer,
-  },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
-    serializableCheck: false,
-  }),
+	reducer: {
+		staffPersonal: staffPersonalReducer,
+		menu: menuReducer,
+	},
+	middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+		serializableCheck: false,
+	}),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
