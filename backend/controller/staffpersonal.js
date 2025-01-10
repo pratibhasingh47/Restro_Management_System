@@ -1,5 +1,5 @@
 const StaffPersonal = require('../model/staffPersonal');
-const moment = require('moment');
+const { parse, format } = require('date-fns');
 
 // Get personal details using verified token
 exports.getStaffPersonalByEmail = async (req, res) => {
@@ -22,9 +22,10 @@ exports.updateStaffPersonal = async (req, res) => {
         const email = req.user.email; // Extract email from verified token
         const updatedData = req.body;
 
-        // Format the birthday to 'MM/DD/YYYY' format if it exists in the request body
+        // Format the birthday to 'MM/dd/yyyy' format if it exists in the request body
         if (updatedData.birthday) {
-            updatedData.birthday = moment(updatedData.birthday).format('MM/DD/YYYY');
+            const parsedDate = parse(updatedData.birthday, 'MM/dd/yyyy', new Date());
+            updatedData.birthday = format(parsedDate, 'MM/dd/yyyy');
         }
 
         const updatedPersonalDetails = await StaffPersonal.findOneAndUpdate({ email }, updatedData, { new: true });
