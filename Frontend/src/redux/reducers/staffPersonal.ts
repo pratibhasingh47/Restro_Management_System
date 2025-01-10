@@ -130,7 +130,7 @@ const initialState: StaffPersonalState = {
 };
 
 const getToken = () => {
-    const token = localStorage.getItem('token'); // Ensure the key matches the one used to store the token
+    const token = localStorage.getItem('authToken'); // Ensure the key matches the one used to store the token
     console.log('Retrieved Token:', token); // Add debugging log
     return token;
 };
