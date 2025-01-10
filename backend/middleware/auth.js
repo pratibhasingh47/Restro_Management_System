@@ -7,9 +7,11 @@ const verifyToken = (req, res, next) => {
     if (!token) {
         return res.status(401).json({ message: "Access denied. No token provided." });
     }
-
+    
+    console.log('JWT_SECRET for verification:', process.env.JWT_SECRET); 
     try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET || "my_jwt_secret");
+        const decoded = jwt.verify(token, process.env.JWT_SECRET );
+        console.log('JWT_SECRET for verification:', process.env.JWT_SECRET); 
         req.user = decoded;
         next();
     } catch (error) {
@@ -21,6 +23,7 @@ const verifyToken = (req, res, next) => {
 // Middleware to check roles
 const checkRole = (roles) => {
     return (req, res, next) => {
+        console.log(`User role: ${req.user.role}`); 
         if (!roles.includes(req.user.role)) {
             return res.status(403).json({ message: "Access denied. You do not have the required role." });
         }

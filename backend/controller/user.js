@@ -320,7 +320,7 @@ exports.signup = async (req, res, next) => {
 
         const token = jwt.sign(
             { userId: newUser._id, email: newUser.email, role: newUser.role, managementId: newUser.managementId },
-            process.env.JWT_SECRET || "your_jwt_secret_key",
+            process.env.JWT_SECRET,
             { expiresIn: "1d" }
         );
 
@@ -371,12 +371,14 @@ exports.login = async (req, res) => {
         if (!isPasswordValid) {
             return res.status(400).json({ message: "Invalid email or password." });
         }
-
+        
+        console.log('JWT_SECRET for signing:', process.env.JWT_SECRET);
         const token = jwt.sign(
             { userId: user._id, email: user.email, role: user.role, managementId: user.managementId },
-            process.env.JWT_SECRET || "my_jwt_secret",
-            { expiresIn: "1d" }
+            process.env.JWT_SECRET,
+            { expiresIn: "1h" }
         );
+        console.log('JWT_SECRET for signing:', process.env.JWT_SECRET);
 
         res.status(200).json({
             message: "Login successful",
