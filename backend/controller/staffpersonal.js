@@ -1,4 +1,5 @@
 const StaffPersonal = require('../model/staffPersonal');
+const moment = require('moment');
 
 // Get personal details using verified token
 exports.getStaffPersonalByEmail = async (req, res) => {
@@ -20,6 +21,12 @@ exports.updateStaffPersonal = async (req, res) => {
     try {
         const email = req.user.email; // Extract email from verified token
         const updatedData = req.body;
+
+        // Format the birthday to 'MM/DD/YYYY' format if it exists in the request body
+        if (updatedData.birthday) {
+            updatedData.birthday = moment(updatedData.birthday).format('MM/DD/YYYY');
+        }
+
         const updatedPersonalDetails = await StaffPersonal.findOneAndUpdate({ email }, updatedData, { new: true });
         res.json(updatedPersonalDetails);
     } catch (error) {
