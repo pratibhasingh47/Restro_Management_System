@@ -6,7 +6,7 @@ const StaffPersonalSchema = new mongoose.Schema({
         required: true
     },
     birthday: {
-        type: Date
+        type: String
     },
     gender: {
         type: String
