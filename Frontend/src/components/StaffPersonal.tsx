@@ -560,7 +560,7 @@ const StaffPersonal: React.FC = () => {
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
-                                label="Birthday"
+                                label="Birthday(DD/MM/YYYY)"
                                 name="birthday"
                                 value={formState.birthday}
                                 onChange={handleChange}
