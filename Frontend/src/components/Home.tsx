@@ -8,7 +8,7 @@ import wallpaper from '../assets/images/w1-transformed.jpeg';
 
 const Home: React.FC = () => {
     const dispatch: AppDispatch = useDispatch();
-    const { menuItems, loading, error } = useSelector((state: RootState) => state.menu);
+    const { menuItems = [], loading, error } = useSelector((state: RootState) => state.menu || { menuItems: [], loading: false, error: null });
     const [expanded, setExpanded] = useState<string | false>(false);
 
     useEffect(() => {
@@ -19,7 +19,7 @@ const Home: React.FC = () => {
         setExpanded(isExpanded ? panel : false);
     };
 
-    const categories = Array.from(new Set(menuItems.map(item => item.category)));
+    const categories: string[] = Array.from(new Set(menuItems.map((item: { category: string }) => item.category)));
 
     return (
         <div>
@@ -64,8 +64,7 @@ const Home: React.FC = () => {
                 </div>
             </div>
 
-
-            <div className='flex flex-col items-center w-auto justify-center bg-accent1	'>
+            <div className='flex flex-col items-center w-auto justify-center bg-accent1'>
                 <div className="mt-12 px-8 py-4">
                     <h2 className="text-5xl font-bold font-lato underline text-center mb-12">Our Menu</h2>
                     {loading && <p>Loading...</p>}
@@ -73,9 +72,9 @@ const Home: React.FC = () => {
                     {!loading && !error && (
                         <div className="grid grid-cols-2 gap-20">
                             {categories.map(category => (
-                                <div key={category} className="mb-10 ">
+                                <div key={category} className="mb-10">
                                     <h3 className="text-2xl font-lato font-bold mb-4 uppercase">{category}</h3>
-                                    {menuItems.filter(item => item.category === category).map(item => (
+                                    {menuItems.filter((item: { category: string; _id: string; name: string; description: string; price: number }) => item.category === category).map((item: { category: string; _id: string; name: string; description: string; price: number }) => (
                                         <Accordion key={item._id} expanded={expanded === item._id} onChange={handleChange(item._id)}>
                                             <AccordionSummary
                                                 expandIcon={<ExpandMoreIcon />}
@@ -94,7 +93,7 @@ const Home: React.FC = () => {
                                             <AccordionDetails
                                                 sx={{ padding: '10px 20px' }}
                                             >
-                                                <div className="flex justify-between items-center font-lato ">
+                                                <div className="flex justify-between items-center font-lato">
                                                     <span className='max-w-[400px]'>{item.description}</span>
                                                     <span className="font-extrabold text-xl  pr-4">${item.price}</span>
                                                 </div>
@@ -114,8 +113,7 @@ const Home: React.FC = () => {
                                                             backgroundColor: 'black',
                                                             color: 'white',
                                                         }
-                                                    }
-                                                    }
+                                                    }}
                                                 >Add to Orders</Button>
                                             </AccordionActions>
                                         </Accordion>
