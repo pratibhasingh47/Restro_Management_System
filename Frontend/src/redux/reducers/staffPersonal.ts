@@ -125,7 +125,7 @@ interface StaffPersonalState {
 
 const initialState: StaffPersonalState = {
     personalDetails: null,
-    loading: false,
+    loading: false, 
     error: null,
 };
 
@@ -151,6 +151,7 @@ export const fetchPersonalDetails = createAsyncThunk(
             });
             return response.data;
         } catch (error: any) {
+            console.error('Error:', error.response.data); // Add debugging log
             return rejectWithValue(error.response.data);
         }
     }

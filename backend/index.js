@@ -19,7 +19,7 @@
 //     console.log('Server is running http://localhost:3000');
 // });
 
-
+require('dotenv').config();
 
 
 const express = require('express');
