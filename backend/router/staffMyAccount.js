@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const staffPersonalController = require('../controller/staffpersonal');
-const employeeJobController = require('../controllers/employeeJobController');
-const employeePayController = require('../controllers/employeePayController');
+const employeeJobController = require('../controller/employeeJob');
+const employeePayController = require('../controller/employeePay');
 const { verifyToken, checkRole } = require('../middleware/auth');
 
 // Route for getting personal details using verified token

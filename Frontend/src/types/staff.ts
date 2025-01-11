@@ -1,22 +1,32 @@
-// export interface StaffDetail {
-//     _id: string;
-//     role: string;
-//     name: string;
-//     email: string;
-//     password : string;
-//     contactNumber: string;
-//     managementId: string;
-//     address: string;
-//     state: string;
-//     country: string;
-//     skills: string[];
-//     dateOfBirth: string; // Changed from Date to string
-//     // aadharNumber: string;
-//     accountNumber: string;
-//     salary: number;
-//     graduationYear: number;
-//     graduationUniversity: string;
-//     motherName: string;
-//     fatherName: string;
-//     alternateMobileNumber: string;
-// }
+export interface JobDetails {
+    status: string;
+    workPerHourWeek: number;
+    dateHired: string;
+    department: string;
+    position: string;
+    employmentType: string;
+}
+
+export interface PayDetails {
+    wageCalculation: string;
+    payroll: string;
+    bankName: string;
+    accountNo: string;
+    bankBranch: string;
+    ifscCode: string;
+    issueDate: string;
+    issueMonth: string;
+    issuedAmount: number;
+}
+
+export interface JobState {
+    jobDetails: JobDetails | null;
+    loading: boolean;
+    error: string | null;
+}
+
+export interface PayState {
+    payDetails: PayDetails | null;
+    loading: boolean;
+    error: string | null;
+}
