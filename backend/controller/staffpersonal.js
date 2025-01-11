@@ -1,5 +1,7 @@
 const StaffPersonal = require('../model/staffPersonal');
 const { parse, format } = require('date-fns');
+const Employee = require('../model/managementSchema'); // Adjust the path to your Employee model
+
 
 // Get personal details using verified token
 exports.getStaffPersonalByEmail = async (req, res) => {
@@ -32,5 +34,15 @@ exports.updateStaffPersonal = async (req, res) => {
         res.json(updatedPersonalDetails);
     } catch (error) {
         res.status(500).json({ message: 'Server error', error });
+    }
+};
+
+
+exports.getAllStaff = async (req, res) => {
+    try {
+        const staffMembers = await Employee.find({ role: 'Staff' });
+        res.status(200).json(staffMembers);
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching staff members', error });
     }
 };

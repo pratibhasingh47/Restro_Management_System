@@ -9,6 +9,8 @@ import StaffPersonal from '../components/StaffPersonal';
 // import StaffJob from '../components/staffMyAccount/StaffJob';
 // import StaffPay from '../components/staffMyAccount/StaffPay';
 import StaffMyAccountDashboard from '../components/staffMyAccountDashboard';
+import EmployeeManagement from '../components/EmployeeManagement';
+
 
 const router = createBrowserRouter([
     {
@@ -32,6 +34,10 @@ const router = createBrowserRouter([
                 element: <MenuManagement />
             },
             {
+                path : '/employeeManagement',
+                element : <EmployeeManagement />
+            },
+            {
                 path: '/staffMyAccount',
                 element: <StaffMyAccountDashboard />,
                 children: [
@@ -39,14 +45,6 @@ const router = createBrowserRouter([
                         path: 'staffPersonal',
                         element: <StaffPersonal />
                     },
-                    // {
-                    //     path: 'staffJob',
-                    //     element: <StaffJob />
-                    // },
-                    // {
-                    //     path: 'staffPay',
-                    //     element: <StaffPay />
-                    // }
                 ]
             }
         ]

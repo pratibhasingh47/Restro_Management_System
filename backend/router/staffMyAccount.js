@@ -5,6 +5,9 @@ const employeeJobController = require('../controller/employeeJob');
 const employeePayController = require('../controller/employeePay');
 const { verifyToken, checkRole } = require('../middleware/auth');
 
+router.get('/allStaff', verifyToken, checkRole(['Manager']), staffPersonalController.getAllStaff);
+
+
 // Route for getting personal details using verified token
 router.post('/personal/getStaff', verifyToken, checkRole(['Staff', 'Manager']), staffPersonalController.getStaffPersonalByEmail);
 

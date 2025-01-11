@@ -27,7 +27,7 @@ const TemporaryDrawer: React.FC<TemporaryDrawerProps> = ({ open, toggleDrawer })
                         </ListItemIcon>
                         <ListItemText primary="Menu Management" />
                     </ListItem>
-                    <ListItem button component={React.forwardRef<HTMLAnchorElement, any>((props, ref) => <Link {...props} ref={ref} to="/employeeDetails" />)}>
+                    <ListItem button component={React.forwardRef<HTMLAnchorElement, any>((props, ref) => <Link {...props} ref={ref} to="/employeeManagement" />)}>
                         <ListItemIcon>
                             <FaUserTie style={{ color: 'white' }} />
                         </ListItemIcon>
