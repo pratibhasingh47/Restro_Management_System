@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Grid } from '@mui/material';
+import { Container, Grid, Paper, Typography } from '@mui/material';
 import EmployeeList from './EmployeeList';
 import EmployeeDetail from './EmployeeDetail';
 
@@ -11,13 +11,29 @@ const EmployeeManagement: React.FC = () => {
     };
 
     return (
-        <Container>
-            <Grid container spacing={2}>
-                <Grid item xs={4}>
-                    <EmployeeList onSelectEmployee={handleSelectEmployee} />
+        <Container style={{ marginTop: '20px' }}>
+            <Grid container spacing={3}>
+                <Grid item xs={12} md={4}>
+                    <Paper elevation={3} style={{ padding: '20px', height: '100%' }}>
+                        <Typography variant="h5" gutterBottom>
+                            Employee List
+                        </Typography>
+                        <EmployeeList onSelectEmployee={handleSelectEmployee} />
+                    </Paper>
                 </Grid>
-                <Grid item xs={8}>
-                    {selectedEmployeeId && <EmployeeDetail employeeId={selectedEmployeeId} />}
+                <Grid item xs={12} md={8}>
+                    <Paper elevation={3} style={{ padding: '20px', height: '100%' }}>
+                        <Typography variant="h5" gutterBottom>
+                            Employee Details
+                        </Typography>
+                        {selectedEmployeeId ? (
+                            <EmployeeDetail employeeId={selectedEmployeeId} />
+                        ) : (
+                            <Typography variant="body1">
+                                Please select an employee to view details.
+                            </Typography>
+                        )}
+                    </Paper>
                 </Grid>
             </Grid>
         </Container>
