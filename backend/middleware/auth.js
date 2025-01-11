@@ -23,7 +23,7 @@ const verifyToken = (req, res, next) => {
 // Middleware to check roles
 const checkRole = (roles) => {
     return (req, res, next) => {
-        console.log(`User role: ${req.user.role}`); 
+        // console.log(`User role: ${req.user.role}`); 
         if (!roles.includes(req.user.role)) {
             return res.status(403).json({ message: "Access denied. You do not have the required role." });
         }
