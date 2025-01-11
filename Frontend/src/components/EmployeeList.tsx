@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Grid, List, ListItem, ListItemText, Typography, CircularProgress, ListItemButton } from '@mui/material';
+import { List, ListItem, ListItemText, CircularProgress, Typography, ListItemButton } from '@mui/material';
 
 interface Employee {
     _id: string;
@@ -16,7 +16,6 @@ const EmployeeList: React.FC<{ onSelectEmployee: (id: string) => void }> = ({ on
     useEffect(() => {
         const fetchEmployees = async () => {
             try {
-                // Retrieve the token from local storage or any other storage mechanism
                 const token = localStorage.getItem('authToken');
 
                 if (!token) {
@@ -56,20 +55,22 @@ const EmployeeList: React.FC<{ onSelectEmployee: (id: string) => void }> = ({ on
     }
 
     return (
-        <Grid container spacing={2}>
-            <Grid item xs={12}>
-                <Typography variant="h4" component="h2" gutterBottom>
-                    Employee List
-                </Typography>
-                <List>
-                    {employees.map((employee) => (
-                        <ListItemButton component="div" key={employee._id} onClick={() => onSelectEmployee(employee._id)}>
-                            <ListItemText primary={employee.name} secondary={employee.position} />
-                        </ListItemButton>
-                    ))}
-                </List>
-            </Grid>
-        </Grid>
+        <List>
+            {employees.map((employee, index) => (
+                <ListItemButton
+                    component="div" 
+                    key={employee._id} 
+                    onClick={() => onSelectEmployee(employee._id)}
+                    style={{ marginBottom: '10px', borderRadius: '8px', border: '1px solid #ddd', padding: '10px' }}
+                >
+                    <ListItemText 
+                        primary={`${index + 1}. ${employee.name}`} 
+                        secondary={employee.position} 
+                        primaryTypographyProps={{ fontWeight: 'bold' }}
+                    />
+                </ListItemButton>
+            ))}
+        </List>
     );
 };
 
