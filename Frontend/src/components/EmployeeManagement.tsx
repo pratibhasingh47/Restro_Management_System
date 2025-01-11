@@ -11,10 +11,12 @@ const EmployeeManagement: React.FC = () => {
     };
 
     return (
-        <Container style={{ marginTop: '20px' }}>
-            <Grid container spacing={3}>
-                <Grid item xs={12} md={4}>
-                    <Paper elevation={3} style={{ padding: '20px', height: '100%' }}>
+        <Container style={{ marginTop: '20px' , width: '100vw' }}>
+            <Grid container spacing={2}
+            style={{   width: '60vw' }}
+            >
+                <Grid item xs={16} md={3}>
+                    <Paper elevation={3} style={{ padding: '20px', height: '80vh'}}>
                         <Typography variant="h5" gutterBottom>
                             Employee List
                         </Typography>
@@ -40,4 +42,4 @@ const EmployeeManagement: React.FC = () => {
     );
 };
 
-export default EmployeeManagement;
+export default EmployeeManagement

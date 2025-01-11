@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { TextField, Grid, Typography, CircularProgress } from '@mui/material';
-
-interface EmployeeDetailProps {
-    employeeId: string;
-}
+import { Grid, TextField, Typography, CircularProgress } from '@mui/material';
 
 interface EmployeeDetails {
     status: string;
@@ -24,14 +20,25 @@ interface EmployeeDetails {
     issuedAmount: number;
 }
 
-const EmployeeDetail: React.FC<EmployeeDetailProps> = ({ employeeId }) => {
+const EmployeeDetail: React.FC<{ employeeId: string }> = ({ employeeId }) => {
     const [employeeDetails, setEmployeeDetails] = useState<EmployeeDetails | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
         const fetchEmployeeDetails = async () => {
             try {
-                const response = await axios.get(`/management/employee/${employeeId}`);
+                const token = localStorage.getItem('authToken');
+
+                if (!token) {
+                    setLoading(false);
+                    return;
+                }
+
+                const response = await axios.get(`/api/employee/${employeeId}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
                 setEmployeeDetails(response.data);
                 setLoading(false);
             } catch (error) {
@@ -55,7 +62,7 @@ const EmployeeDetail: React.FC<EmployeeDetailProps> = ({ employeeId }) => {
         <Grid container spacing={2}>
             <Grid item xs={12}>
                 <Typography variant="h4" component="h2" gutterBottom>
-                    Employee Details
+                    {employeeDetails.position}
                 </Typography>
             </Grid>
             <Grid item xs={6}>
@@ -95,17 +102,6 @@ const EmployeeDetail: React.FC<EmployeeDetailProps> = ({ employeeId }) => {
                 <TextField
                     label="Department"
                     value={employeeDetails.department}
-                    fullWidth
-                    margin="normal"
-                    InputProps={{
-                        readOnly: true,
-                    }}
-                />
-            </Grid>
-            <Grid item xs={6}>
-                <TextField
-                    label="Position"
-                    value={employeeDetails.position}
                     fullWidth
                     margin="normal"
                     InputProps={{
