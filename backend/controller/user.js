@@ -371,7 +371,7 @@ exports.login = async (req, res) => {
         if (!isPasswordValid) {
             return res.status(400).json({ message: "Invalid email or password." });
         }
-        
+
         // console.log('JWT_SECRET for signing:', process.env.JWT_SECRET);
         const token = jwt.sign(
             { userId: user._id, email: user.email, role: user.role, managementId: user.managementId },
