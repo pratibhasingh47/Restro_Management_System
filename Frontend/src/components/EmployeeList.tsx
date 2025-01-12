@@ -58,14 +58,14 @@ const EmployeeList: React.FC<{ onSelectEmployee: (id: string) => void }> = ({ on
         <List>
             {employees.map((employee, index) => (
                 <ListItemButton
-                    component="div" 
-                    key={employee._id} 
+                    component="div"
+                    key={employee._id}
                     onClick={() => onSelectEmployee(employee._id)}
                     style={{ marginBottom: '10px', borderRadius: '8px', border: '1px solid #ddd', padding: '10px' }}
                 >
-                    <ListItemText 
-                        primary={`${index + 1}. ${employee.name}`} 
-                        secondary={employee.position} 
+                    <ListItemText
+                        primary={`${index + 1}. ${employee.name}`}
+                        secondary={employee.position}
                         primaryTypographyProps={{ fontWeight: 'bold' }}
                     />
                 </ListItemButton>
