@@ -125,7 +125,7 @@ interface StaffPersonalState {
 
 const initialState: StaffPersonalState = {
     personalDetails: null,
-    loading: false, 
+    loading: false,
     error: null,
 };
 
