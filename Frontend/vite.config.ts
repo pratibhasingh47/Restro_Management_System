@@ -4,10 +4,10 @@ import * as path from 'path';
 
 // Ensure Node.js polyfills are resolved correctly
 export default defineConfig({
-  plugins: [react()],
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './src'),
-    },
-  },
+	plugins: [react()],
+	resolve: {
+		alias: {
+			'@': path.resolve(__dirname, './src'),
+		},
+	},
 });
