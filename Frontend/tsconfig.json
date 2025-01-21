@@ -9,8 +9,16 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
-    "types": ["node"],
-    "typeRoots": [ "./node_modules/@types" , "./src/types" ],
+    "types": [
+      "node"
+    ],
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/types"
+    ],
   },
-  "include": ["vite.config.ts", "src"]
+  "include": [
+    "vite.config.ts",
+    "src"
+  ]
 }
