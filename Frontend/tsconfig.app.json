@@ -1,23 +1,23 @@
 {
-  "compilerOptions": {
-    "target": "ESNext",
-    "module": "CommonJS",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "allowSyntheticDefaultImports": true,
-    "jsx": "react",
-    "moduleResolution": "node",
-    "types": [
-      "node"
-    ], // Ensure 'node' is included here
-    "typeRoots": [
-      "./node_modules/@types"
-    ],
-  },
-  "include": [
-    "vite.config.ts",
-    "src"
-  ]
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "CommonJS",
+		"strict": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true,
+		"allowSyntheticDefaultImports": true,
+		"jsx": "react",
+		"moduleResolution": "node",
+		"types": [
+			"node"
+		], // Ensure 'node' is included here
+		"typeRoots": [
+			"./node_modules/@types"
+		],
+	},
+	"include": [
+		"vite.config.ts",
+		"src"
+	]
 }
