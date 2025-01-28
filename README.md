@@ -1,2 +1,2 @@
-# Restaurant Management System (RMS)
+# Restaurant_Management_System [RMS]
 
