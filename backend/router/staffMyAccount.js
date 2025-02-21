@@ -28,10 +28,13 @@ router.post('/job/:managementId', verifyToken, checkRole(['Staff', 'Manager']), 
 // Route for getting pay details using verified token
 router.get('/pay/:managementId', verifyToken, checkRole(['Staff', 'Manager']), employeePayController.getPayDetails);
 
+// Route for creating pay details using verified token
+router.post('/pay', verifyToken, checkRole(['Manager']), employeePayController.createPayDetails);
+
 // Route for creating or updating pay details using verified token
-router.post('/pay/:managementId', verifyToken, checkRole(['Staff', 'Manager']), employeePayController.savePayDetails);
+router.put('/pay/:managementId', verifyToken, checkRole(['Manager']), employeePayController.savePayDetails);
 
 // Route for deleting pay details using verified token
-// router.delete('/pay/:managementId', verifyToken, checkRole(['Staff', 'Manager']), employeePayController.deletePayDetails);
+router.delete('/pay/:managementId', verifyToken, checkRole(['Manager']), employeePayController.deletePayDetails);
 
 module.exports = router;
