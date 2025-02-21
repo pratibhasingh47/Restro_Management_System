@@ -31,6 +31,17 @@ exports.savePayDetails = async (req, res) => {
     }
 };
 
+// Create new pay details
+exports.createPayDetails = async (req, res) => {
+    try {
+        const payDetails = new EmployeePay(req.body);
+        await payDetails.save();
+        res.status(201).json(payDetails);
+    } catch (error) {
+        res.status(500).json({ message: 'Server error', error });
+    }
+};
+
 // Delete pay details
 exports.deletePayDetails = async (req, res) => {
     try {
