@@ -7,12 +7,14 @@ const { verifyToken, checkRole } = require('../middleware/auth');
 
 router.get('/allStaff', verifyToken, checkRole(['Manager']), staffPersonalController.getAllStaff);
 
-
 // Route for getting personal details using verified token
 router.post('/personal/getStaff', verifyToken, checkRole(['Staff', 'Manager']), staffPersonalController.getStaffPersonalByEmail);
 
 // Route for updating personal details using verified token
 router.put('/personal/updateStaff', verifyToken, checkRole(['Staff', 'Manager']), staffPersonalController.updateStaffPersonal);
+
+// New route for updating password using verified token
+router.put('/personal/updatePassword', verifyToken, checkRole(['Staff', 'Manager']), staffPersonalController.updateStaffPassword);
 
 // Route for getting job details using verified token
 router.get('/job/:managementId', verifyToken, checkRole(['Staff', 'Manager']), employeeJobController.getJobDetails);
