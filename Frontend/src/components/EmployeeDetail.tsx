@@ -226,6 +226,11 @@
 // export default EmployeeDetail;
 
 
+
+
+
+
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Grid, TextField, Typography, CircularProgress, Button, Paper, Box } from '@mui/material';
