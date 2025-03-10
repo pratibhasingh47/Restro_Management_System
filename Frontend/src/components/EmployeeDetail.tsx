@@ -492,5 +492,3 @@ const StaffPay: React.FC<{ employeeId: string }> = ({ employeeId }) => {
 };
 
 export default StaffPay;
-
-
