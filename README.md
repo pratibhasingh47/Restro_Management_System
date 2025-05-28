@@ -6,53 +6,80 @@ A modern, customizable Restaurant Management System portal built with React, Typ
 
 ## 🚀 Features
 
-- **Home Page:** Stylish landing with menu exploration and category selection
-- **Menu Management:** Dynamic menu loading, accordion-based item details, add-to-order functionality
-- **Order Management:** Real-time order status (Pending, Processing, Ready, Delivered, Cancelled), editable by staff
-- **Stock Management:** Track raw materials with status (In Stock, Low, Out of Stock, Ordered), color-coded, editable
-- **My Account:** Detailed admin account panel with profile, contact, address, and password change
-- **Footer:** Responsive, detailed site footer with quick links, contact info, and “Designed by Pratibha” branding
-- **Role-based Views:** Components tailored for Admin and Staff roles
-- **Responsive UI:** Mobile-friendly and desktop-optimized using Material-UI and Tailwind CSS classes
-- **Redux Integration:** Robust state management for menu items and future scalability
+- **Home Page:** Stylish landing with immersive visuals, easy menu exploration, and intuitive category selection.
+- **Menu Management:** Dynamic menu loading, organized by categories, with expandable item details and one-click order addition.
+- **Order Management:** Real-time order status (Pending, Processing, Ready, Delivered, Cancelled), updateable by staff with detailed tracking and remarks.
+- **Stock Management:** Track raw materials/ingredients with color-coded status indicators (In Stock, Low, Out of Stock, Ordered), quantity editing, and remarks.
+- **My Account:** Comprehensive admin account panel with editable profile, contact, address, and secure password management.
+- **Footer:** Responsive, visually rich footer with quick navigation links, contact info, and prominent “Designed by Pratibha” branding and heart icon.
+- **Role-based Views:** Components and dashboards tailored for Admin and Staff roles.
+- **Responsive UI:** Fully mobile-friendly and desktop-optimized using Material-UI and Tailwind CSS.
+- **Redux Integration:** Robust state management for menu items, orders, users, and more.
+- **Backend API Integration:** Seamless sync with backend for real-time data updates (orders, menu, inventory, etc.).
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Frontend:** React, TypeScript, Redux Toolkit, Material-UI, Tailwind CSS
+### Frontend
+- **Framework:** React
+- **Language:** TypeScript
+- **UI Library:** Material-UI
+- **Styling:** Tailwind CSS, MUI ThemeProvider
 - **State Management:** Redux Toolkit
-- **Styling:** Material-UI, Tailwind CSS
 - **Date Handling:** Day.js
+
+### Backend
+- **Runtime:** Node.js
+- **Framework:** Express.js
+- **Database:** MongoDB (with Mongoose ORM)
+- **Authentication:** JWT (JSON Web Token)
+- **API:** RESTful endpoints for menu, orders, stock, user management
+- **Other:** CORS, dotenv, bcrypt for password hashing
 
 ---
 
 ## 📂 Project Structure
 
 ```
-src/
-  components/
-    Footer.tsx
-    StockManagement.tsx
-    MyAccountAdmin.tsx
-    OrderStatusStaff.tsx
-    ...
-  pages/
-    Home.tsx
-    my-account.tsx
-    order-status-staff.tsx
-    stock-management.tsx
-    ...
-  redux/
-    reducers/
-    store/
-  assets/
-    images/
-  ...
-public/
+rms-portal/
+├── backend/
+│   ├── controllers/         # Express route controllers for all endpoints
+│   ├── models/              # Mongoose models (User, Order, Menu, Stock, etc.)
+│   ├── routes/              # Express route definitions
+│   ├── middleware/          # Authentication, error handling, etc.
+│   ├── config/              # Database and environment configuration
+│   ├── server.js            # Entry point for backend
+│   └── ...                  # Additional backend utilities
+├── src/
+│   ├── assets/
+│   │   └── images/          # Static images and media
+│   ├── components/
+│   │   ├── Footer.tsx
+│   │   ├── StockManagement.tsx
+│   │   ├── MyAccountAdmin.tsx
+│   │   ├── OrderStatusStaff.tsx
+│   │   └── ...              # Other UI components
+│   ├── pages/
+│   │   ├── Home.tsx
+│   │   ├── my-account.tsx
+│   │   ├── order-status-staff.tsx
+│   │   ├── stock-management.tsx
+│   │   └── ...              # Other page-level components
+│   ├── redux/
+│   │   ├── reducers/        # Redux slices for menu, orders, stock, user, etc.
+│   │   └── store/           # Redux store configuration
+│   ├── App.tsx
+│   ├── index.tsx
+│   └── ...                  # Other utility files
+├── public/                  # Static public assets
+├── package.json
+├── README.md
+└── ...
 ```
 
 ---
+
 
 ## 🖥️ Setup & Run
 
@@ -82,7 +109,7 @@ public/
    ```
 
 ---
-
+<!-- 
 ## ✨ Main Components
 
 - **Home:** Welcome screen, menu preview, and category navigation
@@ -90,7 +117,7 @@ public/
 - **OrderStatusStaff:** Staff can view, update, and manage order statuses easily
 - **StockManagement:** Complete inventory view with add/edit, status, and remarks
 - **MyAccountAdmin:** Admin’s profile page with editable personal and address details
-- **Footer:** Informational footer with quick links, contact, and credits
+- **Footer:** Informational footer with quick links, contact, and credits -->
 
 
 
