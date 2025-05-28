@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import {
   Box, Typography, Paper, Table, TableBody, TableCell,
   TableContainer, TableHead, TableRow, Button, IconButton, Dialog,
-  DialogTitle, DialogContent, DialogActions, TextField, MenuItem, Select, InputLabel, FormControl
+  DialogTitle, DialogContent, DialogActions, TextField, MenuItem, Select, InputLabel, FormControl, Chip
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import dayjs, { Dayjs } from "dayjs";
 
-// Type definitions for stock items
 type Category = "Vegetable" | "Grain" | "Dairy" | "Spice" | "Other";
+type StockStatus = "In Stock" | "Low" | "Out of Stock" | "Ordered";
 type StockItem = {
   id: string;
   name: string;
@@ -19,25 +19,40 @@ type StockItem = {
   lastUpdated: Dayjs;
   minRequired: number;
   remarks?: string;
+  status: StockStatus;
 };
 
 const initialStock: StockItem[] = [
-  { id: "1", name: "Potato", quantity: 100, unit: "kg", category: "Vegetable", lastUpdated: dayjs().subtract(2, "hour"), minRequired: 30 },
-  { id: "2", name: "Rice", quantity: 50, unit: "kg", category: "Grain", lastUpdated: dayjs().subtract(1, "day"), minRequired: 20 },
-  { id: "3", name: "Wheat Flour", quantity: 70, unit: "kg", category: "Grain", lastUpdated: dayjs().subtract(3, "hour"), minRequired: 25 },
-  { id: "4", name: "Milk", quantity: 20, unit: "litre", category: "Dairy", lastUpdated: dayjs().subtract(4, "hour"), minRequired: 10 },
-  { id: "5", name: "Tomato", quantity: 40, unit: "kg", category: "Vegetable", lastUpdated: dayjs().subtract(2, "day"), minRequired: 15 },
-  { id: "6", name: "Salt", quantity: 15, unit: "kg", category: "Spice", lastUpdated: dayjs().subtract(2, "hour"), minRequired: 5 },
-  { id: "7", name: "Paneer", quantity: 7, unit: "kg", category: "Dairy", lastUpdated: dayjs().subtract(1, "hour"), minRequired: 3 },
+  { id: "1", name: "Potato", quantity: 100, unit: "kg", category: "Vegetable", lastUpdated: dayjs().subtract(2, "hour"), minRequired: 30, status: "In Stock" },
+  { id: "2", name: "Rice", quantity: 50, unit: "kg", category: "Grain", lastUpdated: dayjs().subtract(1, "day"), minRequired: 20, status: "Low" },
+  { id: "3", name: "Wheat Flour", quantity: 70, unit: "kg", category: "Grain", lastUpdated: dayjs().subtract(3, "hour"), minRequired: 25, status: "In Stock" },
+  { id: "4", name: "Milk", quantity: 0, unit: "litre", category: "Dairy", lastUpdated: dayjs().subtract(4, "hour"), minRequired: 10, status: "Out of Stock", remarks: "Ordered 50 litres" },
+  { id: "5", name: "Tomato", quantity: 10, unit: "kg", category: "Vegetable", lastUpdated: dayjs().subtract(2, "day"), minRequired: 15, status: "Low" },
+  { id: "6", name: "Salt", quantity: 15, unit: "kg", category: "Spice", lastUpdated: dayjs().subtract(2, "hour"), minRequired: 5, status: "In Stock" },
+  { id: "7", name: "Paneer", quantity: 7, unit: "kg", category: "Dairy", lastUpdated: dayjs().subtract(1, "hour"), minRequired: 3, status: "In Stock" },
+  { id: "8", name: "Onion", quantity: 80, unit: "kg", category: "Vegetable", lastUpdated: dayjs().subtract(10, "hour"), minRequired: 25, status: "In Stock" },
+  { id: "9", name: "Sugar", quantity: 25, unit: "kg", category: "Other", lastUpdated: dayjs().subtract(5, "hour"), minRequired: 15, status: "In Stock" },
+  { id: "10", name: "Red Chilli Powder", quantity: 2, unit: "kg", category: "Spice", lastUpdated: dayjs().subtract(1, "day"), minRequired: 2, status: "Low" },
+  { id: "11", name: "Cabbage", quantity: 0, unit: "kg", category: "Vegetable", lastUpdated: dayjs().subtract(2, "hour"), minRequired: 10, status: "Out of Stock" },
+  { id: "12", name: "Curd", quantity: 5, unit: "kg", category: "Dairy", lastUpdated: dayjs().subtract(7, "hour"), minRequired: 5, status: "Low" },
+  { id: "13", name: "Maida", quantity: 12, unit: "kg", category: "Grain", lastUpdated: dayjs().subtract(3, "hour"), minRequired: 10, status: "In Stock" },
+  { id: "14", name: "Black Pepper", quantity: 1, unit: "kg", category: "Spice", lastUpdated: dayjs().subtract(6, "hour"), minRequired: 2, status: "Low" },
+  { id: "15", name: "Carrot", quantity: 22, unit: "kg", category: "Vegetable", lastUpdated: dayjs().subtract(4, "hour"), minRequired: 20, status: "In Stock" },
+  { id: "16", name: "Oil", quantity: 0, unit: "litre", category: "Other", lastUpdated: dayjs().subtract(1, "day"), minRequired: 10, status: "Ordered", remarks: "Expected delivery tomorrow" },
+  { id: "17", name: "Green Peas", quantity: 5, unit: "kg", category: "Vegetable", lastUpdated: dayjs().subtract(11, "hour"), minRequired: 10, status: "Out of Stock" },
+  { id: "18", name: "Butter", quantity: 4, unit: "kg", category: "Dairy", lastUpdated: dayjs().subtract(10, "hour"), minRequired: 3, status: "In Stock" },
+  { id: "19", name: "Turmeric", quantity: 1, unit: "kg", category: "Spice", lastUpdated: dayjs().subtract(9, "hour"), minRequired: 1, status: "Low" },
+  { id: "20", name: "Moong Dal", quantity: 19, unit: "kg", category: "Grain", lastUpdated: dayjs().subtract(7, "hour"), minRequired: 10, status: "In Stock" }
 ];
 
 const categoryOptions: Category[] = ["Vegetable", "Grain", "Dairy", "Spice", "Other"];
+const statusOptions: StockStatus[] = ["In Stock", "Low", "Out of Stock", "Ordered"];
 
-// Color for quantity based on minimum required
-const getQuantityCellColor = (quantity: number, minRequired: number) => {
-  if (quantity <= minRequired) return "#ffebee"; // Light red
-  if (quantity <= minRequired * 1.5) return "#fffde7"; // Light yellow
-  return "#e8f5e9"; // Light green
+const statusColor: Record<StockStatus, "success" | "warning" | "error" | "info"> = {
+  "In Stock": "success",
+  "Low": "warning",
+  "Out of Stock": "error",
+  "Ordered": "info"
 };
 
 const StockManagement: React.FC = () => {
@@ -50,7 +65,8 @@ const StockManagement: React.FC = () => {
     unit: "",
     category: "Vegetable",
     minRequired: 0,
-    remarks: ""
+    remarks: "",
+    status: "In Stock"
   });
 
   const handleOpen = (item?: StockItem, idx?: number) => {
@@ -62,7 +78,8 @@ const StockManagement: React.FC = () => {
         unit: item.unit,
         category: item.category,
         minRequired: item.minRequired,
-        remarks: item.remarks || ""
+        remarks: item.remarks || "",
+        status: item.status
       });
     } else {
       setEditIndex(null);
@@ -72,7 +89,8 @@ const StockManagement: React.FC = () => {
         unit: "",
         category: "Vegetable",
         minRequired: 0,
-        remarks: ""
+        remarks: "",
+        status: "In Stock"
       });
     }
     setModalOpen(true);
@@ -100,6 +118,14 @@ const StockManagement: React.FC = () => {
     setForm((prev) => ({
       ...prev,
       [name as string]: value as Category
+    }));
+  };
+
+  const handleStatusChange = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
+    const { name, value } = event.target;
+    setForm((prev) => ({
+      ...prev,
+      [name as string]: value as StockStatus
     }));
   };
 
@@ -154,6 +180,7 @@ const StockManagement: React.FC = () => {
               <TableCell sx={{ color: "white" }}>Quantity</TableCell>
               <TableCell sx={{ color: "white" }}>Unit</TableCell>
               <TableCell sx={{ color: "white" }}>Min Required</TableCell>
+              <TableCell sx={{ color: "white" }}>Status</TableCell>
               <TableCell sx={{ color: "white" }}>Last Updated</TableCell>
               <TableCell sx={{ color: "white" }}>Remarks</TableCell>
               <TableCell sx={{ color: "white" }}>Actions</TableCell>
@@ -164,11 +191,16 @@ const StockManagement: React.FC = () => {
               <TableRow key={item.id}>
                 <TableCell>{item.name}</TableCell>
                 <TableCell>{item.category}</TableCell>
-                <TableCell sx={{ background: getQuantityCellColor(item.quantity, item.minRequired) }}>
-                  {item.quantity}
-                </TableCell>
+                <TableCell>{item.quantity}</TableCell>
                 <TableCell>{item.unit}</TableCell>
                 <TableCell>{item.minRequired}</TableCell>
+                <TableCell>
+                  <Chip
+                    label={item.status}
+                    color={statusColor[item.status]}
+                    size="small"
+                  />
+                </TableCell>
                 <TableCell>{item.lastUpdated.format("YYYY-MM-DD HH:mm")}</TableCell>
                 <TableCell>{item.remarks}</TableCell>
                 <TableCell>
@@ -245,6 +277,19 @@ const StockManagement: React.FC = () => {
             type="number"
             inputProps={{ min: 0 }}
           />
+          <FormControl fullWidth margin="dense">
+            <InputLabel>Status</InputLabel>
+            <Select
+              name="status"
+              value={form.status}
+              label="Status"
+            //   onChange={handleStatusChange}
+            >
+              {statusOptions.map(option => (
+                <MenuItem value={option} key={option}>{option}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
           <TextField
             label="Remarks"
             name="remarks"
