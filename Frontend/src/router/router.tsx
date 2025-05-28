@@ -17,6 +17,7 @@ import Deliveries from '../components/Deliveries';
 import OrderRecord from '../components/Orders';
 import StockManagement from '../components/StockManagement';
 import MyAccountAdmin from '../components/MyAccountAdmin';
+import OrderStatusStaff from '../components/OrderStatusStaff';
 
 
 const router = createBrowserRouter([
@@ -49,7 +50,11 @@ const router = createBrowserRouter([
                 element: <MenuManagement />
             },
             {
-                path: '//employee-attendance',
+                path: '/employee-attendance',
+                element: <EmployeeAttendance />
+            },
+            {
+                path: '/attendance',
                 element: <EmployeeAttendance />
             },
             {
@@ -71,6 +76,10 @@ const router = createBrowserRouter([
             {
                 path: '/managerAccount',
                 element: <MyAccountAdmin />
+            },
+            {
+                path: '/order-status',
+                element: <OrderStatusStaff />
             },
             {
                 path: '/staffMyAccount',
