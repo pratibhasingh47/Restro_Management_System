@@ -92,26 +92,25 @@ public/
 - **MyAccountAdmin:** Admin’s profile page with editable personal and address details
 - **Footer:** Informational footer with quick links, contact, and credits
 
----
 
-## 🧑‍💻 Customization
+
+<!-- ## 🧑‍💻 Customization
 
 - **Change Branding:** Edit `Footer.tsx` and `Home.tsx` for restaurant name and designer credit.
 - **Update Menu:** Modify menu fetching logic in Redux and backend API.
-- **Role Management:** Expand user authentication and access control as needed.
+- **Role Management:** Expand user authentication and access control as needed. -->
 
----
 
-## 📸 Screenshots
+<!-- ## 📸 Screenshots
 
-> Coming soon! (Add screenshots/gifs here for Home, Orders, Stock, My Account, etc.)
+> Coming soon! (Add screenshots/gifs here for Home, Orders, Stock, My Account, etc.) -->
 
----
+
 
 ## 📬 Contact
 
 **Designed & Developed by [Pratibha Singh](https://github.com/pratibhasingh47)**  
-Email: admin@rms.com
+Email: pratibhasingh1624@gmail.com
 
 ---
 
