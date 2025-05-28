@@ -15,6 +15,7 @@ import Contact from '../components/Contact';
 import EmployeeAttendance from '../components/EmployeeAttendance';
 import Deliveries from '../components/Deliveries';
 import OrderRecord from '../components/Orders';
+import StockManagement from '../components/StockManagement';
 
 
 const router = createBrowserRouter([
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
             {
                 path: '/order-record',
                 element: <OrderRecord />
+            },
+            {
+                path: '/stock-management',
+                element: <StockManagement />
             },
             {
                 path: '/employeeManagement',
