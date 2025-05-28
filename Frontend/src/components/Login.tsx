@@ -363,8 +363,8 @@ const Login: React.FC = () => {
                             </Link>
                         </Grid>
                     </Grid>
-                    <Box mt={10} marginTop="20px">
-                        <Copyright />
+                    <Box mt={17} marginTop="100px" style={{ marginTop: '20px' }} textAlign="center">
+                        Copyright © {new Date().getFullYear()}. All rights reserved.
                     </Box>
                 </div>
             </Grid>

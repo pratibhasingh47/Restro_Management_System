@@ -459,7 +459,7 @@ const SignUp: React.FC = () => {
                         </Grid>
                     </Grid>
                     <Box mt={17} marginTop="100px" style={{ marginTop: '20px' }} textAlign="center">
-                        Copyright © {new Date().getFullYear()} Your Website. All rights reserved.
+                        Copyright © {new Date().getFullYear()}. All rights reserved.
                     </Box>
                 </div>
             </Grid>
