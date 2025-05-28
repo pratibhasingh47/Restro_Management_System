@@ -5,6 +5,7 @@ import { getMenuItems } from '../redux/reducers/menuSlice'; // Adjust the path a
 import { Accordion, AccordionSummary, AccordionDetails, AccordionActions, Button, Box, ButtonGroup } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import wallpaper from '../assets/images/w1-transformed.jpeg';
+import Footer from './Footer';
 
 const Home: React.FC = () => {
     const dispatch: AppDispatch = useDispatch();
@@ -123,6 +124,7 @@ const Home: React.FC = () => {
                         </div>
                     )}
                 </div>
+            <Footer />
             </div>
         </div>
     );
