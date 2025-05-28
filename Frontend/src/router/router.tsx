@@ -16,6 +16,7 @@ import EmployeeAttendance from '../components/EmployeeAttendance';
 import Deliveries from '../components/Deliveries';
 import OrderRecord from '../components/Orders';
 import StockManagement from '../components/StockManagement';
+import MyAccountAdmin from '../components/MyAccountAdmin';
 
 
 const router = createBrowserRouter([
@@ -66,6 +67,10 @@ const router = createBrowserRouter([
             {
                 path: '/employeeManagement',
                 element: <EmployeeManagement />
+            },
+            {
+                path: '/managerAccount',
+                element: <MyAccountAdmin />
             },
             {
                 path: '/staffMyAccount',
