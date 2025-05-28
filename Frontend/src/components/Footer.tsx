@@ -95,9 +95,9 @@ const Footer: React.FC = () => (
         justifyContent: "center"
       }}
     >
-      <FavoriteIcon sx={{ color: "red", fontSize: 22 }} />
-      <Typography variant="body1" sx={{ fontWeight: 600 }}>
-        Designed by Pratibha
+      {/* <FavoriteIcon sx={{ color: "red", fontSize: 18 }} /> */}
+      <Typography variant="body1" sx={{ fontWeight: 400 , fontSize: 14 }}>
+        Designed & Built by Pratibha with ❤️
       </Typography>
     </Box>
     {/* Copyright */}
