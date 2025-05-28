@@ -235,7 +235,7 @@ const Deliveries: React.FC = () => {
                             name="status"
                             value={form.status}
                             label="Status"
-                            onChange={handleChange}
+                        // onChange={handleChange}
                         >
                             {statusOptions.map((option) => (
                                 <MenuItem value={option} key={option}>

@@ -14,6 +14,7 @@ import About from '../components/About';
 import Contact from '../components/Contact';
 import EmployeeAttendance from '../components/EmployeeAttendance';
 import Deliveries from '../components/Deliveries';
+import OrderRecord from '../components/Orders';
 
 
 const router = createBrowserRouter([
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
             {
                 path: '/deliveries',
                 element: <Deliveries />
+            },
+            {
+                path: '/order-record',
+                element: <OrderRecord />
             },
             {
                 path: '/employeeManagement',
