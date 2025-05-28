@@ -124,7 +124,7 @@ const Home: React.FC = () => {
                         </div>
                     )}
                 </div>
-            <Footer />
+                <Footer />
             </div>
         </div>
     );
