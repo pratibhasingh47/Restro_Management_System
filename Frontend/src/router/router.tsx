@@ -12,6 +12,7 @@ import StaffMyAccountDashboard from '../components/staffMyAccountDashboard';
 import EmployeeManagement from '../components/EmployeeManagement';
 import About from '../components/About';
 import Contact from '../components/Contact';
+import EmployeeAttendance from '../components/EmployeeAttendance';
 
 
 const router = createBrowserRouter([
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
             {
                 path: '/menuManagement',
                 element: <MenuManagement />
+            },
+            {
+                path: '//employee-attendance',
+                element: <EmployeeAttendance />
             },
             {
                 path: '/employeeManagement',
